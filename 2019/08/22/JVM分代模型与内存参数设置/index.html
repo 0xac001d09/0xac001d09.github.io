@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="JVM分代模型与内存参数设置, 0xac001d09">
-    <meta name="description" content="Keep on keeping on.">
+    <meta name="description" content="Keep on keeping on">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -124,7 +124,7 @@
         <div class="logo-name">0xac001d09</div>
         <div class="logo-desc">
             
-            Keep on keeping on.
+            Keep on keeping on
             
         </div>
     </div>
@@ -509,56 +509,6 @@
 
             
 
-    <div class="reprint" id="reprint-statement">
-        
-            <div class="reprint__author">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-user">
-                        文章作者:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    <a href="http://yoursite.com" rel="external nofollow noreferrer">Jerry</a>
-                </span>
-            </div>
-            <div class="reprint__type">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-link">
-                        文章链接:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    <a href="http://yoursite.com/2019/08/22/JVM%E5%88%86%E4%BB%A3%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%86%85%E5%AD%98%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE/">http://yoursite.com/2019/08/22/JVM%E5%88%86%E4%BB%A3%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%86%85%E5%AD%98%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE/</a>
-                </span>
-            </div>
-            <div class="reprint__notice">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-copyright">
-                        版权声明:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    本博客所有文章除特別声明外，均采用
-                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
-                    许可协议。转载请注明来源
-                    <a href="http://yoursite.com" target="_blank">Jerry</a>
-                    !
-                </span>
-            </div>
-        
-    </div>
-
-    <script async defer>
-      document.addEventListener("copy", function (e) {
-        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
-        M.toast({html: toastHTML})
-      });
-
-      function navToReprintStatement() {
-        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
-      }
-    </script>
-
 
 
             <div class="tag_share" style="display: block;">
@@ -612,19 +562,19 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/08/24/JVM%E4%B9%8B%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/">
+                <a href="/2019/08/24/JVM%E4%B9%8BParNew%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="JVM之垃圾回收机制详解">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="JVM之ParNew垃圾回收器工作原理">
                         
-                        <span class="card-title">JVM之垃圾回收机制详解</span>
+                        <span class="card-title">JVM之ParNew垃圾回收器工作原理</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            JVM学习笔记（3）：垃圾回收机制详解一、GC Roots的类型&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JVM使用了可达性分析算法，该算法会分析每个对象，看有谁在引用他，一层层判断有没
+                            新生代回收器——ParNew1、工作原理&emsp;&emsp;ParNew垃圾回收器如果一旦在合适的时机执行Minor GC的时候，就会把系统程序的工作线程全部停掉，禁止程序继续运行创建新的对象，然后自己就用多个垃圾回收线程去进行垃圾回收
                         
                     </div>
                     <div class="publish-info">
@@ -842,7 +792,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             <span id="year">2019</span>
-            <a href="http://yoursite.com" target="_blank">Jerry</a>
+            <a href="https://0xac001d09.github.io" target="_blank">Jerry</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
