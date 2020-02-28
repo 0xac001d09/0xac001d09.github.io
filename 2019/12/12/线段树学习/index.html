@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="线段树学习, 0xac001d09">
+    <meta name="keywords" content="算法-线段树, 0xac001d09">
     <meta name="description" content="Keep on keeping on">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>线段树学习 | 0xac001d09</title>
+    <title>算法-线段树 | 0xac001d09</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -214,12 +214,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://tva1.sinaimg.cn/large/00831rSTgy1gccewgtlfgj31ee0u0tb8.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">线段树学习</h1>
+                    <h1 class="description center-align post-title">算法-线段树</h1>
                 </div>
             </div>
         </div>
@@ -389,7 +389,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="线段树"><a href="#线段树" class="headerlink" title="线段树"></a>线段树</h1><p>概念：线段树就是一棵二叉树，每个节点代表一个区间，主要用于解决区间类问题。每个节点的属性根据需要可以去自定义，比如节点的属性可以是区间和、区间最大/最小值。。</p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXBrZWZ3eGthajMxZ2cwaXFkZ24uanBn?x-oss-process=image/format,png" alt="image-20200103162200850"></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXBrZWZ3eGthajMxZ2cwaXFkZ24uanBn?x-oss-process=image/format,png" alt="线段树"></p>
 <h2 id="一、线段树节点定义"><a href="#一、线段树节点定义" class="headerlink" title="一、线段树节点定义"></a>一、线段树节点定义</h2><p>每个node有区间的左右端点，以及左右孩子</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SegmentTreeNode</span><span class="token punctuation">{</span>
       <span class="token keyword">int</span> start<span class="token punctuation">,</span>end<span class="token punctuation">,</span>val<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//val根据需要定义，比如我定义为区间最大值就是max</span>
@@ -428,7 +428,7 @@
     <span class="token keyword">return</span> root<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
 <h3 id="2、修改"><a href="#2、修改" class="headerlink" title="2、修改"></a>2、修改</h3><p>递归调用，一路向下找到最小区间，触底反弹的时候才去修改node。比如数组[6,3,5,1,9]，我要修改1位置上的3，那就是一路向下先找到3，然后返回途中修改 ，时间复杂度logN</p>
-<p><img src="https://img-blog.csdnimg.cn/2020010823242568.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/2020010823242568.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt="线段树的修改"></p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//线段树的修改,</span>
 <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">modify</span><span class="token punctuation">(</span>SegmentTreeNode root<span class="token punctuation">,</span> <span class="token keyword">int</span> index<span class="token punctuation">,</span> <span class="token keyword">int</span> value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>root<span class="token punctuation">.</span>start <span class="token operator">==</span> index <span class="token operator">&amp;&amp;</span> root<span class="token punctuation">.</span>end <span class="token operator">==</span> index<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -478,7 +478,7 @@
     <span class="token keyword">return</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>left_max<span class="token punctuation">,</span> right_max<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
 <h2 id="三、线段树性质"><a href="#三、线段树性质" class="headerlink" title="三、线段树性质"></a>三、线段树性质</h2><p>对于区间[m1,m2]，mid = (m1+m2)/2，其左儿子区间是[m1,mid]，右儿子区间是(mid+1,m2)</p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXBrZWYwc2tvajMxbWUwbXEweWguanBn?x-oss-process=image/format,png" alt="image-20200103163520235"></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXBrZWYwc2tvajMxbWUwbXEweWguanBn?x-oss-process=image/format,png" alt="demo"></p>
 <h2 id="四、题目练习"><a href="#四、题目练习" class="headerlink" title="四、题目练习"></a>四、题目练习</h2><h3 id="1、LintCode-206-Interval-Sum"><a href="#1、LintCode-206-Interval-Sum" class="headerlink" title="1、LintCode 206. Interval Sum"></a>1、LintCode 206. Interval Sum</h3><p>区间求和</p>
 <blockquote>
 <p>给定一个整数数组（下标由 0 到 n-1，其中 n 表示数组的规模），以及一个查询列表。每一个查询列表有两个整数 <code>[start, end]</code> 。 对于每个查询，计算出数组中从下标 start 到 end 之间的数的总和</p>
@@ -992,9 +992,9 @@
                 <a href="/2019/12/12/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E5%AD%A6%E4%B9%A0/">
                     <div class="card-image">
                         
-                        <img src="http://q6etxc9ao.bkt.clouddn.com/FkJ-sdV8ycRex6ANGrwQghz6fZ5W?e=1582893133&amp;token=JBpA81GsYpm4ByFC39u91IgpAUl7QWruKpXPhXgM:hD4qhptHBZMe69fO9TzuDATrYUw=" class="responsive-img" alt="树状数组学习">
+                        <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gccew16irmj31en0u0aau.jpg" class="responsive-img" alt="算法-树状数组">
                         
-                        <span class="card-title">树状数组学习</span>
+                        <span class="card-title">算法-树状数组</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1043,10 +1043,9 @@ update(int index,int val)，将
                 <a href="/2019/12/10/%E5%8C%BA%E9%97%B4%E5%9E%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
                     <div class="card-image">
                         
+                        <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gccez5vcu8j31ek0u0tbp.jpg" class="responsive-img" alt="算法-动态规划">
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="区间型动态规划">
-                        
-                        <span class="card-title">区间型动态规划</span>
+                        <span class="card-title">算法-动态规划</span>
                     </div>
                 </a>
                 <div class="card-content article-content">

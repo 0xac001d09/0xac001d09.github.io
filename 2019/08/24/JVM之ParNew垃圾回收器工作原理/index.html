@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="JVM之ParNew垃圾回收器工作原理, 0xac001d09">
+    <meta name="keywords" content="JVM, 0xac001d09">
     <meta name="description" content="Keep on keeping on">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>JVM之ParNew垃圾回收器工作原理 | 0xac001d09</title>
+    <title>JVM | 0xac001d09</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -214,12 +214,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://tva1.sinaimg.cn/large/00831rSTgy1gccezsj14dj31ea0u0ae2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">JVM之ParNew垃圾回收器工作原理</h1>
+                    <h1 class="description center-align post-title">JVM</h1>
                 </div>
             </div>
         </div>
@@ -455,24 +455,23 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/08/24/JVM%E4%B9%8B%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/">
+                <a href="/2019/08/25/JVM%E4%B9%8BCMS%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">
                     <div class="card-image">
                         
+                        <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gccezy7n1kj31el0u0aeb.jpg" class="responsive-img" alt="JVM">
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="JVM之垃圾回收机制详解">
-                        
-                        <span class="card-title">JVM之垃圾回收机制详解</span>
+                        <span class="card-title">JVM</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            JVM学习笔记（3）：垃圾回收机制详解一、GC Roots的类型&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JVM使用了可达性分析算法，该算法会分析每个对象，看有谁在引用他，一层层判断有没
+                            老年代回收容器——CMS1、CMS工作原理&emsp;&emsp;一般老年代我们选择的垃圾回收器是CMS，他采用的是标记清理算法（不是标记整理）。之前提到过Stop the World状态，就是垃圾回收时停止一切线程的工作，如果在这个状态下
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-08-24
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-08-25
                         </span>
                         <span class="publish-author">
                             
@@ -504,26 +503,23 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/08/22/JVM%E5%88%86%E4%BB%A3%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%86%85%E5%AD%98%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE/">
+                <a href="/2019/08/24/JVM%E4%B9%8B%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/">
                     <div class="card-image">
                         
+                        <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gccf00yoz1j31el0u0wiw.jpg" class="responsive-img" alt="JVM">
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="JVM分代模型与内存参数设置">
-                        
-                        <span class="card-title">JVM分代模型与内存参数设置</span>
+                        <span class="card-title">JVM</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            JVM学习笔记（2）：JVM分代模型与内存参数设置一、JVM分代模型1、背景public class Kafka {
-    // 年轻代
-    public static void main(String[] args) throws 
+                            JVM学习笔记（3）：垃圾回收机制详解一、GC Roots的类型&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JVM使用了可达性分析算法，该算法会分析每个对象，看有谁在引用他，一层层判断有没
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-08-22
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-08-24
                             </span>
                         <span class="publish-author">
                             
