@@ -1,0 +1,905 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="JVM之垃圾回收机制详解, 0xac001d09">
+    <meta name="description" content="Keep on keeping on.">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>JVM之垃圾回收机制详解 | 0xac001d09</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <span class="logo-span">0xac001d09</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <div class="logo-name">0xac001d09</div>
+        <div class="logo-desc">
+            
+            Keep on keeping on.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">JVM之垃圾回收机制详解</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/JVM/">
+                                <span class="chip bg-color">JVM</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/JVM/" class="post-category">
+                                JVM
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-08-27
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.9k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    10 分
+                </div>
+                
+
+                
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="三、新生代JVM参数优化"><a href="#三、新生代JVM参数优化" class="headerlink" title="三、新生代JVM参数优化"></a>三、新生代JVM参数优化</h2><h3 id="1、背景引入"><a href="#1、背景引入" class="headerlink" title="1、背景引入"></a>1、背景引入</h3><p>&emsp;&emsp;假设我们的背景是每日上亿请求量的一个订单系统，按照每个用户每日访问次数为20次来算，大致有500万个用户（1亿/20），对这五百万个用户，假设付费转化率为10%，也就是有50万人会去下单，我们把这50万订单集中在4个小时的高峰期内，平均每秒钟也就几十个订单，感觉也没什么大的压力，因为几十个订单根本不需要对JVM做太多关注。</p>
+<p>&emsp;&emsp;但是如果到了双十一这种活动，就会出问题了。硬件方面来说，如果我们部署到足够的机器上以及机器内存充裕，也不是问题，但就JVM的参数来说，如果我们不能合理的去设置这个参数，就会导致机器资源浪费，硬件成本的增加。</p>
+<p>&emsp;&emsp;为什么要去调JVM参数？我们的<strong>目的就是对JVM有限的内存资源做好合理分配和优化，当然包括垃圾回收的优化，要让GC次数尽可能的少。</strong></p>
+<p>&emsp;&emsp;假设双十一期间一台机器1秒要处理300个订单（处理订单比较耗时，工作经验上是每秒处理100～300个订单），对于每个订单对象我们按1KB来算，那1秒就是300KB内存开销了，但是这时订单连带对象如库存、促销、优惠券等一系列业务对象，这些对象从经验上来讲好要比订单单个对象的开销再放大10倍，同时还有很多与订单相关操作，比如查询等，往大估算就再扩大十倍，<strong>所以1秒钟，我们要处理60MB（300KB x 20 x 10 = 60000KB）对象。</strong>每1秒过后，这个对象就变成垃圾了。</p>
+<p>&emsp;&emsp;假设我们使用4核8G的机器，JVM分配4G，其中3G给堆内存，1G给方法区和每个线程的虚拟机栈。虚拟机栈一般都是1MB，假设我们有几百个线程，就是几百MB，这里我们给永久代256MB，给虚拟机栈总共768MB。至于堆内存，我们给新生代1.5G，老年代1.5G。得到如下参数。（注意这里不写<code>-XX:HandlePromotionFailure</code>，我们使用JDK 1.8）。每1秒有60MB的垃圾，1.5G的内存大概25秒就满了。此时就要<code>Minor GC</code>，明显老年代能够存放新生代所有对象，可以放心GC，由于最后一秒订单还在处理，假设存活的对象就100MB，这里来问题了，如果<code>-XX:SurvivorRatio</code>参数默认值为8，那么此时新生代里Eden区大概占据了1.2GB内存，每个<code>Survivor</code>区是150MB的内存，如下图。</p>
+<pre><code>-Xms3072M -Xmx3072M -Xmn1536M -Xss1M -XX:PermSize=256M -XX:MaxPermSize=256M</code></pre><p><img src="https://img-blog.csdnimg.cn/20200209151328587.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>&emsp;&emsp;所以启动JVM后，大概20秒左右，<code>Eden</code>区就满了，然后<code>Minor GC</code>，把存活对象放在<code>Survivor1</code>中，再过20s，再次回收<code>Eden</code>和<code>Survivor1</code>中的对象，存活的如果还是100MB就放入<code>Survivor2</code>中。</p>
+<p>&emsp;&emsp;以上就是总体的背景，此时的JVM参数为：</p>
+<pre><code>-Xms3072M -Xmx3072M -Xmn1536M -Xss1M -XX:PermSize=256M -XX:MaxPermSize=256M  -XX:SurvivorRatio=8</code></pre><h3 id="2、参数优化"><a href="#2、参数优化" class="headerlink" title="2、参数优化"></a>2、参数优化</h3><h4 id="（1）Survivor空间的设置"><a href="#（1）Survivor空间的设置" class="headerlink" title="（1）Survivor空间的设置"></a>（1）Survivor空间的设置</h4><p>&emsp;&emsp;JVM优化时，首先就得考虑<code>Survivor</code>空间够不够。就上述案例，一种情况是，<code>Survivor</code>中分配了150MB，如果来的对象大于150MB，就会频繁进入老年代，第二种情况是，即使100MB对象能够放入<code>Survivor</code>区，但是100/150 = 0.67，超过了<code>Survivor</code>区空间的50%，这样同一批年龄对象也进入老年代了，这种1秒就变成垃圾的短生命周期对象根本不需要进入老年代。我们得让它们留在新生代里。</p>
+<p>&emsp;&emsp;<strong>方案：</strong>给<code>Survivor</code>区更大的容量。如果你的<strong>业务都是这种短生命周期的</strong>，老年代可以分配少一点的内存，我们可以考虑把新生代调整为2G，老年代为1G，如果<code>-XX:SurvivorRatio=8</code>那么此时<code>Eden</code>为1.6G，每个<code>Survivor</code>为200MB，如图。这时候上述两个问题就同时解决了。</p>
+<p>&emsp;&emsp;针对任何系统，我们要预估内存并合理分配内存，首要做的就是<strong>尽量让每次Minor GC后的对象都留在Survivor里，不要进入老年代。</strong>此时参数如下</p>
+<pre><code>-Xms3072M -Xmx3072M -Xmn2048M -Xss1M  -XX:PermSize=256M -XX:MaxPermSize=256M  -XX:SurvivorRatio=8</code></pre><p><img src="https://img-blog.csdnimg.cn/20200209151417197.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt="\[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-8wmVjoYi-1581232363623)(/Users/zhangye/Library/Application Support/typora-user-images/image-20191024201720899.png)\]"></p>
+<h4 id="（2）-XX-MaxTenuringThreshold参数的设置"><a href="#（2）-XX-MaxTenuringThreshold参数的设置" class="headerlink" title="（2）-XX:MaxTenuringThreshold参数的设置"></a>（2）-XX:MaxTenuringThreshold参数的设置</h4><p>&emsp;&emsp;有些对象是可能躲过15次垃圾回收进入老年代的，就上述背景，有些对象在新生代躲了几分钟进入老年代很应该，那为了不让这种数据进入老年代要怎么做？我们需要调<code>-XX:MaxTenuringThreshold</code>这个参数。这个参数并不是一昧地去调高，一定要<strong>结合系统的运行模型，看看Minor GC频率</strong>，把这个参数从15调高到20、30，让一个垃圾多在<code>Survivor</code>中停留几分钟，根本没用，对于我们上述业务场景就要把这个参数调低，比如调到5.记住，一定要结合系统运行的模型。此时参数如下：</p>
+<pre><code>-Xms3072M -Xmx3072M -Xmn2048M -Xss1M  -XX:PermSize=256M -XX:MaxPermSize=256M  
+-XX:SurvivorRatio=8 -XX:MaxTenuringThreshold=5</code></pre><h3 id="（3）-XX-PretenureSizeThreshold参数设置"><a href="#（3）-XX-PretenureSizeThreshold参数设置" class="headerlink" title="（3）-XX:PretenureSizeThreshold参数设置"></a>（3）-XX:PretenureSizeThreshold参数设置</h3><p>&emsp;&emsp;大对象是可以直接进入老年代的，但是多大呢？一般来说很少有超过1MB的对象，如果有，那就是你提前分配了一个大数组、大List之类的来存放缓存数据，一般这种数据是要用一段时间的，所以我们可以放到老年代。我们一般把这个参数设置为1。此时JVM参数如下：</p>
+<pre><code>-Xms3072M -Xmx3072M -Xmn2048M -Xss1M  -XX:PermSize=256M -XX:MaxPermSize=256M  
+-XX:SurvivorRatio=8 -XX:MaxTenuringThreshold=5 -XX:PretenureSizeThreshold=1M</code></pre><h4 id="（4）指定垃圾回收器"><a href="#（4）指定垃圾回收器" class="headerlink" title="（4）指定垃圾回收器"></a>（4）指定垃圾回收器</h4><p>&emsp;&emsp;针对具体的客户端、服务端来设置垃圾回收器，之前讲过。我们这个系统新生代使用<code>ParNew</code>，老年代使用<code>CMS</code>。设置如下的参数：</p>
+<pre><code>-Xms3072M -Xmx3072M -Xmn2048M -Xss1M  -XX:PermSize=256M -XX:MaxPermSize=256M  
+-XX:SurvivorRatio=8 -XX:MaxTenuringThreshold=5 -XX:PretenureSizeThreshold=1M 
+-XX:+UseParNewGC -XX:+UseConcMarkSweepGC</code></pre><h2 id="四、老年代JVM参数优化"><a href="#四、老年代JVM参数优化" class="headerlink" title="四、老年代JVM参数优化"></a>四、老年代JVM参数优化</h2><p>&emsp;&emsp;老年代参数优化主要就是减少Full GC的次数。首先我们得要分析对象进入老年代的几个原因</p>
+<h3 id="1、对象进入老年代的原因"><a href="#1、对象进入老年代的原因" class="headerlink" title="1、对象进入老年代的原因"></a>1、对象进入老年代的原因</h3><p><strong>第一种</strong>：就是<code>-XX:MaxTenuringThreshold</code>这个参数设置的太低了，就是之前新生代的案例，这种对象一般是<code>@Service</code>或<code>Controller</code>等注解标识的业务逻辑组件，这种对象一般全局有一个实例就行，是要一直用的，所以应该让他进。</p>
+<p><strong>第二种</strong>：就是大对象，但是这种再上述案例中一般没有，可以忽略。</p>
+<p><strong>第三种</strong>：就是Minor GC后存活的对象超过了<code>Survivor</code>区的50%，就直接进入了老年代</p>
+<h3 id="2、大促销场景的Full-GC多久出发一次？"><a href="#2、大促销场景的Full-GC多久出发一次？" class="headerlink" title="2、大促销场景的Full GC多久出发一次？"></a>2、大促销场景的Full GC多久出发一次？</h3><p>&emsp;&emsp;对于此案例触发Full GC的几个情况：</p>
+<p><strong>情况一</strong>：没有打开<code>-XX:HandlePromotionFailure</code>选项。<strong>我们知道如果老年代剩余内存大于新生代对象总大小就直接Minor GC的，但是老年代剩余内存总大小小于新生代对象总大小时，就要看这个参数了，如果没有打开这个参数，老年代空间小于新生代所有对象大小就直接Full GC，如果打开了，就看平均。</strong>这个参数就是看老年代剩余内存总大小是否大于之前每一次Minor GC进入老年代的对象的平均大小，按照之前项目案例，要很多次Minor GC之后才可能有一两次碰巧会有200MB对象升入老年代，所以这个“历次Minor GC后升入老年代的平均对象大小”，基本是很小的。（JDK 1.6之后就不看了）</p>
+<p><strong>情况二</strong>：某次升入老年代的对象很大，但是老年代空间不够了。</p>
+<p><strong>情况三</strong>：和<code>-XX:CMSInitiatingOccupancyFaction</code>参数有关，默认值是92%，超过这个值就会GC。</p>
+<p>&emsp;&emsp;针对大促销场景，由于我们之前在新生代优化了参数，所以对象进入老年代较慢，经验上来说，很可能是在系统运行半小时~1小时之后，才会有接近1GB的对象进入老年代。在大促期间，订单系统运行1小时之后，大促下单高峰期几乎都快过了，此时才可能会触发一次Full GC。这个高峰期过后，基本订单系统访问压力就很小了，那么GC的问题几乎就更不算什么了。</p>
+<p>&emsp;&emsp;当然老年代也会触发<code>Concurrent Mode Failure</code>问题。假设系统，运行1小时之后，老年代大概有900MB的对象了，剩余可用空间仅仅只有100MB了，然后CMS进行垃圾回收，垃圾回收期间是和系统程序并发的，如果系统此时还在创建对象，比如说很不巧有200MB对象要进来了，而老年代又放不下，那么此时就会进入<code>Stop the World</code>，然后切换CMS为Serial Old，直接禁止程序运行，然后单线程进行老年代垃圾回收，回收掉900MB对象过后，再让系统继续运行。当然这个概率非常的小，我们没必要特意去优化它。</p>
+<p>此时参数为:</p>
+<pre><code>-Xms3072M -Xmx3072M -Xmn2048M -Xss1M  -XX:PermSize=256M -XX:MaxPermSize=256M  
+-XX:SurvivorRatio=8 -XX:MaxTenuringThreshold=5 -XX:PretenureSizeThreshold=1M 
+-XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFaction=9</code></pre><h3 id="3、CMS后内存碎片整理频率"><a href="#3、CMS后内存碎片整理频率" class="headerlink" title="3、CMS后内存碎片整理频率"></a>3、CMS后内存碎片整理频率</h3><p>&emsp;&emsp;没必要特意去修改这个频率，对于上述大促销场景，在大促高峰期，Full GC可能也就1小时执行一次，然后大促高峰期过去之后，就没那么多的订单了，此时可能几个小时才会有一次Full GC。所以就保持默认的设置，每次Full GC之后都执行一次内存碎片整理就可以。要针对特定的业务场景来设定。<strong>仅仅针对这个参数来说：</strong></p>
+<ul>
+<li>如果Full GC相对频繁，就设置多次Full GC后进行碎片整理</li>
+<li>如果不是很频繁，可以设置每次Full GC后进行碎片整理</li>
+</ul>
+<h2 id="五、面试题"><a href="#五、面试题" class="headerlink" title="五、面试题"></a>五、面试题</h2><h3 id="1、一个面试题：parnew-cms的gc，如何保证只做ygc，jvm参数如何配置？"><a href="#1、一个面试题：parnew-cms的gc，如何保证只做ygc，jvm参数如何配置？" class="headerlink" title="1、一个面试题：parnew+cms的gc，如何保证只做ygc，jvm参数如何配置？"></a>1、一个面试题：parnew+cms的gc，如何保证只做ygc，jvm参数如何配置？</h3><p>首先和垃圾收集器没什么关系，不同的垃圾收集器，只是它们的性能、吞吐量不同，并不影响垃圾回收的时机。只要在新生代根据对象的存活特征，合理的去分配Eden区和s1、s2区域的大小，尽量让垃圾在新生代被回收就好了，注意这边开启内存担保（jdk 1.6），如果eden区超过了老年代大小，不开担保的话每次MGC前都要FGC的。</p>
+<h3 id="2、为什么老年代回收比新生代慢？"><a href="#2、为什么老年代回收比新生代慢？" class="headerlink" title="2、为什么老年代回收比新生代慢？"></a>2、为什么老年代回收比新生代慢？</h3><p>新生代存活对象小，并且采用复制算法，速度很快，复制过去直接就删除，而老年代对象量较大，遍历标记、遍历清除，然后还要整理好腾出空间来，很耗时，耗时的就是步骤二和步骤四。初始标记是从GC Roots查找直接引用的对象，并发标记也是从GC Roots出发，通过每个对象的引用地址来看哪些对象活着的，活着的又很多，就很耗时。</p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://yoursite.com" rel="external nofollow noreferrer">Jerry</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://yoursite.com/2019/08/27/JVM%E4%B9%8B%E6%96%B0%E7%94%9F%E4%BB%A3%E4%B8%8E%E8%80%81%E5%B9%B4%E4%BB%A3JVM%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96/">http://yoursite.com/2019/08/27/JVM%E4%B9%8B%E6%96%B0%E7%94%9F%E4%BB%A3%E4%B8%8E%E8%80%81%E5%B9%B4%E4%BB%A3JVM%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="http://yoursite.com" target="_blank">Jerry</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/JVM/">
+                                    <span class="chip bg-color">JVM</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/08/29/JVM%E4%B9%8BG1%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E8%AF%A6%E8%A7%A3%E4%B8%8E%E5%9B%9E%E6%94%B6%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="JVM之G1垃圾回收器详解与回收性能优化">
+                        
+                        <span class="card-title">JVM之G1垃圾回收器详解与回收性能优化</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            G1垃圾回收器详解与回收性能优化一、G1的引出1、G1与堆内存&emsp;&emsp;新生代还是老年代，Stop the World是最大的痛点，它们都会产生这个现象，影响系统的运行，所有垃圾回收器的优化都是朝着减少STW的目标去做的，G1
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-08-29
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/JVM/" class="post-category">
+                                    JVM
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/JVM/">
+                        <span class="chip bg-color">JVM</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/08/25/JVM%E4%B9%8BCMS%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="JVM之CMS垃圾回收器工作原理详解">
+                        
+                        <span class="card-title">JVM之CMS垃圾回收器工作原理详解</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            老年代回收容器——CMS1、CMS工作原理&emsp;&emsp;一般老年代我们选择的垃圾回收器是CMS，他采用的是标记清理算法（不是标记整理）。之前提到过Stop the World状态，就是垃圾回收时停止一切线程的工作，如果在这个状态下
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-08-25
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/JVM/" class="post-category">
+                                    JVM
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/JVM/">
+                        <span class="chip bg-color">JVM</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="http://yoursite.com" target="_blank">Jerry</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/0xac001d09" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:876774731@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=876774731" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 876774731" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

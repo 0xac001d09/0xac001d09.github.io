@@ -1,0 +1,988 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="海量数据处理之TopK问题, 0xac001d09">
+    <meta name="description" content="Keep on keeping on.">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>海量数据处理之TopK问题 | 0xac001d09</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <span class="logo-span">0xac001d09</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <div class="logo-name">0xac001d09</div>
+        <div class="logo-desc">
+            
+            Keep on keeping on.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">海量数据处理之TopK问题</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">
+                                <span class="chip bg-color">海量数据处理</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" class="post-category">
+                                海量数据处理
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-11-22
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.9k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    10 分
+                </div>
+                
+
+                
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="海量数据处理（2）：最高频K项问题"><a href="#海量数据处理（2）：最高频K项问题" class="headerlink" title="海量数据处理（2）：最高频K项问题"></a>海量数据处理（2）：最高频K项问题</h1><h2 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h2><p>这个问题即：找到一个大文件或者数据流中出现频率最高的 K 项。问题的难点在于，如果条件不一样，解决的办法是完全不一样的，比如：</p>
+<ul>
+<li>是否需要<strong>精确</strong>的 Top K 结果？即，是否允许小概率出错。</li>
+<li>数据是<strong>离线的</strong>还是<strong>在线的</strong>？即是一个大文件的形式计算一次得到一个结果，还是数据流的形式实时返回结果。</li>
+</ul>
+<p>如果对于一个大文件（也就是说离线的），只是简单的找到前k大的，使用<code>quick select</code>算法即可。在线数据流如何处理？很简单，只要拿新加进来的数和前k大中的最后一个个数比较即可，新来的比它大，那就把最后一个踢出。问题就转变为集合中维护最小的数，马上就想到了<code>min heap</code>。</p>
+<blockquote>
+<p>离线问题—-&gt;quick select算法</p>
+<p>在线问题—-&gt;维护minHeap</p>
+</blockquote>
+<p><a href="https://www.lintcode.com/problem/top-k-largest-numbers-ii/description" target="_blank" rel="noopener">LintCode 545. Top K Largest Numbers</a></p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+        <span class="token keyword">private</span> <span class="token keyword">int</span> k<span class="token punctuation">;</span>
+        <span class="token keyword">private</span> Queue<span class="token operator">&lt;</span>Integer<span class="token operator">></span> minHeap<span class="token punctuation">;</span>
+
+        <span class="token keyword">public</span> <span class="token function">Solution</span><span class="token punctuation">(</span><span class="token keyword">int</span> k<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>k <span class="token operator">=</span> k<span class="token punctuation">;</span>
+            minHeap <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PriorityQueue</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">int</span> num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>minHeap<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> k<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                minHeap<span class="token punctuation">.</span><span class="token function">offer</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>num <span class="token operator">></span> minHeap<span class="token punctuation">.</span><span class="token function">peek</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    minHeap<span class="token punctuation">.</span><span class="token function">poll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    minHeap<span class="token punctuation">.</span><span class="token function">offer</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">public</span> List<span class="token operator">&lt;</span>Integer<span class="token operator">></span> <span class="token function">topk</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            Iterator<span class="token operator">&lt;</span>Integer<span class="token operator">></span> it <span class="token operator">=</span> minHeap<span class="token punctuation">.</span><span class="token function">iterator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            List<span class="token operator">&lt;</span>Integer<span class="token operator">></span> res <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span>it<span class="token punctuation">.</span><span class="token function">hasNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                res<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>it<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            Collections<span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span>res<span class="token punctuation">,</span> Collections<span class="token punctuation">.</span><span class="token function">reverseOrder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span></code></pre>
+<h2 id="二、离线处理-Top-K问题"><a href="#二、离线处理-Top-K问题" class="headerlink" title="二、离线处理 Top K问题"></a>二、离线处理 Top K问题</h2><p><strong>离线问题</strong>的主要处理步骤是</p>
+<ol>
+<li>首先用hash表统计所有项的出现次数</li>
+<li>寻遍每一个出现过的项，用最大K项的方法，获得最大的前K项</li>
+</ol>
+<h3 id="1、MapReduce处理离线-Top-K-步骤"><a href="#1、MapReduce处理离线-Top-K-步骤" class="headerlink" title="1、MapReduce处理离线 Top K 步骤"></a>1、MapReduce处理离线 Top K 步骤</h3><ol>
+<li>通过 Map 步骤，将每一个文件中的单词一个个取出，每个单词构造一个 &lt;Word, 1&gt; 的 Key-value 二元组，作为 Map 的输出。</li>
+<li>通过 Reduce 的步骤，每台机器（Reducer）会处理若干个不同的 Key，在每个 Reducer 一开始初始化的时候，构建一个最小堆，输入 key（某个 word） 和他对应的values（可以假设 values 就是一堆 1，事实上 Map Reduce 会帮你做一些优化，导致有可能 value 已经被加过，所以实际处理的时候，还是老老实实的把 values 加起来，而不是看一下 values 有多少个）。那么我们把所有的 values 加起来就是当前这个 key（某个 word）的出现次数。那么当我们拿到这个单词的出现次数之后，就可以在当前的 Reducer 里去和最小堆里的第K大比大小，来决定是否淘汰当前的第K大了。Reducer 在处理完他需要处理的数据之后，就输出他得到的 Top K。</li>
+<li>由于有多个 Reducers，因此我们会得到多个 Top K，最后还需要从这些输出中过一遍，得到最终的 Top K。这个步骤已经在 Map Reduce 之外了，用一个单独的代码扫一遍就可以了。</li>
+</ol>
+<p><strong>实际情况下，如果真的是非常庞大的数据，全表扫描的时间消耗很长，而且把所有数据放到内存中，这个做法依旧不可行，即使用了MapReduce，用了很多台机器，具体分配到每台机器，也可能出现无法全部加载到内存的情况，我们不能一碰到情况就加机器。</strong></p>
+<p><strong>那就是面试官问：假设现在只有一台机器，内存为 1G，你有一个 1T 大小的文件，需要统计里面最高频的 K 个单词，你该怎么做？</strong></p>
+<p>答案是：哈希算法</p>
+<h3 id="2、Hash算法"><a href="#2、Hash算法" class="headerlink" title="2、Hash算法"></a>2、Hash算法</h3><p>哈希函数对于同一个 Key，会返回一个<strong>固定的</strong>，无规律的整数值。虽然哈希值是可能<strong>重复的</strong>，并不是一对一的，但并不影响我们的计算。这样我们处理离线问题就分成了下面这三步：</p>
+<ol>
+<li>先将文件扫描一次，把每个单词作为 Key，算一下他的哈希值，然后模上大概 <strong>2000 - 10000</strong> 的这样一个数。之所以取这这么一个数是因为，内存的大小是 1G，那么如果将 1T 的文件分成若干个 1G 大小的小文件的话，那么理想需要 1000 个文件（1024G/1G）。平均下来就是将所有的单词分成 1000 组，每组大概就是 1G 个不同的单词（理想状况），实际上处理的时候，分成 2000 组比较保险。10000 组当然更保险了，但是可能就没有合理利用上内存了。实际做的时候，可以先看一下分成 2000 行不行，不行的话，再放大分组数。</li>
+<li>对于每个文件，分别导入内存进行处理，使用<strong>哈希表+最小堆</strong>（MapReduce那块）。每一组文件得到一个 Top K。</li>
+<li>类似于 Map Reduce 一样，我们得到了若干个 Top K，我们最后把这若干个 Top K 再合并一次就好了。</li>
+</ol>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXFpcm9wc2lyajMxaXEwdTBuM2QuanBn?x-oss-process=image/format,png" alt="image-20200109154510548"></p>
+<h2 id="三、在线处理-Top-K-问题"><a href="#三、在线处理-Top-K-问题" class="headerlink" title="三、在线处理 Top K 问题"></a>三、在线处理 Top K 问题</h2><p>数据流问题的特点是没有第二次从头访问数据的机会。因此在离线算法中，先通过哈希表（HashMap）计数，再通过堆（Heap）来统计Top K的方法就行不通了。那在线算法的思路就是<strong>边计数，边比较Top K</strong>。这种算法的空间复杂度消耗和数据流中流过的数据量总大小有关，如果数据量一大，根本不好控制内存消耗。想要找一个在线的、精确的、省空间的TOP K算法是很困难的，只能牺牲掉准确性，<strong>用精度换空间</strong>。这就是我们优化的余地。（就好比热搜TOP 10里面 排名不用非常精确）</p>
+<p>常见的精度换空间算法有：Lossy Counting、Efficient Count、Hash Count等</p>
+<h3 id="1、HashCount"><a href="#1、HashCount" class="headerlink" title="1、HashCount"></a>1、HashCount</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">TopKAnalyzer</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>k <span class="token operator">=</span> k
+        self<span class="token punctuation">.</span>hash_heap <span class="token operator">=</span> HashHeap<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>hash_count <span class="token operator">=</span> 开一个数组，内存有多大开多大
+
+    <span class="token keyword">def</span> <span class="token function">add</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>word<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        index <span class="token operator">=</span> hashfunc<span class="token punctuation">(</span>word<span class="token punctuation">)</span><span class="token operator">%</span> self<span class="token punctuation">.</span>hash_count<span class="token punctuation">.</span>size
+        self<span class="token punctuation">.</span>hash_count<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token operator">+=</span><span class="token number">1</span>
+        word_count <span class="token operator">=</span> self<span class="token punctuation">.</span>hash_count<span class="token punctuation">[</span>index<span class="token punctuation">]</span>
+
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+    <span class="token keyword">def</span> <span class="token function">topk</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span></code></pre>
+<p>这里将原本记录所有单词的出现次数的哈希表，换成了一个根据内存大小能开多大开多大的数组。这个数组的每个下标存储了“某些”单词的出现次数。使用了hashfun函数计算每个单词的hashcode，将hashcode模整个hashcount数组的大小得到一个下标（index），用这个下标对应的计数来代表这个单词的出现次数。有了这个单词的出现次数之后，再拿去 hash heap 里进行比较就可以了。</p>
+<p>问题是如果有两个单词，计算下来的index一样，一个单词把另一个单词挤掉了，实际上根据<strong>长尾效应</strong>（统计学名词。正态曲线中间的突起部分叫头，两边相对平缓的部分叫尾，人们需求的角度来看，大多数的需求会集中在头部，分布在尾部的只是少量个性化的需求），由于 Top K 的 K 肯定是远小于 N（整个数据集的），而 Top K 的这些数据项的计数又远远大于其他的数据项。因此，Top K 的 index 扎堆的可能性是非常非常小的。</p>
+<h2 id="四、面试问题"><a href="#四、面试问题" class="headerlink" title="四、面试问题"></a>四、面试问题</h2><h3 id="1、设计一个听歌统计系统，返回用户-7-天内听的最多-10-首的歌。"><a href="#1、设计一个听歌统计系统，返回用户-7-天内听的最多-10-首的歌。" class="headerlink" title="1、设计一个听歌统计系统，返回用户 7 天内听的最多 10 首的歌。"></a>1、设计一个听歌统计系统，返回用户 7 天内听的最多 10 首的歌。</h3><h4 id="（1）问题分析"><a href="#（1）问题分析" class="headerlink" title="（1）问题分析"></a>（1）问题分析</h4><p>几个问题条件：</p>
+<ul>
+<li>7天和10首歌这个数字是固定的么？有可能一会儿7天一会儿10天，一会儿10首歌一会儿8首歌么？</li>
+<li>对实时性要求严格么？是否允许一定时间的延迟？比如一首个一分钟内被点爆，是否需要在这1分钟之内在榜单中体现出来？</li>
+</ul>
+<p>澄清问题是面试中重要的一个步骤，因为上述问题的答案，稍有不同，则算法的设计，系统的设计就截然不同。我们先做如下的合理假设：</p>
+<ul>
+<li>7天10首歌这两个数字是固定的。</li>
+<li>对实时性要求不严格，可以有1小时的误差。</li>
+</ul>
+<h4 id="（2）离线算法"><a href="#（2）离线算法" class="headerlink" title="（2）离线算法"></a>（2）离线算法</h4><p>通常来说，系统都会进行一些 log。比如用户在什么时候听了什么歌曲，都会被作为一条条的log 记录下来，这个时候，我们可以每小时运行一次分析程序，计算最近7天被听的最多的10首歌。这个分析程序则读取最近 7 天的听歌记录，用前面的 Hash + Heap 的方法进行统计即可。如果这个记录过大，需要加速的话，还可以使用 Map Reduce 来提速。</p>
+<ul>
+<li><p><strong>缺点：</strong></p>
+<ul>
+<li>每小时都进行一次对前7天的数据统计，若数据量很大，使用 Map Reduce 则会耗费很多计算资源。</li>
+<li>如果系统的实时性要求变高，则该方法很有可能不奏效</li>
+</ul>
+</li>
+<li><p><strong>解决方案：提出基于桶（Bucket）的统计方法</strong></p>
+<ul>
+<li><strong>聚合（Aggregate）</strong>：将用户的同个记录，按照1小时为单位进行一次聚合（Aggregate），即整合成一个 Hash 表，Key是歌曲的id，Value是歌曲在这1小时之内被播放的次数。这种方法的好处在于，因为很多歌曲，特别是热门歌曲，是被高频率点播的，这个时候没有必要去一条一条的记录点播记录，只需要记录一个1小时的统计即可。这里每个小时就是一个桶（Bucket），比如当前时刻是 1月1日的18点，那么18点之后，19点之前的点播记录，都放在18点的这个桶里，进行聚合统计。</li>
+<li><strong>滑动窗口（Sliding Window）</strong>：7天的话，只需要在内存中保存 7 * 24 = 144 个桶，随着时间轴的推移，旧的桶则可以被删除。每次需要获得 Top 10 的时候，则将这 144 个桶的结果进行合并即可。</li>
+</ul>
+</li>
+<li><p><strong>关于桶的问题</strong></p>
+<ul>
+<li>如果桶统计的hash表很大，无法放进能存，那么在每个桶的局部统计中，可以删除value很小的key（长尾理论），他们都没用，但却占据了很大的空间</li>
+<li>桶是同事存放在内存和硬盘的，存在内存中是为了更快计算top10，存在硬盘中，防止断电，并且即便桶里的数据没被存下来，可以利用数据库中的log，重新还原每个桶里的hash表</li>
+</ul>
+</li>
+</ul>
+<h4 id="（3）在线算法"><a href="#（3）在线算法" class="headerlink" title="（3）在线算法"></a>（3）在线算法</h4><p>由于有7天这个窗口，我们要做到：</p>
+<ul>
+<li>新数据来的时候，需要丢弃对应的7天前的旧数据。</li>
+<li>7天之内的数据，都应该按照某种带着时间标记的方式被保存下来，而不是只有一个计数。</li>
+<li>在线 Hash + Heap 的方法“可能”不再奏效，因为跌出前10名的歌曲，还可能在过短时间后回到前10名。而之前介绍中我们在 Heap 中保存的是前10名，跌出前10名的元素不再有机会回到前10名，则无需保存。</li>
+</ul>
+<h3 id="2、在-10-亿个数中找最小的-100-万个数（假设内存只能放下-100-万个数）"><a href="#2、在-10-亿个数中找最小的-100-万个数（假设内存只能放下-100-万个数）" class="headerlink" title="2、在 10 亿个数中找最小的 100 万个数（假设内存只能放下 100 万个数）"></a>2、在 10 亿个数中找最小的 100 万个数（假设内存只能放下 100 万个数）</h3><p>使用一个最大堆保存最小的前 100 万个数。循环每个数的过程中，和 Max Heap 的堆顶比较，看看是否能被加入最小前 100 万个数里。可以结合MapReduce以及HashCount算法来讲。</p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://yoursite.com" rel="external nofollow noreferrer">Jerry</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://yoursite.com/2019/11/22/%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B9%8BTopK%E9%97%AE%E9%A2%98/">http://yoursite.com/2019/11/22/%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B9%8BTopK%E9%97%AE%E9%A2%98/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="http://yoursite.com" target="_blank">Jerry</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">
+                                    <span class="chip bg-color">海量数据处理</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/11/24/%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B9%8B%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="海量数据处理之布隆过滤器">
+                        
+                        <span class="card-title">海量数据处理之布隆过滤器</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            海量数据处理（3）：布隆过滤器一、简介布隆过滤器（Bloom Filter，BF）对普通的哈希表做了进一步的改进，是一种更省空间的哈希表。当碰到内存不够的问题时，BF就是一个很好的选择。BF的两个功能：检测一个元素在不在一个集合中、统计一个
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-11-24
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" class="post-category">
+                                    海量数据处理
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">
+                        <span class="chip bg-color">海量数据处理</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/11/21/%E6%B5%B7%E9%87%8F%E5%A4%84%E7%90%86%E4%B9%8BMapReduce/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="海量数据处理之MapReduce">
+                        
+                        <span class="card-title">海量数据处理之MapReduce</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            海量数据处理（1）：MapReduce海量数据处理，就是基于海量数据的存储、删除、搜索等操作。由于数据量太大，导致要么无法在短时间内迅速处理，要么无法一次性装入内存。针对面试过程中的问题，主要有以下解决步骤
+
+针对时间，可以采用更加迅速的数
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-21
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" class="post-category">
+                                    海量数据处理
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">
+                        <span class="chip bg-color">海量数据处理</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="http://yoursite.com" target="_blank">Jerry</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/0xac001d09" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:876774731@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=876774731" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 876774731" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
