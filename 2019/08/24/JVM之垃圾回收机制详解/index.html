@@ -425,12 +425,12 @@
 <span class="token punctuation">}</span></code></pre>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;肯定是不会的，<code>ReplicaFetcher</code>类的对象被<code>ReplicaManager</code>类的<code>replicaFetcher</code>强引用着，而<code>ReplicaManager</code>类的对象被可作为GC Root的静态变量<code>replicaManager</code>强引用着，所以<code>ReplicaFetcher</code>对象可以向上找到GC Root，因此不会被回收。</p>
 <h2 id="二、针对新生代的垃圾回收算法——复制算法"><a href="#二、针对新生代的垃圾回收算法——复制算法" class="headerlink" title="二、针对新生代的垃圾回收算法——复制算法"></a>二、针对新生代的垃圾回收算法——复制算法</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;背景：对于新生代，一种不太好的垃圾回收思路是直接对新生代里的垃圾对象进行标记，然后直接对垃圾进行回收，这样的缺陷是引入了许多内存碎片，内存碎片导致了内存的浪费，我们没有了完整的连续的内存空间是很难受的一件事。在这改进一下，我们可以将新生代内存空间划分为两部分，对<strong>不回收</strong>的对象进行标记，转移到另一块区域中顺便整理下，然后把另一块区域里的垃圾干掉，这就是所谓的复制算法。如下图</p>
-<p><img src="https://img-blog.csdnimg.cn/2020020816594853.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt="\[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-om5GRGa0-1581152304198)(/Users/zhangye/Library/Application Support/typora-user-images/image-20191023185617356.png)\]"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为什么标记不回收的呢？因为新生代里存放的对象大都是存活时间很短的，所以不回收的只是很少一部分，标记速度更快，如果标记回收的，就不合适了。</p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200304171904248.png" alt=""><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为什么标记不回收的呢？因为新生代里存放的对象大都是存活时间很短的，所以不回收的只是很少一部分，标记速度更快，如果标记回收的，就不合适了。</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;但是复制算法有缺点，因为我们永远只有一半内存可以使用，另一半放垃圾，这样转移，使得内存使用效率太低了。所以对复制算法进行了优化。因为新生代放的都是存活时期非常短的对象，极端情况比如99%的垃圾1%有用的。实际上新生代内存区被划分为三部分：1块<code>Eden</code>区，2块<code>Survivor</code>区。</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;初始对象都是优先被分配在<code>Eden</code>区的，如果<code>Eden</code>区快满了就触发<code>Minor GC</code>，把<code>Eden</code>中存活的对象全部转移到空的<code>Survivor</code>区，接着清空<code>Eden</code>中的垃圾，再次配分对象到<code>Eden</code>。由于存活的对象较少，所以给Survivor区域分配的内存就较少，当然看实际场景来分配。</p>
-<p><img src="https://img-blog.csdnimg.cn/20200208170027214.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt="\[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-DCS5LOUV-1581152304199)(/Users/zhangye/Library/Application Support/typora-user-images/image-20191023190409235.png)\]"></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200304171914949.png" alt=""></p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>如果<code>Survivor</code>一个区域中都放满了，并且<code>Eden</code>区域中也占满了，但是垃圾回收后可能就只有10M对象活着，只要把那10MB对象转移到另一块<code>Survivor</code>区域中即可，之后把第一块<code>Survivor</code>区域和<code>Eden</code>区域中垃圾全部回收，这样始终保证着有一块<code>Survivor</code>区域是空的。</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/20200208170047902.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt="\[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-CYhaAy18-1581152304200)(/Users/zhangye/Library/Application Support/typora-user-images/image-20191023190838996.png)\]"></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200304171932766.png" alt=""></p>
 <h2 id="三、针对老年代的垃圾回收算法——标记整理算法"><a href="#三、针对老年代的垃圾回收算法——标记整理算法" class="headerlink" title="三、针对老年代的垃圾回收算法——标记整理算法"></a>三、针对老年代的垃圾回收算法——标记整理算法</h2><h3 id="1、进入老年代的几种情况"><a href="#1、进入老年代的几种情况" class="headerlink" title="1、进入老年代的几种情况"></a>1、进入老年代的几种情况</h3><h4 id="（1）躲过15次GC（当然我们可以自己设置次数）"><a href="#（1）躲过15次GC（当然我们可以自己设置次数）" class="headerlink" title="（1）躲过15次GC（当然我们可以自己设置次数）"></a>（1）躲过15次GC（当然我们可以自己设置次数）</h4><h4 id="（2）大对象直接进入老年代"><a href="#（2）大对象直接进入老年代" class="headerlink" title="（2）大对象直接进入老年代"></a>（2）大对象直接进入老年代</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过<code>-XX:PretenureSizeThreshold</code>把值设置成字节数，创建的对象大于这个值就直接进入老年代，之所以这么做是避免新生代里的大对象屡次躲过GC还要在三个区域来回复制，耗费时间。</p>
 <h4 id="（3）动态对象年龄判断"><a href="#（3）动态对象年龄判断" class="headerlink" title="（3）动态对象年龄判断"></a>（3）动态对象年龄判断</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;比如当前放对象的Survivor区域里，一批对象的总大小，大于这块Survivor区域的内存大小的50%，那么此时大于等于这批对象年龄的对象就直接进入老年代</p>
 <ul>
@@ -445,12 +445,12 @@
 <li><strong>第二种情况：</strong>老年代剩余内存大小小于新生代所有对象总大小，此时就会看<code>-XX:HandlePromotionFailure</code>参数是否设置了，若设置了，则会看老年代可用内存大小是否大于<strong>之前每一次Minor GC后进入老年代的对象的平均大小</strong>，如果不是，只能<code>Full GC</code>,即对老年代里的对象进行回收，才能让剩余存活对象进入老年代。如果是，则可以冒险尝试下<code>Minor GC</code>，但这个尝试也是有三种可能：<br>&emsp;<strong>可能一：</strong><code>Minor GC</code>后，剩余存活对象比<code>Survivor</code>区还小，就直接放进<code>Survivor</code>中<br>&emsp;<strong>可能二：</strong><code>Minor GC</code>后，剩余存活对象大于<code>Survivor</code>区，小于老年代可用区，即直接进入老年代<br>&emsp;<strong>可能三：</strong><code>Minor GC</code>后，剩余存活对象大于老年代可用区，放不下了，这时候就会触发<code>Full GC</code>，要是<code>Full GC</code>后还是放不下，直接导致<code>OOM内存溢出</code>。</li>
 </ul>
 <p>&emsp;&emsp;<strong>简介：空间担保机制是看老年代可用空间是否大于新生代所有对象总大小的，如果成立了，那么Minor GC就是安全的，如果不成立，则看<code>HandlerPromotionFailure</code>是否设置为true，true则允许担保失败，如果允许，则检查老年代可用连续空间是否大于历次晋升到老年代对象的平均大小，如果大于，则尝试Minor GC，如果小于，则Full GC。<br>&emsp;&emsp;实际上<code>-XX:HandlePromotionFailure</code>参数在JDK 1.6以后就被废弃了，所以现在一般都不会在生产环境里设置这个参数了。JDK 1.6之前是把空间担保机制和<code>HandlerPromotionFailure</code>参数拆开了，JDK 1.6之后的空间担保机制只要满足”老年代可用连续空间 &gt; 新生代对象总大小或历次晋升到老年代对象的平均大小”其中一个就可，不满足就Full GC。</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/2020020817021856.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt="- \[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-ExOzTU0w-1581152304201)(/Users/zhangye/Library/Application Support/typora-user-images/image-20191023194318928.png)\]"></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200304171950708.png" alt=""></p>
 <h3 id="2、老年代Full-GC算法——标记整理算法"><a href="#2、老年代Full-GC算法——标记整理算法" class="headerlink" title="2、老年代Full GC算法——标记整理算法"></a>2、老年代Full GC算法——标记整理算法</h3><p>&emsp;&emsp;顾名思义，标记整理就是把老年代里活着的对象整理，紧凑在一起，避免垃圾回收后出现内存碎片。注意<code>Full GC</code>的速度比<code>Minor GC</code>慢10多倍，如果频繁出现<code>Full GC</code>就影响了系统性能，出现卡顿，但是你多两次<code>Minor GC</code>无关紧要，反正速度很快。</p>
 <p>&emsp;&emsp;所以，所谓JVM优化，就是尽量能让对象在新生代里进行分配和回收，别让太多对象进入老年代，避免对老年代的频繁<code>Full GC</code>，同时要给系统足够的内存大小来避免新生代频繁的<code>Minor GC</code>。</p>
-<p><img src="https://img-blog.csdnimg.cn/20200208170242625.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt="\[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-xJsW6N3p-1581152304202)(/Users/zhangye/Library/Application Support/typora-user-images/image-20191023194609145.png)\]"></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200304172009272.png" alt=""></p>
 <p>未回收前</p>
-<p><img src="https://img-blog.csdnimg.cn/20200208170301143.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt="\[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-NSYGdfm1-1581152304203)(/Users/zhangye/Library/Application Support/typora-user-images/image-20191023194646277.png)\]"></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200304172023156.png" alt=""></p>
 <p>回收后</p>
 <p><strong>为什么老年代不用复制算法？</strong></p>
 <p>&emsp;&emsp;因为老年代存活的对象太多了，如果用复制算法，每次挪动90%的对象很不方便，所以采用标记回收，把有用的挪到一边，然后回收垃圾，是很好的一个方式。</p>
@@ -478,7 +478,7 @@
 情况1：Minor GC前先判断：存活的对象所占的内存空间 &lt; Survivor区域内存空间的大小，那么存活的对象进入Survivor区。 
 情况2：Minor GC前先判断：Survivor区域内存空间的大小 &lt; 存活的对象所占的内存空间 &lt; 老年代的可用空间大小。那么存活的对象，直接进入老年代。 
 情况3：Minor GC前先判断： (存活的对象所占的内存空间 &gt; Survivor区域内存空间的大小) &amp;&amp; (存活的对象所占的内存空间 &gt; 老年代的可用空间大小)。那么会触发Full GC，老年代腾出空间后，再进行Minor GC。如果腾出空间后还不能存放存活的对象，那么会导致OOM即堆内存空间不足、堆内存溢出。 </code></pre><h2 id="四、垃圾回收容器简介"><a href="#四、垃圾回收容器简介" class="headerlink" title="四、垃圾回收容器简介"></a>四、垃圾回收容器简介</h2><h3 id="1、抛出问题：垃圾回收的同时能创建对象吗？"><a href="#1、抛出问题：垃圾回收的同时能创建对象吗？" class="headerlink" title="1、抛出问题：垃圾回收的同时能创建对象吗？"></a>1、抛出问题：垃圾回收的同时能创建对象吗？</h3><p>&emsp;&emsp;<strong>不能</strong>！垃圾回收的时候，尽可能要让垃圾收集器专心工作，此时JVM在后台直接进入<code>Stop the World</code>状态，停止我们写的Java系统的所有线程，让我们代码不再运行。一旦回收完毕，就可以恢复线程运行了。这里要注意的就是避免频繁GC，无论是新生代还是老年代，我们都不希望系统隔一段时间卡死一下，这是JVM最需要优化的地方。当然我们可以使用适当的垃圾回收容器来缩短回收的时间。</p>
-<p><img src="https://img-blog.csdnimg.cn/20200208170342848.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt="\[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-6DsEndCV-1581152304204)(/Users/zhangye/Library/Application Support/typora-user-images/image-20191023201603168.png)\]"></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200304172050467.png" alt=""></p>
 <h3 id="2、垃圾回收容器"><a href="#2、垃圾回收容器" class="headerlink" title="2、垃圾回收容器"></a>2、垃圾回收容器</h3><p>&emsp;&emsp;不同的内存区域使用不同的垃圾回收容器，简单介绍下垃圾回收容器</p>
 <ul>
 <li><p><code>Serial和Serial Old</code>：分别用来回收新生代和老年代对象。工作原理就是单线程运行，回收的时候会停止系统中其他工作线程，现在几乎不用。</p>
@@ -488,7 +488,7 @@
 <li><p><code>G1</code>：统一收集新生代和老年代，采用了更优秀的算法和设计机制</p>
 </li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/20200208170407341.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>多线程回收</p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200304172109733.png" alt=""><br>多线程回收</p>
 <h2 id="五、捋清概念"><a href="#五、捋清概念" class="headerlink" title="五、捋清概念"></a>五、捋清概念</h2><p>&emsp;&emsp;有很多GC名词需要捋一下：Minor GC、Young GC、Full GC、Old GC、Major GC、Mixed GC。</p>
 <h3 id="1、Minor-GC-与Young-GC"><a href="#1、Minor-GC-与Young-GC" class="headerlink" title="1、Minor GC 与Young GC"></a>1、Minor GC 与Young GC</h3><p>&emsp;&emsp;年轻代 = 新生代，新生代的回收就叫Minor GC或是Young GC</p>
 <h3 id="2、Full-GC与Old-GC"><a href="#2、Full-GC与Old-GC" class="headerlink" title="2、Full GC与Old GC"></a>2、Full GC与Old GC</h3><p>&emsp;&emsp;Full GC就是整体的意思，指的是针对新生代、老年代、永久代的全体内存空间的垃圾回收，所以称之为Full GC，但是说实话，平时习惯就是把Full GC等价为Old GC，也就是仅仅针对老年代的垃圾回收。</p>
@@ -534,32 +534,6 @@
         </div>
     </div>
 
-    
-        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="/css/my-gitalk.css">
-
-<div class="card gitalk-card" data-aos="fade-up">
-    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
-        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
-        <span>评论</span>
-    </div>
-    <div id="gitalk-container" class="card-content"></div>
-</div>
-
-<script src="/libs/gitalk/gitalk.min.js"></script>
-<script>
-    let gitalk = new Gitalk({
-        clientID: 'dc4953b9709420569433',
-        clientSecret: 'be3e7d3530ec49aabfcc887ee30bc356e23de849',
-        repo: 'gitalk',
-        owner: '2885688585',
-        admin: 2885688585,
-        id: '2019-08-24T12-11-37',
-        distractionFreeMode: false  // Facebook-like distraction free mode
-    });
-
-    gitalk.render('gitalk-container');
-</script>
     
 
     

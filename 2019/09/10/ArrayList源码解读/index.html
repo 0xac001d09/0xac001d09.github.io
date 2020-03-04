@@ -605,7 +605,7 @@
 <p>（5）<strong>有一个 ArrayList，数据是 2、3、3、3、4，中间有三个 3，现在我通过 for 循环的方式想把3删除，可以删除干净吗？最终结果是什么？为什么</strong></p>
 <blockquote>
 <p>答:不能删除干净，最终删除的结果是 2、3、4，有一个 3 删除不掉，原因我们看下图</p>
-<p><img src="https://img-blog.csdnimg.cn/20200209214231739.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt="\[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-yL9JKWWP-1581255614347)(/Users/zhangye/Library/Application Support/typora-user-images/image-20191211164341073.png)\]"></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200304171218373.png" alt="例子"></p>
 <p>每次删除一个元素后，该元素后面的元素就会往前移动，而此时循环的 i 在不断地增长，最终会使每次删除 3 的后一个 3 被遗漏，导致删除不掉。</p>
 </blockquote>
 <p>（6）<strong>还是上面的 ArrayList 数组，我们通过增强 for 循环进行删除，可以么?</strong></p>
@@ -689,32 +689,6 @@
         </div>
     </div>
 
-    
-        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="/css/my-gitalk.css">
-
-<div class="card gitalk-card" data-aos="fade-up">
-    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
-        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
-        <span>评论</span>
-    </div>
-    <div id="gitalk-container" class="card-content"></div>
-</div>
-
-<script src="/libs/gitalk/gitalk.min.js"></script>
-<script>
-    let gitalk = new Gitalk({
-        clientID: 'dc4953b9709420569433',
-        clientSecret: 'be3e7d3530ec49aabfcc887ee30bc356e23de849',
-        repo: 'gitalk',
-        owner: '2885688585',
-        admin: 2885688585,
-        id: '2019-09-10T23-15-48',
-        distractionFreeMode: false  // Facebook-like distraction free mode
-    });
-
-    gitalk.render('gitalk-container');
-</script>
     
 
     

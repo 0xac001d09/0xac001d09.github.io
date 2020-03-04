@@ -651,7 +651,7 @@
 </li>
 <li>子问题就是分别讨论两种情况，T1是否由S1变来，T2是否由S2变来，或 T1是否由S2变来，T2是否由S1变来。</li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/20191209094025664.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt="\[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-qETkstTE-1575855579132)(/Users/zhangye/Library/Application Support/typora-user-images/image-20191208150015394.png)\]"></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200304170802189.png" alt=""></p>
 <p>【状态】<code>dp[i][j][k][h]</code>表示T[k..h]是否由S[i..j]变来。由于变换必须长度是一样的，因此这边有个关系<code>j - i = h - k</code>，可以把四维数组降成三维。<code>dp[i][j][len]</code> 表示从字符串S中i开始长度为len的字符串是否能变换为从字符串T中j开始长度为len的字符串</p>
 <blockquote>
 <p>dp[i] [j] [k] = OR<del>1&lt;=w&lt;=k-1</del>{dp[i] [j] [w] AND dp[i+w] [j+w] [k-w]}  或 OR<del>1&lt;=w&lt;=k-1</del>{dp[i] [j+k-w] [w] AND dp[i+w] [j] [k-w]}</p>
@@ -786,32 +786,6 @@
         </div>
     </div>
 
-    
-        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="/css/my-gitalk.css">
-
-<div class="card gitalk-card" data-aos="fade-up">
-    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
-        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
-        <span>评论</span>
-    </div>
-    <div id="gitalk-container" class="card-content"></div>
-</div>
-
-<script src="/libs/gitalk/gitalk.min.js"></script>
-<script>
-    let gitalk = new Gitalk({
-        clientID: 'dc4953b9709420569433',
-        clientSecret: 'be3e7d3530ec49aabfcc887ee30bc356e23de849',
-        repo: 'gitalk',
-        owner: '2885688585',
-        admin: 2885688585,
-        id: '2019-12-10T23-11-37',
-        distractionFreeMode: false  // Facebook-like distraction free mode
-    });
-
-    gitalk.render('gitalk-container');
-</script>
     
 
     

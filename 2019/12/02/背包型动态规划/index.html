@@ -606,9 +606,9 @@
 <li>f[i] [w] = max<del>k&gt;=0</del>{f[i-1] [w-kA<del>i-1</del>] + kV<del>i-1</del>}，表示用<strong>前i种</strong>物品拼出重量w时的最大总价值，<strong>等于用前i-1种物品拼出重量w-kA<del>i-1</del> 时最大总价值，加上k个第i种物品</strong>，当k = 0和1时，就可以直接用在Backpack II 中了。</li>
 </ul>
 <p>把这个式子展开，如下</p>
-<p><img src="https://img-blog.csdnimg.cn/20191208001351399.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt="\[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-uCecL0xb-1575735182775)(/Users/zhangye/Library/Application Support/typora-user-images/image-20191207222836105.png)\]"></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200304170107112.png" alt="展开如图"></p>
 <p><strong>可以优化</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/20191208001359592.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt="\[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-shXqPs9c-1575735182776)(/Users/zhangye/Library/Application Support/typora-user-images/image-20191207223019634.png)\]"></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200304170143810.png" alt="优化"></p>
 <p><strong>什么意思呢</strong></p>
 <blockquote>
 <p>假设A<del>i-1</del> = 2,V<del>i-1</del> = x</p>
@@ -641,7 +641,7 @@
         <span class="token keyword">return</span> res<span class="token punctuation">;</span>
     <span class="token punctuation">}</span></code></pre>
 <p>可以优化到一维，这边的细节是：用的不是两个old值，而是old+new，可以只开一个数组，old+new去覆盖本来的old，这就需要时从前往后来，而不是逆序，如图</p>
-<p><img src="https://img-blog.csdnimg.cn/20191208001438509.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200304170257368.png" alt="压缩成一维"></p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">backPackIII</span><span class="token punctuation">(</span><span class="token keyword">int</span> m<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> A<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> V<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">int</span> n <span class="token operator">=</span> A<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
         <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> dp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span>m <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
@@ -699,32 +699,6 @@
         </div>
     </div>
 
-    
-        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="/css/my-gitalk.css">
-
-<div class="card gitalk-card" data-aos="fade-up">
-    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
-        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
-        <span>评论</span>
-    </div>
-    <div id="gitalk-container" class="card-content"></div>
-</div>
-
-<script src="/libs/gitalk/gitalk.min.js"></script>
-<script>
-    let gitalk = new Gitalk({
-        clientID: 'dc4953b9709420569433',
-        clientSecret: 'be3e7d3530ec49aabfcc887ee30bc356e23de849',
-        repo: 'gitalk',
-        owner: '2885688585',
-        admin: 2885688585,
-        id: '2019-12-02T23-15-48',
-        distractionFreeMode: false  // Facebook-like distraction free mode
-    });
-
-    gitalk.render('gitalk-container');
-</script>
     
 
     

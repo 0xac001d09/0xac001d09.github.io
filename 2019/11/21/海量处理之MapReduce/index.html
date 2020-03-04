@@ -412,16 +412,16 @@
 </li>
 </ul>
 <h2 id="一、MapReduce简介"><a href="#一、MapReduce简介" class="headerlink" title="一、MapReduce简介"></a>一、MapReduce简介</h2><p>给定一个有海量单词的集合，统计每个词的出现次数，最简单的就是for循环，放进map，一台机器这样做，明显是不合适的，所以我们想到了用两台机器for循环，两台服务器去处理数据，但是到了merge环节，还是一台机器啊，这也是个瓶颈。</p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXFpcmp5bzZ6ajMyNzYwdTBncGYuanBn?x-oss-process=image/format,png" alt="image-20200109140334227"></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXFpcmp5bzZ6ajMyNzYwdTBncGYuanBn?x-oss-process=image/format,png" alt="MapReduce"></p>
 <p>合并时候也可以采用并行的方式，有两种选择</p>
 <ul>
 <li>一是以机器来划分（比如第i台到第j台由某台机器合并）</li>
 <li>二是根据key来划分（比如key由a、b、c、d，让一台机器合并key a和key b）</li>
 </ul>
 <p>很显然以机器作为划分并不好，因为进行了第一轮合并了后，还要再进行合并…最后形成一个类似树状结构的，后面的机器得要等前面机器合并完了才能继续工作，依赖性较强。所以才用根据key来划分（没有前后依赖性，系统复杂度低），这就有了MapReduce。</p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXFpcmxxdjV4ajMyOGswcjY3OXYuanBn?x-oss-process=image/format,png" alt="image-20200109140833402"></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXFpcmxxdjV4ajMyOGswcjY3OXYuanBn?x-oss-process=image/format,png" alt=""></p>
 <p>注意，上面的map中采用了合并，这实际上是不对的，如果要合并，需要hashmap，机器里开一个hashmap肯定是放不下的，map的主要任务是打乱，不做合并。</p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXFpcms3bW8yajMyOHUwcHVhZm0uanBn?x-oss-process=image/format,png" alt="image-20200109141250219"></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXFpcms3bW8yajMyOHUwcHVhZm0uanBn?x-oss-process=image/format,png" alt=""></p>
 <h2 id="二、Map函数和Reduce函数"><a href="#二、Map函数和Reduce函数" class="headerlink" title="二、Map函数和Reduce函数"></a>二、Map函数和Reduce函数</h2><p>Map函数和Reduce函数的输入输出必须是<code>key-value</code>的形式</p>
 <ul>
 <li>Map 输入 key：文章存储地址，value：文章内容</li>
@@ -460,14 +460,14 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
 <h2 id="三、传输整理"><a href="#三、传输整理" class="headerlink" title="三、传输整理"></a>三、传输整理</h2><p>在Map到Reduce的过程中有个传输整理，这个流程如图所示</p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXFpcmtrbWY2ajMyOHUwcHVhZm0uanBn?x-oss-process=image/format,png" alt="image-20200109142649235"></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXFpcmtrbWY2ajMyOHUwcHVhZm0uanBn?x-oss-process=image/format,png" alt=""></p>
 <p>Partition和Sort就是传输整理，在这个过程中ab分为一组，cd分为一组，这个分组是由master的一致性hash来进行分组，由于分组存在硬盘上，采用外部排序。排序时key作为第一关键字，value作为第二关键字。接下来是Reduce的工作，通过Fetch把排好序的文件拿到自己的机器上，并对这些文件进行k路归并成Reduce的输入。</p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXFpcm15anl5ajMyNGYwdTBncnguanBn?x-oss-process=image/format,png" alt="image-20200109143009331"></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXFpcm15anl5ajMyNGYwdTBncnguanBn?x-oss-process=image/format,png" alt=""></p>
 <p>下面介绍两个应用</p>
 <h2 id="四、利用MapReduce建立倒排索引"><a href="#四、利用MapReduce建立倒排索引" class="headerlink" title="四、利用MapReduce建立倒排索引"></a>四、利用MapReduce建立倒排索引</h2><p>正排：序号-&gt;关键字，倒排：给定文章关键词，返回文章序号，就比如google上搜索关键词，返回网页。</p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXFpcm1kc3VxajMyOHkwZjBkaGQuanBn?x-oss-process=image/format,png" alt="image-20200109143417433"></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXFpcm1kc3VxajMyOHkwZjBkaGQuanBn?x-oss-process=image/format,png" alt=""></p>
 <p>map输出的key是文章的关键词，value是文章的编号。在reduce中需要进行去重操作</p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXFpcmt1NGxuajMyOW0wbTI3OXAuanBn?x-oss-process=image/format,png" alt="image-20200109143559740"></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXFpcmt1NGxuajMyOW0wbTI3OXAuanBn?x-oss-process=image/format,png" alt=""></p>
 <p><a href="https://www.lintcode.com/problem/inverted-index-map-reduce/description" target="_blank" rel="noopener">LintCode 504. 倒排索引</a></p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//OutputCollector是辅助输出的工具</span>
 <span class="token keyword">class</span> <span class="token class-name">OutputCollector</span><span class="token operator">&lt;</span>K<span class="token punctuation">,</span> V<span class="token operator">></span> <span class="token punctuation">{</span>
@@ -508,7 +508,7 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
 <h2 id="五、利用MapReduce对Anagram进行分组"><a href="#五、利用MapReduce对Anagram进行分组" class="headerlink" title="五、利用MapReduce对Anagram进行分组"></a>五、利用MapReduce对Anagram进行分组</h2><p>Anagram的特性就是能够随意改变单词中字母顺序，如果把内部字母排个序，那么只要是Anagram就会变成同一个单词。经过内部排序的单词就能够作为key，而原单词就是value。</p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXFpcm5yZjZvajMyOHUwbnFqd2guanBn?x-oss-process=image/format,png" alt="image-20200109145006642"></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXFpcm5yZjZvajMyOHUwbnFqd2guanBn?x-oss-process=image/format,png" alt=""></p>
 <p><a href="https://www.lintcode.com/problem/anagram-map-reduce/description" target="_blank" rel="noopener">LintCode 503. 乱序字符串</a></p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//OutputCollector是辅助输出的工具</span>
 <span class="token keyword">class</span> <span class="token class-name">OutputCollector</span><span class="token operator">&lt;</span>K<span class="token punctuation">,</span> V<span class="token operator">></span> <span class="token punctuation">{</span>
@@ -580,32 +580,6 @@
         </div>
     </div>
 
-    
-        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="/css/my-gitalk.css">
-
-<div class="card gitalk-card" data-aos="fade-up">
-    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
-        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
-        <span>评论</span>
-    </div>
-    <div id="gitalk-container" class="card-content"></div>
-</div>
-
-<script src="/libs/gitalk/gitalk.min.js"></script>
-<script>
-    let gitalk = new Gitalk({
-        clientID: 'dc4953b9709420569433',
-        clientSecret: 'be3e7d3530ec49aabfcc887ee30bc356e23de849',
-        repo: 'gitalk',
-        owner: '2885688585',
-        admin: 2885688585,
-        id: '2019-11-21T19-10-37',
-        distractionFreeMode: false  // Facebook-like distraction free mode
-    });
-
-    gitalk.render('gitalk-container');
-</script>
     
 
     

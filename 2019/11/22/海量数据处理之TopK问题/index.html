@@ -449,7 +449,7 @@
 <li>对于每个文件，分别导入内存进行处理，使用<strong>哈希表+最小堆</strong>（MapReduce那块）。每一组文件得到一个 Top K。</li>
 <li>类似于 Map Reduce 一样，我们得到了若干个 Top K，我们最后把这若干个 Top K 再合并一次就好了。</li>
 </ol>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXFpcm9wc2lyajMxaXEwdTBuM2QuanBn?x-oss-process=image/format,png" alt="image-20200109154510548"></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXFpcm9wc2lyajMxaXEwdTBuM2QuanBn?x-oss-process=image/format,png" alt=""></p>
 <h2 id="三、在线处理-Top-K-问题"><a href="#三、在线处理-Top-K-问题" class="headerlink" title="三、在线处理 Top K 问题"></a>三、在线处理 Top K 问题</h2><p>数据流问题的特点是没有第二次从头访问数据的机会。因此在离线算法中，先通过哈希表（HashMap）计数，再通过堆（Heap）来统计Top K的方法就行不通了。那在线算法的思路就是<strong>边计数，边比较Top K</strong>。这种算法的空间复杂度消耗和数据流中流过的数据量总大小有关，如果数据量一大，根本不好控制内存消耗。想要找一个在线的、精确的、省空间的TOP K算法是很困难的，只能牺牲掉准确性，<strong>用精度换空间</strong>。这就是我们优化的余地。（就好比热搜TOP 10里面 排名不用非常精确）</p>
 <p>常见的精度换空间算法有：Lossy Counting、Efficient Count、Hash Count等</p>
 <h3 id="1、HashCount"><a href="#1、HashCount" class="headerlink" title="1、HashCount"></a>1、HashCount</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">TopKAnalyzer</span><span class="token punctuation">:</span>
@@ -547,32 +547,6 @@
         </div>
     </div>
 
-    
-        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="/css/my-gitalk.css">
-
-<div class="card gitalk-card" data-aos="fade-up">
-    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
-        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
-        <span>评论</span>
-    </div>
-    <div id="gitalk-container" class="card-content"></div>
-</div>
-
-<script src="/libs/gitalk/gitalk.min.js"></script>
-<script>
-    let gitalk = new Gitalk({
-        clientID: 'dc4953b9709420569433',
-        clientSecret: 'be3e7d3530ec49aabfcc887ee30bc356e23de849',
-        repo: 'gitalk',
-        owner: '2885688585',
-        admin: 2885688585,
-        id: '2019-11-22T18-15-45',
-        distractionFreeMode: false  // Facebook-like distraction free mode
-    });
-
-    gitalk.render('gitalk-container');
-</script>
     
 
     

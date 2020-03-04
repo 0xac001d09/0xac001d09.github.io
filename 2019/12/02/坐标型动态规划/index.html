@@ -564,7 +564,7 @@
         <span class="token punctuation">}</span>
         <span class="token keyword">return</span> dp<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token punctuation">[</span>m <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span></code></pre>
-<p><img src="https://img-blog.csdnimg.cn/20191208000116507.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20191208000116507.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt=""></p>
 <h3 id="5、LintCode-553-Bomb-Enemy"><a href="#5、LintCode-553-Bomb-Enemy" class="headerlink" title="5、LintCode 553 Bomb Enemy"></a>5、<a href="https://www.lintcode.com/problem/bomb-enemy/description" target="_blank" rel="noopener">LintCode 553 Bomb Enemy</a></h3><p>【问题】给定一个二维矩阵, 每一个格子可能是一堵墙 <code>W</code>,或者 一个敌人 <code>E</code> 或者空 <code>0</code> (数字 ‘0’), 返回你可以用一个炸弹杀死的最大敌人数. 炸弹会杀死所有在同一行和同一列没有墙阻隔的敌人。 由于墙比较坚固，所以墙不会被摧毁。</p>
 <p>【分析】原本只能在空地放炸弹，现在假设有敌人和有墙的地方也能放炸弹，有敌人的地方，格子里的敌人能被炸死，再加上其他炸死的人，有墙的地方，炸死人数为0。现在分析一个方向，比如向上，有三种情况：</p>
 <ul>
@@ -711,32 +711,6 @@
     </div>
 
     
-        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="/css/my-gitalk.css">
-
-<div class="card gitalk-card" data-aos="fade-up">
-    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
-        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
-        <span>评论</span>
-    </div>
-    <div id="gitalk-container" class="card-content"></div>
-</div>
-
-<script src="/libs/gitalk/gitalk.min.js"></script>
-<script>
-    let gitalk = new Gitalk({
-        clientID: 'dc4953b9709420569433',
-        clientSecret: 'be3e7d3530ec49aabfcc887ee30bc356e23de849',
-        repo: 'gitalk',
-        owner: '2885688585',
-        admin: 2885688585,
-        id: '2019-12-02T19-10-37',
-        distractionFreeMode: false  // Facebook-like distraction free mode
-    });
-
-    gitalk.render('gitalk-container');
-</script>
-    
 
     
 
@@ -755,10 +729,10 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/12/02/%E5%8F%8C%E5%BA%8F%E5%88%97%E5%9E%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+                <a href="/2019/12/02/%E5%8D%9A%E5%BC%88%E5%9E%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
                     <div class="card-image">
                         
-                        <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gccezt6vxkj31ex0u0416.jpg" class="responsive-img" alt="算法-动态规划">
+                        <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gccezthz1aj31eh0u0mzt.jpg" class="responsive-img" alt="算法-动态规划">
                         
                         <span class="card-title">算法-动态规划</span>
                     </div>
@@ -766,9 +740,8 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            动态规划：双序列型双序列型，就是有两个子序列/字符串，每个序列本身是一维的，可以转换为二维dp，序列型开数组开n+1，双序列型也是开n+1。
-突破口：看串A和串B的最后一个字符是否匹配，是否需要串A/串B的最后一个字符，来缩减规模。
-两种类
+                            动态规划：博弈型博弈型dp一般从第一步分析，而不是最后一步，需要开n+1
+1、LintCode 394 Coins in a Line【问题】有 n 个硬币排成一条线。两个参赛者轮流从右边依次拿走 1 或 2 个硬币，直到没有硬币为止。拿到
                         
                     </div>
                     <div class="publish-info">

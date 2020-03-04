@@ -389,7 +389,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h2><p>&emsp;&emsp;底层数据结构是<strong>双向链表</strong>，如图。链表中没数据时，first和last是同一个结点，前后指向null。因为是个双向链表，只要机器内存足够大，没有大小限制。</p>
-<p><img src="https://img-blog.csdnimg.cn/20200209214704149.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt="\[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-OzywFitY-1581256004798)(/Users/zhangye/Library/Application Support/typora-user-images/image-20191211153542310.png)\]"></p>
+<p><img src="LinkedList%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB.assets/image-20200304172903184.png" alt="双向链表"></p>
 <p>内部有一个Node类</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">Node</span><span class="token operator">&lt;</span>E<span class="token operator">></span> <span class="token punctuation">{</span>
         E item<span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//节点值</span>
@@ -660,32 +660,6 @@
         </div>
     </div>
 
-    
-        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="/css/my-gitalk.css">
-
-<div class="card gitalk-card" data-aos="fade-up">
-    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
-        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
-        <span>评论</span>
-    </div>
-    <div id="gitalk-container" class="card-content"></div>
-</div>
-
-<script src="/libs/gitalk/gitalk.min.js"></script>
-<script>
-    let gitalk = new Gitalk({
-        clientID: 'dc4953b9709420569433',
-        clientSecret: 'be3e7d3530ec49aabfcc887ee30bc356e23de849',
-        repo: 'gitalk',
-        owner: '2885688585',
-        admin: 2885688585,
-        id: '2019-09-11T22-16-28',
-        distractionFreeMode: false  // Facebook-like distraction free mode
-    });
-
-    gitalk.render('gitalk-container');
-</script>
     
 
     

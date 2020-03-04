@@ -390,13 +390,13 @@
             <div id="articleContent">
                 <h1 id="G1垃圾回收器详解与回收性能优化"><a href="#G1垃圾回收器详解与回收性能优化" class="headerlink" title="G1垃圾回收器详解与回收性能优化"></a>G1垃圾回收器详解与回收性能优化</h1><h2 id="一、G1的引出"><a href="#一、G1的引出" class="headerlink" title="一、G1的引出"></a>一、G1的引出</h2><h3 id="1、G1与堆内存"><a href="#1、G1与堆内存" class="headerlink" title="1、G1与堆内存"></a>1、G1与堆内存</h3><p>&emsp;&emsp;新生代还是老年代，<code>Stop the World</code>是最大的痛点，它们都会产生这个现象，影响系统的运行，所有垃圾回收器的优化都是朝着减少STW的目标去做的，G1便应运而生了。G1可以同时回收新生代和老年代，<strong>它的最大特点，就是把Java堆内存拆分为多个大小相等的<code>Region</code></strong>，如图，所以G1的新生代老年代是一种逻辑上的概念了，新生代可能包含了某些<code>Region</code>，老年代可能包含了某些<code>Reigon</code>。<strong>另一个最大特点，就是允许我们设置一个垃圾回收的预期停顿时间，比如我们可以指定1小时内回收垃圾的时候产生的STW时间要小于1min</strong></p>
 <p>&emsp;&emsp;<strong>G1相比之前的垃圾回收器，最大进步就是STW可控</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/20200209152107836.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt="\[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-FEvznQE5-1581232833681)(/Users/zhangye/Library/Application Support/typora-user-images/image-20191025205227363.png)\]"></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200304172228596.png" alt=""></p>
 <p>&emsp;&emsp;给整个堆内存设置了大小后，启动JVM，一旦发现你使用的是G1垃圾回收器（通过使用<code>-XX:+UseG1GC</code>这个参数来设置），那就会自动用堆内存大小除以2048（默认情况下是这个，当然我们可以通过<code>-XX:G1HeapRegionSize</code>参数来指定），因为最多可以有2048个Region，Region的大小为2的倍数，比如堆内存给2G，那Region可能是1MB、2MB、4MB这样的，堆内存给4G，那每个Region就是2MB。</p>
 <p>&emsp;&emsp;Region区域既有新生代，也有老年代，这时候就不需要去给他们分配内存了，这两个区域是由G1控制，不停变动的。默认新生代堆内存占比是5%，当然可以通过<code>-XX:G1NewSizePercent</code>参数来设置新生代初始占比，一般都是维持这个默认值，因为系统运行时会动态变化。</p>
 <p>&emsp;&emsp;此外，新生代还是有Eden和Survivor划分的，之前有个参数是<code>-XX:SurvivorRatio=8</code>，意思是说80%的Eden，20%的Survivor，在这里，比如新生代初始共100个Region，那就是80个Eden，两个Survivor各占十个。随着动态分配，比如新生代的Region不断增加，那么Eden和Survivor对应的Region也会不断增加。</p>
 <h3 id="2、G1如果做到对于系统的停顿可控的？"><a href="#2、G1如果做到对于系统的停顿可控的？" class="headerlink" title="2、G1如果做到对于系统的停顿可控的？"></a>2、G1如果做到对于系统的停顿可控的？</h3><p>&emsp;&emsp;G1要做到这一点必须<strong>追踪每一个Region的回收价值</strong>，所谓回收价值就是根据设定的预期系统停顿时间，来选择<strong>最少回收时间和最多回收对象的Region进行垃圾回收</strong>，保证GC对系统停顿的影响在可控范围内，同时还能尽可能回收最多的对象。（有点类似贪心算法）。</p>
 <h2 id="二、G1的垃圾回收机制"><a href="#二、G1的垃圾回收机制" class="headerlink" title="二、G1的垃圾回收机制"></a>二、G1的垃圾回收机制</h2><h3 id="1、G1新生代Region的垃圾回收"><a href="#1、G1新生代Region的垃圾回收" class="headerlink" title="1、G1新生代Region的垃圾回收"></a>1、G1新生代Region的垃圾回收</h3><p>前提：新生代占据了整个堆大小的60%。（比如我们划分了2000个Region，差不多有1200个新生代Region，其中Eden占1000个，每个Survivor各占100个，如图）</p>
-<p><img src="https://img-blog.csdnimg.cn/20200209152119896.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt="\[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-MUkGTmiC-1581232833683)(/Users/zhangye/Library/Application Support/typora-user-images/image-20191025220101126.png)\]"></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200304172239966.png" alt=""></p>
 <p>这时候还是会触发Minor GC，使用复制算法，进入<code>Stop the World</code>，把Eden中活着的对象放进S1对应的Region，然后回收。看起来和ParNew没区别，其实是有区别的，因为我们给G1设定了停顿时间（参数<code>-XX:MaxGCPauseMills</code>,默认200ms），那么G1首先会对每个Region追踪回收的时间，再选择，来尽可能多回收掉一点对象。</p>
 <p><strong>当然也有进入老年代的几种情况：</strong></p>
 <ul>
@@ -410,15 +410,15 @@
 <h4 id="（2）Mixed-GC的停止时机"><a href="#（2）Mixed-GC的停止时机" class="headerlink" title="（2）Mixed GC的停止时机"></a>（2）Mixed GC的停止时机</h4><p><strong>混合回收都是基于复制算法进行的</strong>，把要回收的Region区存活的对象放入其他Region，然后这个Region全部清理掉，这样就会不断空出来新的Region，有一个参数<code>-XX:G1HeapWastePercent</code>，默认值是5%，就是说空出来的区域大于整个堆的5%，就会立即停止混合回收了。正常默认回收次数是8次，但是可能到了4次，发现空闲Region大于整个堆的5%，就不会再进行后续回收了。</p>
 <h4 id="（3）回收失败问题"><a href="#（3）回收失败问题" class="headerlink" title="（3）回收失败问题"></a>（3）回收失败问题</h4><p>可以看出<strong>G1整体都是基于复制算法进行，不会出现内存碎片问题</strong>，但另一个问题是，Mixed GC中新生代、老年代都是复制算法，对象复制时候别的Region内存不够了咋办？那就是回收失败了！就会立即停止系统程序，然后采用单线程去标记、清理、压缩整理，再空闲出新的Region，这个过程极其缓慢！（<strong>采用的是Serial Old回收器</strong>）</p>
 <h3 id="3、Mixed-GC的四个阶段"><a href="#3、Mixed-GC的四个阶段" class="headerlink" title="3、Mixed GC的四个阶段"></a>3、Mixed GC的四个阶段</h3><h4 id="（1）初始标记阶段"><a href="#（1）初始标记阶段" class="headerlink" title="（1）初始标记阶段"></a>（1）初始标记阶段</h4><p>这个过程需要进入<code>Stop the World</code>的，仅仅只是标记一下GC  Roots直接能引用的对象，这个过程速度是很快的。如下图，<strong>先停止系统程序的运行</strong>，然后<strong>对各个线程栈内存中的局部变量代表的GC Roots，以及方法区中的类静态变量代表的GC Roots，进行扫描</strong>，标记出来他们直接引用的那些对象。</p>
-<p><img src="https://img-blog.csdnimg.cn/20200209152138972.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt="\[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-oKehIY34-1581232833684)(/Users/zhangye/Library/Application Support/typora-user-images/image-20191025224910516.png)\]"></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200304172318944.png" alt="初始标记"></p>
 <h4 id="（2）并发标记阶段"><a href="#（2）并发标记阶段" class="headerlink" title="（2）并发标记阶段"></a>（2）并发标记阶段</h4><p>这个阶段会<strong>允许系统程序的运行</strong>，同时进行GC Roots追踪，从GC Roots开始追踪所有的存活对象，并对这个过程对象的变化<strong>做记录</strong>，比如哪些对象失去了引用，哪些对象是新建的。如下图所示。（这个阶段也是很耗时的，要追踪全部存活的对象，但跟系统并发运行，影响不大）</p>
-<p><img src="https://img-blog.csdnimg.cn/20200209152155526.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt="\[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-k9y2CwrZ-1581232833686)(/Users/zhangye/Library/Application Support/typora-user-images/image-20191025225048722.png)\]"></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200304172358117.png" alt="并发标记"></p>
 <h4 id="（3）最终标记阶段"><a href="#（3）最终标记阶段" class="headerlink" title="（3）最终标记阶段"></a>（3）最终标记阶段</h4><p>这个阶段会进入<code>Stop the World</code>，<strong>系统程序是禁止运行的</strong>，但是会根据并发标记阶段记录的那些对象修改，最终标记一下有哪些存活对象，有哪些是垃圾对象，如下图所示。</p>
-<p><img src="https://img-blog.csdnimg.cn/20200209152209589.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt="\[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-yPNSOlQI-1581232833687)(/Users/zhangye/Library/Application Support/typora-user-images/image-20191025225515257.png)\]"></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200304172412072.png" alt="最终标记"></p>
 <h4 id="（4）混合回收阶段"><a href="#（4）混合回收阶段" class="headerlink" title="（4）混合回收阶段"></a>（4）混合回收阶段</h4><p>&emsp;&emsp;基于复制算法，这个阶段会计算老年代中每个Region中的存活对象数量，存活对象的占比，还有执行垃圾回收的预期性能和效率。<strong>接着会停止系统程序</strong>，然后全力以赴尽快进行垃圾回收，此时会选择部分Region进行回收，因为必须让垃圾回收的停顿时间控制在我们指定的范围内。</p>
 <p>&emsp;&emsp;注意，这里到底回收哪些Region是G1自己选择的，<strong>这里的混合回收是指在我们指定的时间（比如200ms）内回收尽可能多的垃圾。</strong></p>
 <p>&emsp;&emsp;<strong>另外，这个阶段G1允许多次执行混合回收</strong>，也就是说先停止系统工作，执行回收，恢复系统运行，再停止系统运行，再回收，再恢复…这么一个流程。每次回收的间隔是由G1自己控制的，回收执行次数可以通过参数<code>-XX:G1MixedGCCountTarget</code>来设置，这个参数默认回收次数是8次，同时有一个参数<code>-XX:G1HeapWastePercent</code>，默认值是5%，就是说空出来的区域大于整个堆的5%，就会立即停止混合回收了。正常默认回收次数是8次，但是可能到了4次，发现空闲Region大于整个堆的5%，就不会再进行后续回收了。这种多次回收的机制能够让系统停顿时间不要太长，可以在多次回收的间隙也运行一下。</p>
-<p><img src="https://img-blog.csdnimg.cn/20200209152245697.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt="\[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-cCauDw0d-1581232833688)(/Users/zhangye/Library/Application Support/typora-user-images/image-20191025225705796.png)\]"></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200304172431309.png" alt="混合回收"></p>
 <h3 id="4、G1垃圾回收的参数"><a href="#4、G1垃圾回收的参数" class="headerlink" title="4、G1垃圾回收的参数"></a>4、G1垃圾回收的参数</h3><ul>
 <li><code>-XX:+UseG1GC</code>：设置使用G1垃圾回收器</li>
 <li><code>-XX:MaxGCPauseMills</code>：设定系统停顿时间，默认200ms</li>
@@ -503,32 +503,6 @@
         </div>
     </div>
 
-    
-        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="/css/my-gitalk.css">
-
-<div class="card gitalk-card" data-aos="fade-up">
-    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
-        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
-        <span>评论</span>
-    </div>
-    <div id="gitalk-container" class="card-content"></div>
-</div>
-
-<script src="/libs/gitalk/gitalk.min.js"></script>
-<script>
-    let gitalk = new Gitalk({
-        clientID: 'dc4953b9709420569433',
-        clientSecret: 'be3e7d3530ec49aabfcc887ee30bc356e23de849',
-        repo: 'gitalk',
-        owner: '2885688585',
-        admin: 2885688585,
-        id: '2019-08-29T15-12-47',
-        distractionFreeMode: false  // Facebook-like distraction free mode
-    });
-
-    gitalk.render('gitalk-container');
-</script>
     
 
     

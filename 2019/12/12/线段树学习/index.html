@@ -428,7 +428,7 @@
     <span class="token keyword">return</span> root<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
 <h3 id="2、修改"><a href="#2、修改" class="headerlink" title="2、修改"></a>2、修改</h3><p>递归调用，一路向下找到最小区间，触底反弹的时候才去修改node。比如数组[6,3,5,1,9]，我要修改1位置上的3，那就是一路向下先找到3，然后返回途中修改 ，时间复杂度logN</p>
-<p><img src="https://img-blog.csdnimg.cn/2020010823242568.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt="线段树的修改"></p>
+<p><img src="https://img-blog.csdnimg.cn/2020010823242568.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt=""></p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//线段树的修改,</span>
 <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">modify</span><span class="token punctuation">(</span>SegmentTreeNode root<span class="token punctuation">,</span> <span class="token keyword">int</span> index<span class="token punctuation">,</span> <span class="token keyword">int</span> value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>root<span class="token punctuation">.</span>start <span class="token operator">==</span> index <span class="token operator">&amp;&amp;</span> root<span class="token punctuation">.</span>end <span class="token operator">==</span> index<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -478,7 +478,7 @@
     <span class="token keyword">return</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>left_max<span class="token punctuation">,</span> right_max<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
 <h2 id="三、线段树性质"><a href="#三、线段树性质" class="headerlink" title="三、线段树性质"></a>三、线段树性质</h2><p>对于区间[m1,m2]，mid = (m1+m2)/2，其左儿子区间是[m1,mid]，右儿子区间是(mid+1,m2)</p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXBrZWYwc2tvajMxbWUwbXEweWguanBn?x-oss-process=image/format,png" alt="demo"></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXBrZWYwc2tvajMxbWUwbXEweWguanBn?x-oss-process=image/format,png" alt=""></p>
 <h2 id="四、题目练习"><a href="#四、题目练习" class="headerlink" title="四、题目练习"></a>四、题目练习</h2><h3 id="1、LintCode-206-Interval-Sum"><a href="#1、LintCode-206-Interval-Sum" class="headerlink" title="1、LintCode 206. Interval Sum"></a>1、LintCode 206. Interval Sum</h3><p>区间求和</p>
 <blockquote>
 <p>给定一个整数数组（下标由 0 到 n-1，其中 n 表示数组的规模），以及一个查询列表。每一个查询列表有两个整数 <code>[start, end]</code> 。 对于每个查询，计算出数组中从下标 start 到 end 之间的数的总和</p>
@@ -970,32 +970,6 @@
         </div>
     </div>
 
-    
-        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="/css/my-gitalk.css">
-
-<div class="card gitalk-card" data-aos="fade-up">
-    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
-        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
-        <span>评论</span>
-    </div>
-    <div id="gitalk-container" class="card-content"></div>
-</div>
-
-<script src="/libs/gitalk/gitalk.min.js"></script>
-<script>
-    let gitalk = new Gitalk({
-        clientID: 'dc4953b9709420569433',
-        clientSecret: 'be3e7d3530ec49aabfcc887ee30bc356e23de849',
-        repo: 'gitalk',
-        owner: '2885688585',
-        admin: 2885688585,
-        id: '2019-12-12T15-16-17',
-        distractionFreeMode: false  // Facebook-like distraction free mode
-    });
-
-    gitalk.render('gitalk-container');
-</script>
     
 
     

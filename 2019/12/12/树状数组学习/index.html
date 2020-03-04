@@ -397,19 +397,19 @@
 <p>这两个用线段树求过很多遍了。树状数组也是通过前缀和的思想来完成单点更新和区间查询。它比线段树用的空间更小，速度更快。</p>
 <h2 id="二、树状数组算法分析"><a href="#二、树状数组算法分析" class="headerlink" title="二、树状数组算法分析"></a>二、树状数组算法分析</h2><p><strong>注意</strong>：树状数组的下标从 1 开始计数。定义数组 C 是一个对原始数组 A 的预处理数组。</p>
 <p>由原数组构造树状数组</p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXE5Y3FydTNlajMyNHYwdTAwencuanBn?x-oss-process=image/format,png" alt="image-20200109002039119"></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXE5Y3FydTNlajMyNHYwdTAwencuanBn?x-oss-process=image/format,png" alt=""></p>
 <p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXE5Y2xsdzllajMyMXAwdTBnc20uanBn?x-oss-process=image/format,png" alt="image-20200109002054068"></p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXE5Y25uMDE3ajMyMTYwdTBuM3QuanBn?x-oss-process=image/format,png" alt="image-20200109002106786"></p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXE5Y3B3amg0ajMyM3MwdTAwenkuanBn?x-oss-process=image/format,png" alt="image-20200109002127369"></p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXE5Y3BjcXV6ajMyZjgwcXN0ZGguanBn?x-oss-process=image/format,png" alt="image-20200109002400400"></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXE5Y25uMDE3ajMyMTYwdTBuM3QuanBn?x-oss-process=image/format,png" alt=""></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXE5Y3B3amg0ajMyM3MwdTAwenkuanBn?x-oss-process=image/format,png" alt=""></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXE5Y3BjcXV6ajMyZjgwcXN0ZGguanBn?x-oss-process=image/format,png" alt=""></p>
 <blockquote>
 <p><strong>结论</strong>：C[i]来自几个数组A中的元素:取决于i的二进制末尾有几个连续的0。比 如有k个0，那么C[i]来自2^k^个A中的元素。</p>
 </blockquote>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXE5Y29mbGhrajMyM2IwdTBxYXYuanBn?x-oss-process=image/format,png" alt="image-20200109002521025"></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXE5Y29mbGhrajMyM2IwdTBxYXYuanBn?x-oss-process=image/format,png" alt=""></p>
 <p>如果i是当前位置，当前有 $2^k$ 个来自A中的元素，有哪 $2^k$ 个呢？就是从C[i]的正下方出发，往前数 $2^k$ 个，C[i]就是这2^k^个数的和。</p>
 <p>定义一个 $lowbit(i) = 2^k$ 函数，就是把下标i传到函数中来，返回 $2^k$，lowbit表示C[i]这个数值是由A中的多少个元素相加得来的。（根据上面一段，你还能找到这几个元素是啥，从C[i]的正下方开始往前数2^k^个）</p>
 <p>怎么找父亲节点？<code>i+lowbit(i) = 父亲</code>比如C[4]，4的lowbit是4，它有个宽度为4的梯子，这个梯子就是它到它父亲的距离宽度。4+lowbit(4) = 8。再比如6，6的lowbit是2，6+2 = 8</p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXE5Y3I3cWluajMyYXkwcmc0MmsuanBn?x-oss-process=image/format,png" alt="image-20200109003719649"></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXE5Y3I3cWluajMyYXkwcmc0MmsuanBn?x-oss-process=image/format,png" alt=""></p>
 <h2 id="三、lowbit函数"><a href="#三、lowbit函数" class="headerlink" title="三、lowbit函数"></a>三、lowbit函数</h2><p>lowbit函数用到了补码相关知识。给定一个数，比如12，我们能求得它的二进制1100，如何求-12的二进制？实际上二进制前面有个符号位，正数前面符号位是0，负数前面符号位是1，12的二进制实际上是01100，那么求-12的二进制有两步</p>
 <ul>
 <li>首先把符号位从0改成1，然后对12每位取反。变成10011</li>
@@ -419,9 +419,9 @@
 <p><code>lowbit(i) = 2^k</code>，它就是利用了正数和负数的二进制</p>
 <pre class=" language-java"><code class="language-java">num <span class="token operator">&amp;</span> <span class="token punctuation">(</span><span class="token operator">-</span>num<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token operator">^</span>k</code></pre>
 <h2 id="四、树状数组的构建、修改、查询"><a href="#四、树状数组的构建、修改、查询" class="headerlink" title="四、树状数组的构建、修改、查询"></a>四、树状数组的构建、修改、查询</h2><h3 id="1、构建"><a href="#1、构建" class="headerlink" title="1、构建"></a>1、构建</h3><p>把原始数组A和预处理数组C都初始化为0，每更新一个元素，都要把它的值累加到它父亲的值上面去。比如初始化A1后，要把它的值累加到它父亲C1上面去，C1接收到值后，还要把C1的值传递给C2，然后C2传递给C4，C4传递给C8，如果A1的值为10，那第一次更新完就是这个样子</p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXE5Y2x2ZGZvajMxbjYwamtqdDYuanBn?x-oss-process=image/format,png" alt="image-20200109125400938"></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXE5Y2x2ZGZvajMxbjYwamtqdDYuanBn?x-oss-process=image/format,png" alt=""></p>
 <p>再更新A2，C2就要开始累加A2的值，并传给C2的父亲们，比如A2为5，就是下面这样子</p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXE5Y296c3JsajMxbW8wanEwdjEuanBn?x-oss-process=image/format,png" alt="image-20200109125651336"></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndneTFnYXE5Y296c3JsajMxbW8wanEwdjEuanBn?x-oss-process=image/format,png" alt=""></p>
 <h3 id="2、更新"><a href="#2、更新" class="headerlink" title="2、更新"></a>2、更新</h3><p>比如我要把A1从10改为1，那么就会有一个差值delta为9，C1更新成1，然后不断传给它的父亲们继续更新。</p>
 <h3 id="3、查询"><a href="#3、查询" class="headerlink" title="3、查询"></a>3、查询</h3><p>想要查询区间<code>[i,j]</code>的和，首先要查询区间<code>[1,j]</code>（树状数组起点从1开始的）和区间<code>[1,i-1]</code>的和，前者减去后者就是我们要求的答案。</p>
 <p>这里还有个求前缀和<code>[1,i]</code>的公式，是推导出来的，<code>sum(i) = sum(i - lowbit(i)) + C[i]</code></p>
@@ -512,32 +512,6 @@
         </div>
     </div>
 
-    
-        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="/css/my-gitalk.css">
-
-<div class="card gitalk-card" data-aos="fade-up">
-    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
-        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
-        <span>评论</span>
-    </div>
-    <div id="gitalk-container" class="card-content"></div>
-</div>
-
-<script src="/libs/gitalk/gitalk.min.js"></script>
-<script>
-    let gitalk = new Gitalk({
-        clientID: 'dc4953b9709420569433',
-        clientSecret: 'be3e7d3530ec49aabfcc887ee30bc356e23de849',
-        repo: 'gitalk',
-        owner: '2885688585',
-        admin: 2885688585,
-        id: '2019-12-12T15-16-17',
-        distractionFreeMode: false  // Facebook-like distraction free mode
-    });
-
-    gitalk.render('gitalk-container');
-</script>
     
 
     
