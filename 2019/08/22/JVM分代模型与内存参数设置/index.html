@@ -403,7 +403,7 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们可以看到在<code>main()</code>方法的<code>while</code>循环中，不断调用<code>loadReplicasFromDisk()</code>方法生成新对象，这个新生成对象的存活时间是极其短的，大致过程是<code>loadReplicasFromDisk()</code>入栈，在堆内存中生成对象，栈帧里的局部变量指向这个对象，然后方法结束，出栈，这个对象就没人指向了，结果如下图</p>
-<p><img src="JVM%E5%88%86%E4%BB%A3%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%86%85%E5%AD%98%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE.assets/image-20200304171607206.png" alt=""></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200305191130661.png" alt=""></p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;但有些对象是长期存活的，比如下面这段代码。</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Kafka</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 老年代</span>
@@ -420,7 +420,7 @@
         replicaManager<span class="token punctuation">.</span><span class="token function">load</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在Kafka类中定一个一个<strong>静态</strong>变量，这个静态变量指向堆内存中的对象，while循环中不停得调用这个对象的方法，使得这个对象一直被引用，这样就长期存活下来了。<br><img src="https://img-blog.csdnimg.cn/20200208165021425.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQyNDY2OA==,size_16,color_FFFFFF,t_70" alt=""></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在Kafka类中定一个一个<strong>静态</strong>变量，这个静态变量指向堆内存中的对象，while循环中不停得调用这个对象的方法，使得这个对象一直被引用，这样就长期存活下来了。<br><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200305191148973.png" alt=""></p>
 <h3 id="2、年轻代、老年代、永久代"><a href="#2、年轻代、老年代、永久代" class="headerlink" title="2、年轻代、老年代、永久代"></a>2、年轻代、老年代、永久代</h3><ul>
 <li><p>JVM将Java堆内存分成两个区域，即年轻代和老年代，年轻代就是生命周期极短、用完就要被回收的对象所在的区域，老年代就是生命周期较长对象存在的区域，需要一直存在堆中，让程序后续不断的去使用。</p>
 </li>
@@ -462,7 +462,7 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
 <p>对应下面这张图</p>
-<p><img src="JVM%E5%88%86%E4%BB%A3%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%86%85%E5%AD%98%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE.assets/image-20200304171627330.png" alt=""></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200305191205882.png" alt=""></p>
 <h2 id="二、JVM内存如何分配？"><a href="#二、JVM内存如何分配？" class="headerlink" title="二、JVM内存如何分配？"></a>二、JVM内存如何分配？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;虽然有了年轻代和老年代，但是对于大部分正常对象，都是先升在新生代中分配内存的，新生代就是年轻代和老年代的总和，一开始并没有区分。我们的对象有两种类型，一种是像ReplicaManager这样的，用完一次就没人指向他了，这样的对象在新生代内存中不断囤积，最后导致空间几乎都被它占满了，那就会触发<code>Minor GC</code>，又称之为<code>Young GC</code>，它就把新生代中的没用的这些垃圾回收掉；另一种对象是像ReplicaFetcher这样的，始终有人指向它，JVM中有规定，垃圾每回收一次，如果一个对象没被回收掉，它的年龄就增加1，如果一个对象年龄超过15，就会把它放置到老年代区域（这个阈值我们可以修改，默认值是15），也就是说老年代存放了年龄很大的对象，下面两张图就很形象。同样的，如果老年代也满了也会被回收。</p>
 <p>小结：</p>
 <ul>
@@ -475,19 +475,20 @@
 <li>动态对象年龄判断机制</li>
 <li>空间担保机制</li>
 </ul>
-<p><img src="JVM%E5%88%86%E4%BB%A3%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%86%85%E5%AD%98%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE.assets/image-20200304171656123.png" alt="">ReplicaManager的对象太多导致内存不够</p>
-<p><img src="JVM%E5%88%86%E4%BB%A3%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%86%85%E5%AD%98%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE.assets/image-20200304171711791.png" alt="image-20200304171711791"></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200305191221284.png" alt=""></p>
+<p>ReplicaManager的对象太多导致内存不够</p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200305191240283.png" alt=""></p>
 <p>ReplicaManager的对象被回收掉，且ReplicaFetcher对象符合要求进入老年代</p>
 <h2 id="三、JVM内存分配参数"><a href="#三、JVM内存分配参数" class="headerlink" title="三、JVM内存分配参数"></a>三、JVM内存分配参数</h2><pre><code>-Xms：Java堆内存大小
 -Xmx：Java堆内存最大大小
 -Xmn：Java堆内存中新生代大小，扣除新生代就是老年代的大小了
 -XX:PermSize：永久代大小
 -XX:MaxPermSize：永久代最大大小
--Xss：每个线程栈内大小，一般0.5～1M</code></pre><p><img src="JVM%E5%88%86%E4%BB%A3%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%86%85%E5%AD%98%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE.assets/image-20200304171729830.png" alt="image-20200304171729830"></p>
+-Xss：每个线程栈内大小，一般0.5～1M</code></pre><p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200305191321086.png" alt=""></p>
 <h2 id="四、JVM堆内存、栈内存、永久代大小设置"><a href="#四、JVM堆内存、栈内存、永久代大小设置" class="headerlink" title="四、JVM堆内存、栈内存、永久代大小设置"></a>四、JVM堆内存、栈内存、永久代大小设置</h2><h3 id="1、堆内存大小设置"><a href="#1、堆内存大小设置" class="headerlink" title="1、堆内存大小设置"></a>1、堆内存大小设置</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;背景是电商支付系统，首先看一下支付流程：</p>
-<p><img src="JVM%E5%88%86%E4%BB%A3%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%86%85%E5%AD%98%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE.assets/image-20200304171744093.png" alt="image-20200304171744093"></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200305191341344.png" alt=""></p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个系统的支付压力就是每日百万订单的交易，从JVM角度来看，就是在堆内存中生存了百万个订单对象，而这些订单频繁的创建和销毁就是核心问题。</p>
-<p><img src="JVM%E5%88%86%E4%BB%A3%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%86%85%E5%AD%98%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE.assets/image-20200304171755689.png" alt="image-20200304171755689"></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200305191356871.png" alt=""></p>
 <p>我们怎么去设定堆内存的大小呢？按照下边的步骤估计：</p>
 <ul>
 <li>确定业务规模，分析系统压力点</li>
@@ -496,10 +497,10 @@
 <li>确定每台机器JVM分配的内存空间（方法区、栈内存、堆内存，堆中新生代、老年代大小）</li>
 </ul>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;假设我们一天100万个订单，共三台机器，把这100w个订单分配到几个小时里（考虑高峰时间段），假设算下来一秒钟100个订单。把这100个订单的任务分配个3台机器，每台机器一秒30个订单，那这30个订单占多少内存？就要看我们订单对象是多大了，看订单对象里面的变量来计算（Integer变量4字节，Long类型8字节…），假设1kb，那么30个订单也就30kb，大概情况如下。系统运行起来后，一台机器每秒有30个对象不被使用了，然后直到新生代空间快满了，就发生一次Minor GC，这就是这个业务运行的模型。但是实际情况下，每秒钟创建出来的对象不单单就订单对象，还会创建许多其他对象，所以每秒创建出来的被栈内存中局部变量引用的对象所占用的空间大致在几百KB～1MB之间。</p>
-<p><img src="JVM%E5%88%86%E4%BB%A3%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%86%85%E5%AD%98%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE.assets/image-20200304171812012.png" alt="image-20200304171812012"></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200305191413590.png" alt=""></p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;做完了前三步后，我们要估算JVM堆内存如何分配了，常见的机器配置也就2核4G或4核8G。以2核4G为例，一半内存要给机器本身运行，另一半分配给JVM，也就是说分配到了2G，这2G要分配给方法区、栈内存、堆内存，堆内存最多再分得一半，也就是1G，堆内存中要划分新生代和老年代，假设都给一半，实际业务情况下1秒占1M那么过不了多了就会GC，频繁的GC影响了系统的稳定性，所以不行，还是得换4核8G，这样堆内存还能分得多一点，比如分3G（-Xms和-Xmx设置为3G，整个堆内存，然后-Xmn给新生代2G），能够大大降低GC频率，当然部署机器越多，对JVM压力更小。</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果我们设置内存过小会出现什么情况？比如双十一，这会每秒支付不再是1秒100个了，而是秒1000个，这时候所有资源都会吃紧，当然有些支付请求并不是立即支付的，它可能卡好久，使得这些数据在Minor GC后都放到了老年代，与此同时新生代中又不断增加对象，最后新生代又爆满，然后再Minor GC放到老年代。。。最后老年代对象越来越多，可能频繁触发老年代的垃圾回收，<strong>老年代的垃圾回收速度是很慢的！</strong>，然后不断影响系统性能</p>
-<p><img src="JVM%E5%88%86%E4%BB%A3%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%86%85%E5%AD%98%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE.assets/image-20200304171826124.png" alt="image-20200304171826124"></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200305191431151.png" alt=""></p>
 <h3 id="2、栈内存和永久代大小设置"><a href="#2、栈内存和永久代大小设置" class="headerlink" title="2、栈内存和永久代大小设置"></a>2、栈内存和永久代大小设置</h3><p>栈内存：不用特别的去估计和设置，默认的是<strong>512KB～1MB</strong>，差不多够了。</p>
 <p>永久代：存放类相关信息，一般设置<strong>几百MB</strong>是够的，当然有些系统会导致永久代内存溢出，后面分析。</p>
 

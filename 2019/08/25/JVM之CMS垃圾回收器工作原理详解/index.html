@@ -397,13 +397,13 @@
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ReplicaManager</span> <span class="token punctuation">{</span>
     <span class="token keyword">private</span> ReplicaFetcher replicaFetcher <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ReplicaFetcher</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
-<p><img src="JVM%E4%B9%8BCMS%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3.assets/image-20200304172614176.png" alt="初始标记"></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200305191724008.png" alt=""></p>
 <p>初识标记如图所示</p>
 <h4 id="（2）并发标记——对老年代所有对象进行GC-Roots追踪（最耗时）"><a href="#（2）并发标记——对老年代所有对象进行GC-Roots追踪（最耗时）" class="headerlink" title="（2）并发标记——对老年代所有对象进行GC Roots追踪（最耗时）"></a>（2）并发标记——对老年代所有对象进行GC Roots追踪（最耗时）</h4><p>&emsp;&emsp;这个阶段会让系统线程可以随意创建各种新对象，继续运行。在运行期间可能会创建新的存活对象，也可能会让部分存活对象失去引用，变成垃圾对象。在这个过程中，垃圾回收线程，会尽可能的对已有的对象进行GC Roots追踪。GC Roots追踪，意思就是对类似<code>ReplicaFetcher</code>之类的全部老年代里的对象，他会去看他被谁引用了，<strong>认定为是被GC Roots间接引用后，就不需要回收它。因为老年代里存活对象是比较多的，这个过程会追踪大量的对象，所以耗时较高。</strong></p>
-<p><img src="JVM%E4%B9%8BCMS%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3.assets/image-20200304172631515.png" alt="并发标记"></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200305191740459.png" alt=""></p>
 <h4 id="（3）重新标记"><a href="#（3）重新标记" class="headerlink" title="（3）重新标记"></a>（3）重新标记</h4><p>&emsp;&emsp;第二阶段里，你一边标记存活对象和垃圾对象，一边系统在不停运行创建新对象，让老对象变成垃圾，所以第二阶段结束之后，绝对会有很多存活对象和垃圾对象，是之前第二阶段没标记出来的。在这个阶段，要再次进入<code>Stop the World</code>阶段，重新标记下在第二阶段里新创建的一些对象，还有一些已有对象可能失去引用变成垃圾的情况。重新标记的阶段只是对变动过的<strong>少数对象</strong>进行标记，是速度很快的</p>
 <h4 id="（4）并发清理"><a href="#（4）并发清理" class="headerlink" title="（4）并发清理"></a>（4）并发清理</h4><p>&emsp;&emsp;这个阶段就是让系统程序随意运行，然后清理掉之前标记为垃圾的对象即可，也是很耗时的。</p>
-<p><img src="JVM%E4%B9%8BCMS%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3.assets/image-20200304172706763.png" alt="并发清理"></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200305191757623.png" alt=""></p>
 <h3 id="3、CMS性能分析"><a href="#3、CMS性能分析" class="headerlink" title="3、CMS性能分析"></a>3、CMS性能分析</h3><h4 id="（1）好的方面"><a href="#（1）好的方面" class="headerlink" title="（1）好的方面"></a>（1）好的方面</h4><p>&emsp;&emsp;CMS的第二阶段和第四阶段，都是很耗时的，但都和系统程序是并发执行的，所以基本这两个最耗时的阶段对性能影响不大。只有第一个阶段和第三个阶段是需要<code>Stop the World</code>的，但是这两个阶段都是简单的标记而已，速度非常的快，所以基本上对系统运行响应也不大。</p>
 <h4 id="（2）坏的方面"><a href="#（2）坏的方面" class="headerlink" title="（2）坏的方面"></a>（2）坏的方面</h4><h5 id="①并发回收导致CPU资源紧张。"><a href="#①并发回收导致CPU资源紧张。" class="headerlink" title="①并发回收导致CPU资源紧张。"></a>①并发回收导致CPU资源紧张。</h5><p>&emsp;&emsp;并发标记和并发清理两个最耗时的阶段，使垃圾回收线程和系统工作线程同时工作，导致有限的CPU资源被垃圾回收线程占用了一部分。在这两个阶段，CMS的垃圾回收线程是比较耗费CPU资源的。CMS默认启动的垃圾回收线程的数量是（CPU核数 + 3）/ 4，比如的2核4G机器，就会占用(2+3)/4 = 1个CPU被用来垃圾回收。</p>
 <h5 id="②Concurrent-Mode-Failure问题"><a href="#②Concurrent-Mode-Failure问题" class="headerlink" title="②Concurrent Mode Failure问题"></a>②Concurrent Mode Failure问题</h5><p>&emsp;&emsp;在并发清理阶段，CMS只不过是回收之前标记好的垃圾对象，但这个时候系统一直在运行，先把某些对象分配在新生代，然后可能触发了一次Minor GC，一些对象进入了老年代，在短时间内又没人使用这些对象，这种垃圾对象就是<strong>浮动垃圾</strong>，虽然它是垃圾，但是不会回收他们，要等到下一次才能回收。</p>
@@ -411,7 +411,7 @@
 <h5 id="③内存碎片问题"><a href="#③内存碎片问题" class="headerlink" title="③内存碎片问题"></a>③内存碎片问题</h5><p>&emsp;&emsp;老年代的CMS采用<code>标记清理</code>算法（不是<code>标记整理</code>），每次都是标记出来垃圾对象，然后一次性回收掉，这样会导致大量的内存碎片产生，太多的内存碎片实际上会导致更加频繁的Full GC。</p>
 <p>&emsp;&emsp;CMS有一个参数是<code>-XX:+UseCMSCompactAtFullCollection</code>，默认是打开的，意思是在Full GC之后要再次进行<code>Stop the World</code>，停止工作线程，然后进行碎片整理，就是把存活对象挪到一起，空出来大片连续内存空间，避免内存碎片。</p>
 <p>&emsp;&emsp;还有一个参数是<code>-XX:CMSFullGCsBeforeCompaction</code>，这个意思是执行多少次Full GC之后再执行一次内存碎片整理的工作，默认是0，意思就是每次Full GC之后都会进行一次内存整理，存活对象都放在一起，然后空出来大片连续内存空间可供使用。</p>
-<p><img src="JVM%E4%B9%8BCMS%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3.assets/image-20200304172729938.png" alt="内存碎片"><br>红圈处即浮动垃圾</p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200305191831226.png" alt=""></p>
 
             </div>
             <hr/>

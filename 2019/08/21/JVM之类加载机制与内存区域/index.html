@@ -437,7 +437,7 @@
 <p><code>双亲委派机制</code>：如果应用程序要加载一个类，首先会委派自己的父类加载器去加载，直至传到最顶层的加载器去加载，如果父类加载器在自己的职责范围内没有找到这个类，就会把加载权利下放给子类加载器。<strong>总的来说，就说先找父类去加载，不行再由儿子来加载</strong>。先从顶层加载器开始，发现自己加载不到，往下推给子类，这样能<strong>保证绝不会重复加载某个类</strong>。</p>
 <p>双亲委派的好处：避免了类的重复加载，如果两个不同层级的类加载器可以加载同一个类，就重复了。</p>
 <p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndseTFnYWN1dmU3ajJiajMwZW8waG1qcnouanBn?x-oss-process=image/format,png" alt=""></p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndseTFnYWN1dmc2eDF0ajMweDIwdTBhZ3EuanBn?x-oss-process=image/format,png" alt="image-20191022204250043"></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly90dmExLnNpbmFpbWcuY24vbGFyZ2UvMDA2dE5iUndseTFnYWN1dmc2eDF0ajMweDIwdTBhZ3EuanBn?x-oss-process=image/format,png" alt=""></p>
 <h2 id="三、初识JVM内存区域"><a href="#三、初识JVM内存区域" class="headerlink" title="三、初识JVM内存区域"></a>三、初识JVM内存区域</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们写好的代码中有很多的类，类中有许多的方法，同时方法中也有许多变量，它们都需要放到合适的区域，这就是JVM为什么要划分出不同内存区域的原因，下面介绍下JVM中的内存区域分类。</p>
 <h3 id="3-1存放类的区域——方法区"><a href="#3-1存放类的区域——方法区" class="headerlink" title="3.1存放类的区域——方法区"></a>3.1存放类的区域——方法区</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>方法区</code>主要存放从<code>class</code>文件中加载进来的类，JDK 1.8后这块区域改名为<code>Metaspace</code>，即元数据空间，放的还是我们自己写的各种类相关的信息。</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Kafka</span> <span class="token punctuation">{</span>
