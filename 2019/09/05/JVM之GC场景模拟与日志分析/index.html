@@ -388,8 +388,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="JVM之GC场景模拟与日志分析"><a href="#JVM之GC场景模拟与日志分析" class="headerlink" title="JVM之GC场景模拟与日志分析"></a>JVM之GC场景模拟与日志分析</h1><p>##一、Young GC场景模拟与日志分析</p>
-<h3 id="1、JVM参数设置"><a href="#1、JVM参数设置" class="headerlink" title="1、JVM参数设置"></a>1、JVM参数设置</h3><pre class=" language-java"><code class="language-java"><span class="token operator">-</span>XX<span class="token operator">:</span>NewSize<span class="token operator">=</span><span class="token number">5242880</span>                        <span class="token comment" spellcheck="true">//新生代大小为5MB</span>
+                <h1 id="JVM之GC场景模拟与日志分析"><a href="#JVM之GC场景模拟与日志分析" class="headerlink" title="JVM之GC场景模拟与日志分析"></a>JVM之GC场景模拟与日志分析</h1><h2 id="一、Young-GC场景模拟与日志分析"><a href="#一、Young-GC场景模拟与日志分析" class="headerlink" title="一、Young GC场景模拟与日志分析"></a>一、Young GC场景模拟与日志分析</h2><h3 id="1、JVM参数设置"><a href="#1、JVM参数设置" class="headerlink" title="1、JVM参数设置"></a>1、JVM参数设置</h3><pre class=" language-java"><code class="language-java"><span class="token operator">-</span>XX<span class="token operator">:</span>NewSize<span class="token operator">=</span><span class="token number">5242880</span>                        <span class="token comment" spellcheck="true">//新生代大小为5MB</span>
 <span class="token operator">-</span>XX<span class="token operator">:</span>MaxNewSize<span class="token operator">=</span><span class="token number">5242880</span>                <span class="token comment" spellcheck="true">//最大新生代大小为5MB</span>
 <span class="token operator">-</span>XX<span class="token operator">:</span>InitialHeapSize<span class="token operator">=</span><span class="token number">10485760</span>    <span class="token comment" spellcheck="true">//初始堆大小10MB</span>
 <span class="token operator">-</span>XX<span class="token operator">:</span>MaxHeapSize<span class="token operator">=</span><span class="token number">10485760</span>            <span class="token comment" spellcheck="true">//初始堆最大大小10MB</span>
@@ -404,8 +403,7 @@
 <span class="token operator">-</span>Xloggc<span class="token operator">:</span>gc<span class="token punctuation">.</span>log                    <span class="token comment" spellcheck="true">//这个参数可以设置将gc日志写入一个磁盘文件</span></code></pre>
 <p> <img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20191028163835508.png" alt=""></p>
 <p>idea参数设置步骤方法</p>
-<p>###2、代码测试</p>
-<p>代码如下，<code>new byte[1024 * 1024]</code>这样的代码连续分配了3个数组，每个数组都是1MB（1024B*1024B），通过array1这个局部变量依次引用这三个对象，最后还把array1这个局部变量指向了null。</p>
+<h3 id="2、代码测试"><a href="#2、代码测试" class="headerlink" title="2、代码测试"></a>2、代码测试</h3><p>代码如下，<code>new byte[1024 * 1024]</code>这样的代码连续分配了3个数组，每个数组都是1MB（1024B*1024B），通过array1这个局部变量依次引用这三个对象，最后还把array1这个局部变量指向了null。</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Demo1</span> <span class="token punctuation">{</span>
 
     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -441,8 +439,7 @@ Heap
  concurrent mark-sweep generation total 5120K, used 1026K [0x00000007bfb00000, 0x00000007c0000000, 0x00000007c0000000)
  Metaspace       used 2934K, capacity 4496K, committed 4864K, reserved 1056768K
   class space    used 320K, capacity 388K, committed 512K, reserved 1048576K</code></pre>
-<p>###（1）第一部分</p>
-<p><code>CommandLine flags</code>就是一些默认参数以及我们设置的一些参数。</p>
+<h3 id="（1）第一部分"><a href="#（1）第一部分" class="headerlink" title="（1）第一部分"></a>（1）第一部分</h3><p><code>CommandLine flags</code>就是一些默认参数以及我们设置的一些参数。</p>
 <h3 id="（2）第二部分"><a href="#（2）第二部分" class="headerlink" title="（2）第二部分"></a>（2）第二部分</h3><pre><code>0.101: [GC (Allocation Failure) 0.102: [ParNew: 3473K-&gt;416K(4608K), 0.0018825 secs] 3473K-&gt;1442K(9728K), 0.0019891 secs] [Times: user=0.01 sys=0.00, real=0.01 secs] </code></pre><p>这一段说的是本次GC执行的情况。</p>
 <ul>
 <li><p><code>GC (Allocation Failure)</code>：GC发生原因，分配对象失败0.102,意思是系统运行了0.102s后发生GC</p>
@@ -813,9 +810,7 @@ DEFAULT_CAPACITY：表示初始数组的大小，默认是10！！！（无参�
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            OOM问题的分析与解决一、OOM原因与场景模拟###1、Metaspace内存溢出
-####（1）原因
-首先来讲Metaspace的回收，当Metaspace快满了就要进行回收，但是这个回收条件比较苛刻，比如这个类的类加载器要先被回收、这个
+                            OOM问题的分析与解决一、OOM原因与场景模拟1、Metaspace内存溢出（1）原因首先来讲Metaspace的回收，当Metaspace快满了就要进行回收，但是这个回收条件比较苛刻，比如这个类的类加载器要先被回收、这个类的所有实例对象要
                         
                     </div>
                     <div class="publish-info">

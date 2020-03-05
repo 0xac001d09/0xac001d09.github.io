@@ -388,15 +388,12 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="OOM问题的分析与解决"><a href="#OOM问题的分析与解决" class="headerlink" title="OOM问题的分析与解决"></a>OOM问题的分析与解决</h1><h2 id="一、OOM原因与场景模拟"><a href="#一、OOM原因与场景模拟" class="headerlink" title="一、OOM原因与场景模拟"></a>一、OOM原因与场景模拟</h2><p>###1、Metaspace内存溢出</p>
-<p>####（1）原因</p>
-<p>首先来讲Metaspace的回收，当Metaspace快满了就要进行回收，但是这个回收条件比较苛刻，比如这个类的类加载器要先被回收、这个类的所有实例对象要被回收等等，所以即使Metaspace满了，未必能回收掉很多类，腾不出太多空间，又要放进入，就会导致OOM，一般来说，Metaspace的OOM有两个原因</p>
+                <h1 id="OOM问题的分析与解决"><a href="#OOM问题的分析与解决" class="headerlink" title="OOM问题的分析与解决"></a>OOM问题的分析与解决</h1><h2 id="一、OOM原因与场景模拟"><a href="#一、OOM原因与场景模拟" class="headerlink" title="一、OOM原因与场景模拟"></a>一、OOM原因与场景模拟</h2><h3 id="1、Metaspace内存溢出"><a href="#1、Metaspace内存溢出" class="headerlink" title="1、Metaspace内存溢出"></a>1、Metaspace内存溢出</h3><h4 id="（1）原因"><a href="#（1）原因" class="headerlink" title="（1）原因"></a>（1）原因</h4><p>首先来讲Metaspace的回收，当Metaspace快满了就要进行回收，但是这个回收条件比较苛刻，比如这个类的类加载器要先被回收、这个类的所有实例对象要被回收等等，所以即使Metaspace满了，未必能回收掉很多类，腾不出太多空间，又要放进入，就会导致OOM，一般来说，Metaspace的OOM有两个原因</p>
 <p><strong>第一个原因</strong>是我们忘记去设置永久区的大小了，默认永久去打大小只有几十MB，太小了，我们一般设置为256MB～512MB。有两个参数是来设置区域大小的：<code>-XX:MetaspaceSize=512m</code>和<code>-XX:MaxMetaspaceSize=512m</code>。一般来说512MB足够！</p>
 <p><strong>第二个原因</strong>是写系统的时候使用了cglib之类的技术，来动态的生成一些类，一旦没控制好生成类的个数就很容易把Metaspace塞满，引发内存溢出。</p>
 <p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20191101103540944.png" alt=""></p>
 <p>示意图：内存溢出</p>
-<p>####（2）场景模拟</p>
-<p>这里使用cglib来模拟Metaspace的OOM</p>
+<h4 id="（2）场景模拟"><a href="#（2）场景模拟" class="headerlink" title="（2）场景模拟"></a>（2）场景模拟</h4><p>这里使用cglib来模拟Metaspace的OOM</p>
 <p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20191101104842624.png" alt=""></p>
 <p>使用cglib来增强Car类的run方法，实质就是cglib的Enhancer能在系统运行期间动态的生成Car的子类。在JVM参数中动点手脚，把Metaspace的区域限制得小一点：</p>
 <pre><code>-XX:MetaspaceSize=10m 
@@ -424,9 +421,8 @@ at net.sf.cglib.core.internal.LoadingCache$2.call(LoadingCache.java:54)
 at java.util.concurrent.FutureTask.run(FutureTask.java:266)
 at net.sf.cglib.core.internal.LoadingCache.createEntry(LoadingCache.java:61)</code></pre><p>发送有一行就是OOM，明确告诉你溢出了。</p>
 <p><strong>一般使用动态代理要记得用缓存！这个子类只要生成一次就可以了，下次能直接用，如果没有缓存这个动态生成的类，每次调用生成一个类，若线上负载很高，可能导致瞬间创建一大堆类，塞满元数据空间，直接OOM，系统崩溃。</strong></p>
-<h3 id="2、栈内存溢出"><a href="#2、栈内存溢出" class="headerlink" title="2、栈内存溢出"></a>2、栈内存溢出</h3><p>####（1）原因</p>
-<p>JVM把类加载进内存后，就通过main线程执行main方法，方法调用的栈帧不断压入虚拟机栈，这都是占栈内存的，每一个虚拟机栈的大小是固定的，比如1MB，虽然说一些变量和其他数据占卜了太多，但是这个<code>栈帧</code>是会占内存的，一个方法调用的栈帧要占个几百字节。如果我们不停的调用方法，不停的往栈里放入栈帧，就会导致OOM。</p>
-<h4 id="（2）场景模拟"><a href="#（2）场景模拟" class="headerlink" title="（2）场景模拟"></a>（2）场景模拟</h4><p>代码设置</p>
+<h3 id="2、栈内存溢出"><a href="#2、栈内存溢出" class="headerlink" title="2、栈内存溢出"></a>2、栈内存溢出</h3><h4 id="（1）原因-1"><a href="#（1）原因-1" class="headerlink" title="（1）原因"></a>（1）原因</h4><p>JVM把类加载进内存后，就通过main线程执行main方法，方法调用的栈帧不断压入虚拟机栈，这都是占栈内存的，每一个虚拟机栈的大小是固定的，比如1MB，虽然说一些变量和其他数据占卜了太多，但是这个<code>栈帧</code>是会占内存的，一个方法调用的栈帧要占个几百字节。如果我们不停的调用方法，不停的往栈里放入栈帧，就会导致OOM。</p>
+<h4 id="（2）场景模拟-1"><a href="#（2）场景模拟-1" class="headerlink" title="（2）场景模拟"></a>（2）场景模拟</h4><p>代码设置</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Demo</span> <span class="token punctuation">{</span>
     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">long</span> counter <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
 
@@ -446,14 +442,13 @@ at net.sf.cglib.core.internal.LoadingCache.createEntry(LoadingCache.java:61)</co
 Exception in thread &quot;main&quot; java.lang.StackOverflowError</code></pre><h4 id="（3）处理思路"><a href="#（3）处理思路" class="headerlink" title="（3）处理思路"></a>（3）处理思路</h4><p>在JVM参数中加入打印日志参数和内存快照参数，但是内存快照参数主要是分析堆内存的Metaspace的，对于栈内存而言不需要用。运行本地代码能够得到异常报错的调用栈，直接告诉你溢出问题来自哪个类的哪个方法，可以直接定位到。</p>
 <pre class=" language-java"><code class="language-java">at com<span class="token punctuation">.</span>demo<span class="token punctuation">.</span>jvm<span class="token punctuation">.</span>Demo2<span class="token punctuation">.</span><span class="token function">work</span><span class="token punctuation">(</span>Demo2<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">13</span><span class="token punctuation">)</span>
 at com<span class="token punctuation">.</span>demo<span class="token punctuation">.</span>jvm<span class="token punctuation">.</span>Demo2<span class="token punctuation">.</span><span class="token function">work</span><span class="token punctuation">(</span>Demo2<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">13</span><span class="token punctuation">)</span></code></pre>
-<h3 id="3、堆内存溢出"><a href="#3、堆内存溢出" class="headerlink" title="3、堆内存溢出"></a>3、堆内存溢出</h3><h4 id="（1）原因"><a href="#（1）原因" class="headerlink" title="（1）原因"></a>（1）原因</h4><p>对象进来先进入Eden区，Eden区满了则Young GC，多次GC后S区也满了，S区放不下放进了老年代，慢慢的，老年代也满了，那就得等CMS进行回收，如果此时Full GC后，依然存活下来很多对象，而此时又有对象要放进老年代，如果老年代空间不足，就会再出发Full GC，触发后还是没足够空间，如果还坚持要放就会导致OOM。</p>
+<h3 id="3、堆内存溢出"><a href="#3、堆内存溢出" class="headerlink" title="3、堆内存溢出"></a>3、堆内存溢出</h3><h4 id="（1）原因-2"><a href="#（1）原因-2" class="headerlink" title="（1）原因"></a>（1）原因</h4><p>对象进来先进入Eden区，Eden区满了则Young GC，多次GC后S区也满了，S区放不下放进了老年代，慢慢的，老年代也满了，那就得等CMS进行回收，如果此时Full GC后，依然存活下来很多对象，而此时又有对象要放进老年代，如果老年代空间不足，就会再出发Full GC，触发后还是没足够空间，如果还坚持要放就会导致OOM。</p>
 <p><strong>总的来说，就是有限的空间放了过多的对象，大多数都是存活的，即使GC后也有很多存活的，再放进新的对象就不行了，此时就引发OOM了。</strong></p>
 <p><strong>内存溢出的两个场景</strong></p>
 <p><strong>第一个场景</strong>：系统承载高并发请求，因为请求量过大，导致大量对象都是存活的，所以要继续放入新的对象实在是不行了，此时就会引发OOM。</p>
 <p><strong>第二个场景</strong>：系统有内存泄漏的问题，莫名其妙弄了很多的对象，结果对象都是存活的，没有及时取消对他们的引用，导致触发GC还是无法回收，此时只能引发内存溢出</p>
 <p><strong>总的来说，一般引发OOM不是系统负载过高就是有内存泄漏问题。</strong></p>
-<p>####（2）场景模拟</p>
-<p>代码</p>
+<h4 id="（2）场景模拟-2"><a href="#（2）场景模拟-2" class="headerlink" title="（2）场景模拟"></a>（2）场景模拟</h4><p>代码</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Demo</span> <span class="token punctuation">{</span>
 
     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -499,8 +494,7 @@ Exception in thread &quot;main&quot; java.lang.OutOfMemoryError: Java heap space
 -XX:+PrintGCDetails 
 -Xloggc:gc.log 
 -XX:+HeapDumpOnOutOfMemoryError  
--XX:HeapDumpPath=/usr/local/app/oom”</code></pre><h2 id="三、导致OOM的实例"><a href="#三、导致OOM的实例" class="headerlink" title="三、导致OOM的实例"></a>三、导致OOM的实例</h2><p>###1、每秒仅上百请求的事故现场</p>
-<p>每秒仅100+请求的系统报警发生异常，第一件事就是登陆到线上机器去看日志文件。看到有这么一行</p>
+-XX:HeapDumpPath=/usr/local/app/oom”</code></pre><h2 id="三、导致OOM的实例"><a href="#三、导致OOM的实例" class="headerlink" title="三、导致OOM的实例"></a>三、导致OOM的实例</h2><h3 id="1、每秒仅上百请求的事故现场"><a href="#1、每秒仅上百请求的事故现场" class="headerlink" title="1、每秒仅上百请求的事故现场"></a>1、每秒仅上百请求的事故现场</h3><p>每秒仅100+请求的系统报警发生异常，第一件事就是登陆到线上机器去看日志文件。看到有这么一行</p>
 <pre><code>Exception in thread &quot;http-nio-8080-exec-1089&quot; java.lang.OutOfMemoryError: Java heap space</code></pre><p>这里<code>http-nio-8080-exec-1089</code>说的其实就是Tomcat的工作线程。我们写的系统都是部署在Tomcat中的。最早我们会在IDE上写一堆的Servlet，然后打包之后放入Tomcat，再启动Tomcat，接着我们访问Tomcat监听的一个端口号（一般是8080），然后系统的功能就可以运行起来了。后来随着技术发展，我们不再写Servlet这么原始的东西了，有一些类似Spring MVC之类的框架把Servlet封装起来了，我们就基于Spring MVC之类的框架去开发。再到后来，越来越先进了，出现了Spring Boot，我们可以把Tomcat之类的Web容器都内嵌在系统里。再到后来甚至是基于Spring Cloud去开发分布式的系统。我们基于Spring Cloud、Spring Boot、Spring Web MVC等技术，写好一套系统，给打包之后，放入线上服务器中部署的Tomcat目录下，然后启动Tomcat就可以了。每当Tomcat间听到了请求，就会把请求交给框架去处理，框架会根据请求路径，找到代码中处理这个请求的Controller组件。如图。</p>
 <p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20191101125402691.png" alt=""></p>
 <p>Tomcat自己本身就是个JVM进程，我们写好的系统只不过是一些代码，一个个类被Tomcat加载到内存中，由Tomcat来执行。Tomcat有很多的线程，少则100来个，多则三四百个，从8080端口上收到的请求就交给这些线程去做，这些线程收到请求后就回去调用框架的代码，框架再调用我们写好的代码，这基本就是Tomcat的底层原理了。如图</p>
@@ -576,9 +570,8 @@ Exception in thread &quot;main&quot; java.lang.OutOfMemoryError: Java heap space
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            JVM之GC场景模拟与日志分析##一、Young GC场景模拟与日志分析
-1、JVM参数设置-XX:NewSize=5242880                        //新生代大小为5MB
--XX:MaxNewSize=5242
+                            JVM之GC场景模拟与日志分析一、Young GC场景模拟与日志分析1、JVM参数设置-XX:NewSize=5242880                        //新生代大小为5MB
+-XX:MaxNewSize=5242880
                         
                     </div>
                     <div class="publish-info">

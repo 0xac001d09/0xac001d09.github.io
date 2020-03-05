@@ -398,8 +398,7 @@
 <p>第一个参数是<code>-XX:TraceClassLoading</code>,第二个参数是<code>-XX:TraceClassUnloading</code>，分别追踪类加载和类卸载的情况，他会通过日志打印出来JVM中加载了哪些类，卸载了哪些类。对于这些类，通过查资料就会明白了，有一个案例说是java中反射时加载的类，执行反射代码时，JVM会在你反射调用一定次数之后就动态生成一些类。<strong>只要记住一个结论：如果你在代码里大量用了类似上面的反射的东西，那么JVM就是会动态的去生成一些类放入Metaspace区域里的。</strong></p>
 <h4 id="（1）为什么会这些类会被放进Metaspace呢？"><a href="#（1）为什么会这些类会被放进Metaspace呢？" class="headerlink" title="（1）为什么会这些类会被放进Metaspace呢？"></a>（1）为什么会这些类会被放进Metaspace呢？</h4><p>反射过程中生成的类的Class对象，都是软引用的，正常情况下不会被回收！（什么是Class对象？类自己本身就是一个对象，就是一个Class的对象，一个Class对象代表了一个类，这个Class对象能够派生出很多的实例）</p>
 <h4 id="（2）什么时候软引用会被回收呢？"><a href="#（2）什么时候软引用会被回收呢？" class="headerlink" title="（2）什么时候软引用会被回收呢？"></a>（2）什么时候软引用会被回收呢？</h4><p>通过这个公式来判断<code>clock - timestamp &lt;= freespace * SoftRefLRUPolicyMSPerMB</code>,“clock - timestamp”代表了一个软引用对象他有多久没被访问过了，freespace代表JVM中的空闲内存空间，SoftRefLRUPolicyMSPerMB代表每一MB空闲内存空间可以允许SoftReference对象存活多久,默认是1000毫秒。假如JVM空闲空间为3000MB，那么一个软引用的对象最多可以活50分钟（3000*1000ms）。</p>
-<p>####（3）解决方案</p>
-<p>按理说JVM应该会随着反射代码的执行，动态的创建一些奇怪的类，他们的Class对象都是软引用的，正常情况下不会被回收，但是也不应该快速增长才对，问题出在<code>SoftRefLRUPolicyMSPerMB</code>这个参数，别误把它设置为0，一旦这个参数设置为0，任何软引用对象就可以尽快释放掉，但这样并不会提高内存利用率，JVM好不容易给你弄出来100个奇怪的类，结果因为瞎设置软引用的参数，导致突然一次GC就给你回收掉几十个类，接着JVM在反射代码执行的过程中，就会继续创建这种奇怪的类，在JVM的机制之下，会导致这种奇怪类越来越多。</p>
+<h4 id="（3）解决方案"><a href="#（3）解决方案" class="headerlink" title="（3）解决方案"></a>（3）解决方案</h4><p>按理说JVM应该会随着反射代码的执行，动态的创建一些奇怪的类，他们的Class对象都是软引用的，正常情况下不会被回收，但是也不应该快速增长才对，问题出在<code>SoftRefLRUPolicyMSPerMB</code>这个参数，别误把它设置为0，一旦这个参数设置为0，任何软引用对象就可以尽快释放掉，但这样并不会提高内存利用率，JVM好不容易给你弄出来100个奇怪的类，结果因为瞎设置软引用的参数，导致突然一次GC就给你回收掉几十个类，接着JVM在反射代码执行的过程中，就会继续创建这种奇怪的类，在JVM的机制之下，会导致这种奇怪类越来越多。</p>
 <p>解决方案：在有大量反射代码的场景下，只要把<code>-XX:SoftRefLRUPolicyMSPerMB=0</code>，这个参数设置大一些即可，千万别让一些新手同学设置为0，可以设置个1000，2000，3000，或者5000毫秒，都可以。提高这个数值，就是让反射过程中JVM自动创建的软引用的一些类的Class对象不要被随便回收，优化这个参数之后，就可以看到系统稳定运行了。</p>
 <h3 id="2、大对象导致频繁Full-GC"><a href="#2、大对象导致频繁Full-GC" class="headerlink" title="2、大对象导致频繁Full GC"></a>2、大对象导致频繁Full GC</h3><p>场景是这样的，有一个线上系统一天频繁Full GC数十次，开始以为是每次Young GC后的存活对象较多，Survivor区域太小，放不下了，但通过jstat工具观察，发现每次Young GC后的对象很少，每次存活也就几十MB，且通过jstat追踪观察，并不是每次Young GC后都有几十MB对象进入老年代的，而是偶尔一次Young GC才会有几十MB对象进入老年代，记住，是偶尔一次！但是不知道为什么突然有几百MB对象进入老年代中，所以才导致Young GC偶尔一次让几十MB对象升入老年代，平均30分钟左右就会触发一次Full GC！这个几百MB的对象就是<strong>大对象</strong>，我们想要知道大对象是谁，可以利用堆内存快照工具jmap，通过使用这个工具我们发现是几个Map之类的数据结构，是从数据库中出来的，通过排查SQL语句，发现有一句<code>select * from tbl</code>，根本没使用where语句，导致它把表中几十万条数据查出来，搞出来一个大对象。</p>
 <p><strong>解决方案</strong>，一是对SQL语句的处理，不要一次性查表里全部数据，二是给新生代分配更多的空间，毕竟每次到老年代的对象较少而且频率很低，同时给老年代调整了参数“-XX:CMSInitiatingOccupancyFraction=92”，避免老年代仅仅占用68%就触发GC。</p>
@@ -491,9 +490,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            OOM问题的分析与解决一、OOM原因与场景模拟###1、Metaspace内存溢出
-####（1）原因
-首先来讲Metaspace的回收，当Metaspace快满了就要进行回收，但是这个回收条件比较苛刻，比如这个类的类加载器要先被回收、这个
+                            OOM问题的分析与解决一、OOM原因与场景模拟1、Metaspace内存溢出（1）原因首先来讲Metaspace的回收，当Metaspace快满了就要进行回收，但是这个回收条件比较苛刻，比如这个类的类加载器要先被回收、这个类的所有实例对象要
                         
                     </div>
                     <div class="publish-info">

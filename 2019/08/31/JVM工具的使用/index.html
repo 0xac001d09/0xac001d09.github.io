@@ -425,14 +425,12 @@
 <li><code>GCT</code>：这是所有GC的总耗时</li>
 </ul>
 <h3 id="3、工具使用姿势"><a href="#3、工具使用姿势" class="headerlink" title="3、工具使用姿势"></a>3、工具使用姿势</h3><p>使用jstat来分析线上的JVM进程，要知道的信息有如下几个：新生代对象增长的速率、Young GC的触发频率、Young GC的耗时、每次Young GC后有多少对象是存活下来的、每次Young GC过后有多少对象进入了老年代、老年代对象增长的速率、Full GC的触发频率、Full GC的耗时等。知道了这些就能进行优化了。</p>
-<p>####（1）新生代对象增长速率</p>
-<p>使用<code>jstat -gc PID 1000 10</code>，每隔1秒钟更新出来最新的一行jstat统计信息，通过这个命令，你可以非常灵活的对线上机器通过固定频率输出统计信息，观察每隔一段时间的jvm中的Eden区对象占用变化。时间段可以根据对象增长速度来设定。还有就是一般系统都有高峰和日常两种状态，比如系统高峰期用的人很多，此时你就应该在系统高峰期去用上述命令看看高峰期的对象增长速率。然后你再得在非高峰的日常时间段内看看对象的增长速率。</p>
+<h4 id="（1）新生代对象增长速率"><a href="#（1）新生代对象增长速率" class="headerlink" title="（1）新生代对象增长速率"></a>（1）新生代对象增长速率</h4><p>使用<code>jstat -gc PID 1000 10</code>，每隔1秒钟更新出来最新的一行jstat统计信息，通过这个命令，你可以非常灵活的对线上机器通过固定频率输出统计信息，观察每隔一段时间的jvm中的Eden区对象占用变化。时间段可以根据对象增长速度来设定。还有就是一般系统都有高峰和日常两种状态，比如系统高峰期用的人很多，此时你就应该在系统高峰期去用上述命令看看高峰期的对象增长速率。然后你再得在非高峰的日常时间段内看看对象的增长速率。</p>
 <h4 id="（2）Young-GC触发一频率和耗时"><a href="#（2）Young-GC触发一频率和耗时" class="headerlink" title="（2）Young GC触发一频率和耗时"></a>（2）Young GC触发一频率和耗时</h4><p>知道了新生代对象增长速度，就可以估计Young GC的时间了，同时jstat会告诉你迄今为止系统已经发生了多少次Young GC以及这些Young GC的总耗时。比如系统运行24小时后共发生了100次Young GC，总耗时为20s。那么平均下来每次Young GC大概就耗时二十毫秒的时间。</p>
 <h4 id="（3）每次Young-GC后有多少对象进入老年代"><a href="#（3）每次Young-GC后有多少对象进入老年代" class="headerlink" title="（3）每次Young GC后有多少对象进入老年代"></a>（3）每次Young GC后有多少对象进入老年代</h4><p>这个对象量只能估算出来，我们知道了多久发生一次Young GC，假设为t，可以利用<code>jstat -gc PID t 10</code>看看，每隔t分钟后Eden、Survivor、老年代的对象变化。老年代中内存占用会慢慢增加，这里的关键，就是观察老年代的对象增长速率。正常的角度来看，老年代的对象是不太可能不停的快速增长的，普通的系统其实没那么多长期存活的对象。如果你发现比如每次Young GC过后，老年代对象都要增长几十MB，那很有可能就是你一次Young GC过后存活对象太多了。如果老年代对象快速增长，那一定是不正常的。</p>
 <h4 id="（4）Full-GC出发时机和耗时"><a href="#（4）Full-GC出发时机和耗时" class="headerlink" title="（4）Full GC出发时机和耗时"></a>（4）Full GC出发时机和耗时</h4><p>知道了老年代对象的增长速率，那么Full GC的触发时机就很清晰了，jstat可以打印Full GC次数以及总耗时。</p>
 <h2 id="二、jmap和jhat"><a href="#二、jmap和jhat" class="headerlink" title="二、jmap和jhat"></a>二、jmap和jhat</h2><p>这两个工具可以帮助我们观察线上JVM中的对象分布，了解到系统运行过程中，到底哪些对象占据了主角位置，他们占据了多少内存空间。这篇<a href="https://www.cnblogs.com/ityouknow/p/5714703.html" target="_blank" rel="noopener">博客</a>写的非常详细！</p>
-<p>###1、jmap</p>
-<p>单单看JVM运行状况，jstat足够用了，如果发现JVM新对象增加速度很快，想看这个对象是谁，可以用jmap。</p>
+<h3 id="1、jmap"><a href="#1、jmap" class="headerlink" title="1、jmap"></a>1、jmap</h3><p>单单看JVM运行状况，jstat足够用了，如果发现JVM新对象增加速度很快，想看这个对象是谁，可以用jmap。</p>
 <ul>
 <li><code>jmap -heap PID</code>：系统运行时内存区域信息。这个会打印出来堆内存相关的一些参数设置，以及当前堆内存里的一些基本各个区域的情况。</li>
 <li><code>jmap -histo PID</code>：系统运行时的对象分布，他会按照各种对象占用内存空间的大小降序排列，把占用内存最多的对象放在最上面。</li>
