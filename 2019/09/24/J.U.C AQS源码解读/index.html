@@ -1,0 +1,1096 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Java源码, 0xac001d09">
+    <meta name="description" content="Keep on keeping on">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Java源码 | 0xac001d09</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <span class="logo-span">0xac001d09</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <div class="logo-name">0xac001d09</div>
+        <div class="logo-desc">
+            
+            Keep on keeping on
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://gitee.com/Jerry1997/img-bed/raw/master/uPic/Xnip2020-03-06_00-19-19.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Java源码</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Java%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81/">
+                                <span class="chip bg-color">Java集合源码</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Java%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81/" class="post-category">
+                                Java集合源码
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-09-24
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.1k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    11 分
+                </div>
+                
+
+                
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="简介和属性"><a href="#简介和属性" class="headerlink" title="简介和属性"></a>简介和属性</h2><p>同步器AbstractQueuedSynchronizer，它是各种锁的底层，比如ReentrantLock、CountDownLatch。肯定要各种队列知识的，之前看过了。找了张很不错的图</p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200219194659047.png" alt=""></p>
+<p>aqs就两个队列，条件队列、同步队列，也就是sync queue 和condition queue，队列底层又是链表，1、2、3代表看的顺序，四种颜色代表四种不同的场景。aqs就是一套框架，定义了获得锁和释放锁的代码结构，你要新搞个锁，继承aqs就行。</p>
+<ul>
+<li><p>大概</p>
+<ul>
+<li>本身就是个抽象类，要让子类去实现一些东西，它只是定义了如何获得锁、释放锁的抽象方法，aqs继承了aos，为的是知道当前哪个线程拿到了锁，监控它</li>
+<li>aqs首先定义了一个fifo的 sync queue，拿不到锁的线程就去队列中排队吧</li>
+<li>然后同步器有个状态字符，用的是atomic包里的，可以通过状态字段来判断能不能获得锁。aqs的子类是通过给状态赋值（cas操作）来决定能不能拿到锁，比如我定义0就是可以获得锁，1就是不能获得锁。</li>
+<li>aqs提供了排他锁和共享锁的实现，readwritelock实现了两种模式。</li>
+<li>aqs内部的条件队列是通过 new ConditionObject得到的</li>
+</ul>
+</li>
+<li><p>简单属性</p>
+<ul>
+<li>state 属性，int类型，所有继承 aqs 的锁都是通过这个字段来判断能不能获得锁，能不能释放锁。比如当前同步器状态是 0，表示可以获得锁，当前同步器状态是 1，表示锁已经被其他线 程持有，当前线程无法获得锁，<strong>state是锁的状态，，下面还有个事waitStatus，它是队列中节点的状态，别搞混了</strong></li>
+</ul>
+</li>
+<li><p>sync queue 同步队列</p>
+<ul>
+<li>有俩重要属性，同步队列的头和同步队列的尾巴，多个线程竞争一把锁，只有一个线程能拿到，其他都跑到队列尾曲了，有人释放锁，是从同步队列头开始释放一个排队的线程，让线程重新去竞争锁，同步队列的作用很简单的，就是阻塞你们这些获得不到锁的线程，然后在合适的时候释放。同步队列底层是个双向链表</li>
+<li><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200219200241418.png" alt=""></li>
+</ul>
+</li>
+<li><p>condition queue 条件队列</p>
+<ul>
+<li>条件队列也是管理那些获取不到锁的线程，但是它只是和锁配合着使用，底层是一个链表，firstwaiter是第一个等待的，lastwaiter是最后一个等待的node，使用时候直接new ConditionObject，它实现了Condition接口，Condition接口相当于各种监控方法，类似于Object的wait、notify</li>
+<li><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200219200717993.png" alt=""></li>
+</ul>
+</li>
+<li><p>同步队列和条件队列的节点Node</p>
+<ul>
+<li><p>一般是用Node把线程包装一下就放进队列中了</p>
+</li>
+<li><pre class=" language-java"><code class="language-java"><span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">Node</span> <span class="token punctuation">{</span>
+        <span class="token keyword">static</span> <span class="token keyword">final</span> Node SHARED <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//共享的</span>
+        <span class="token keyword">static</span> <span class="token keyword">final</span> Node EXCLUSIVE <span class="token operator">=</span> null<span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//排他的</span>
+
+              <span class="token comment" spellcheck="true">//状态看这个https://www.jianshu.com/p/3a7e8c028dd8</span>
+              <span class="token comment" spellcheck="true">//被取消状态</span>
+        <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> CANCELLED <span class="token operator">=</span>  <span class="token number">1</span><span class="token punctuation">;</span>        
+
+              <span class="token comment" spellcheck="true">//cur.next处于等待状态，如果cur释放锁（将cur状态置为-1），然后通知它的下一个</span>
+        <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> SIGNAL    <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>    
+
+              <span class="token comment" spellcheck="true">//节点处于等待队列中，节点线程等待在Condition上，当其他线程对Condition调用了signal()方法后，该节点从等待队列中转移到同步队列中，加入到对同步状态的获取中；</span>
+        <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> CONDITION <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">;</span>
+
+              <span class="token comment" spellcheck="true">//代表后续结点会传播唤醒的操作，共享模式下起作用</span>
+        <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> PROPAGATE <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">;</span>
+
+              <span class="token comment" spellcheck="true">//表示当前节点的状态，通过节点的状态来控制节点的行为</span>
+              <span class="token comment" spellcheck="true">//普通同步节点，就是 0 ，条件节点是 CONDITION -2</span>
+              <span class="token comment" spellcheck="true">//ws大于0，说明被取取消了</span>
+        <span class="token keyword">volatile</span> <span class="token keyword">int</span> waitStatus<span class="token punctuation">;</span>
+
+              <span class="token comment" spellcheck="true">//当前节点的前驱节点</span>
+              <span class="token comment" spellcheck="true">//节点 acquire 成功后就会变成head，head 节点不能被 cancelled</span>
+        <span class="token keyword">volatile</span> Node prev<span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 当前节点的下一个节点</span>
+        <span class="token keyword">volatile</span> Node next<span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">//当前节点的线程</span>
+        <span class="token keyword">volatile</span> Thread thread<span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">//等待节点的后继节点。</span>
+              <span class="token comment" spellcheck="true">//在同步队列中，Node构建同步队列节点，nextWaiter标识同步锁是独占锁的还是共享锁</span>
+              <span class="token comment" spellcheck="true">//在条件队列中，nextWaiter指向单向链表下一个节点</span>
+               <span class="token comment" spellcheck="true">//这边特别要注意，看的时候给我带来了很大困扰</span>
+        Node nextWaiter<span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">//是否被共享</span>
+        <span class="token keyword">final</span> <span class="token keyword">boolean</span> <span class="token function">isShared</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> nextWaiter <span class="token operator">==</span> SHARED<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+</code></pre>
+</li>
+<li><p>特别特别注意，nextWaiter 是条件队列中下一个节 点的指向字段，但在同步队列中，nextWaiter 只是一个标识符，表示当前节点是共享还是排它模式。</p>
+</li>
+</ul>
+</li>
+<li><p>条件队列 ConditionObject</p>
+<ul>
+<li><p>ConditionObject它是实现了Condition接口的，所以这个接口很重要，细节如下</p>
+<ul>
+<li>注释中说，当用lock代替synchronized的时候，Condition就能代替Object中相应的监控方法了，比如wait、notify、notifyAll等。Condition的实例它是绑定在锁上的，lock.newCondition就能获得实例了。</li>
+<li>为什么需要条件队列，举个例子，我有put和take方法，put的时候，如果满了，就会阻塞，take的时候，如果空了，就会阻塞，这两种情况的线程其实都会去条件队列中阻塞，<strong>如果仅仅依靠一个条件队列，那就只能执行一个操作，那在这种情况下，我可以新建两个条件队列，建几个具体还是看需求吧，这样就可以分别执行操作了。</strong></li>
+</ul>
+</li>
+<li><p>condition中的一些方法</p>
+<ul>
+<li><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 唤醒条件队列中的一个线程，在被唤醒前必须先获得锁</span>
+<span class="token keyword">void</span> <span class="token function">signal</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// 唤醒条件队列中的所有线程 </span>
+<span class="token keyword">void</span> <span class="token function">signalAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//使当前线程一直等待，直到被 signalled 或被打断。</span>
+<span class="token comment" spellcheck="true">//被唤醒时，特别注意:线程从条件队列中苏醒时，必须重新获得锁，才能真正被唤醒</span>
+<span class="token comment" spellcheck="true">//当然await方法还有待超时时间的 。。啊我懒得贴过来了</span>
+<span class="token keyword">void</span> <span class="token function">await</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> InterruptedException<span class="token punctuation">;</span></code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="获取锁"><a href="#获取锁" class="headerlink" title="获取锁"></a>获取锁</h2><ul>
+<li><p>获取排他锁–acquire</p>
+<ul>
+<li><p>最直观的就是通过<code>Lock.lock()</code>获取，Lock 一般是 aqs 的子类，lock 方法底层也是根据情况来调用acquire或是tryAcquire。acquire这个方法aqs已经实现了，tryAcquire是交给子类去实现的，只要包含try的方法，都是交给子类去实现的，它在aqs中是直接抛了个异常。<strong>acquire方法先尝试用tryAcquire去获取锁，获取不到时，再去同步队列中等待锁。acquire也分为排他锁和共享锁。</strong></p>
+</li>
+<li><p>acquire运行流程是这样的，我先走一遍子类的tryAcquire，看看有米有实现咯，如果实现了，那就直接返回呗，否则线程就尝试进入同步队列，就会先调用addWaiter方法，也就是放进同步队列尾，然后外面包裹一层acquireQueued，其目的是阻塞节点，同时赋予节点被唤醒时，让它能够获得锁。如果上述操作也失败了，打断线程。</p>
+<ul>
+<li><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token keyword">int</span> arg<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">//tryAcquire是交给子类去实现的</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">tryAcquire</span><span class="token punctuation">(</span>arg<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span>
+      <span class="token comment" spellcheck="true">//addWaiter代表是排他模式</span>
+      <span class="token function">acquireQueued</span><span class="token punctuation">(</span><span class="token function">addWaiter</span><span class="token punctuation">(</span>Node<span class="token punctuation">.</span>EXCLUSIVE<span class="token punctuation">)</span><span class="token punctuation">,</span> arg<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token function">selfInterrupt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//所以这个是排他的情况下去获取锁</span></code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong>总的来说 acquire方法就是三步，我先tryAcquire，哦，失败了，我再把它封装成节点，具体是排他还是共享看传入的mode，然后我把它放到同步队列尾巴去，最后阻塞它，自旋，让同步队列中当的pre节点状态置为signal后，然后阻塞自己。</strong></p>
+</li>
+<li><p>先看一下这个<strong>addWaiter*8方法，也就是把它放到同步队列尾。入参mode，代表模式，排他，还是共享，首先就是去给同步队列新增一个节点，让队尾成为pre，前驱节点，这里也是cas。。。我先尝试放一下，成功立马返回，不成功，那就<code>enq</code>，通过</strong>自旋**保证你这个node能加到队尾（这里不是马上自旋，大部分操作一次就能成功，自旋成本大）</p>
+<ul>
+<li><pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> Node <span class="token function">addWaiter</span><span class="token punctuation">(</span>Node mode<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Node node <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">(</span>Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> mode<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// Try the fast path of enq; backup to full enq on failure</span>
+    Node pred <span class="token operator">=</span> tail<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>pred <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        node<span class="token punctuation">.</span>prev <span class="token operator">=</span> pred<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">compareAndSetTail</span><span class="token punctuation">(</span>pred<span class="token punctuation">,</span> node<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            pred<span class="token punctuation">.</span>next <span class="token operator">=</span> node<span class="token punctuation">;</span>
+            <span class="token keyword">return</span> node<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">enq</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> node<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+</li>
+</ul>
+</li>
+<li><p>再看一下<strong>acquireQueued</strong>方法，用来阻塞节点（阻塞这个线程的），这个方法主要做了这么几件事，首先是通过不断自旋，尝试让自己的前一个节点的状态变为signal（就是前一个节点如果释放锁，就会通知它的下一个，也就是现在来的这个），然后阻塞自己。其次是它的前一个老兄执行完了，释放锁，会把这个node唤醒，node被唤醒会再次自旋。</p>
+<ul>
+<li><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//返回false，表示获得锁了，true表示失败  </span>
+      <span class="token keyword">final</span> <span class="token keyword">boolean</span> <span class="token function">acquireQueued</span><span class="token punctuation">(</span><span class="token keyword">final</span> Node node<span class="token punctuation">,</span> <span class="token keyword">int</span> arg<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">boolean</span> failed <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+       <span class="token keyword">try</span> <span class="token punctuation">{</span>
+           <span class="token keyword">boolean</span> interrupted <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+           <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span><span class="token punctuation">;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>    <span class="token comment" spellcheck="true">//尝试自旋</span>
+               <span class="token keyword">final</span> Node p <span class="token operator">=</span> node<span class="token punctuation">.</span><span class="token function">predecessor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+               <span class="token keyword">if</span> <span class="token punctuation">(</span>p <span class="token operator">==</span> head <span class="token operator">&amp;&amp;</span> <span class="token function">tryAcquire</span><span class="token punctuation">(</span>arg<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                   <span class="token function">setHead</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                   p<span class="token punctuation">.</span>next <span class="token operator">=</span> null<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// help GC</span>
+                   failed <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                   <span class="token keyword">return</span> interrupted<span class="token punctuation">;</span>
+               <span class="token punctuation">}</span>
+               <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">shouldParkAfterFailedAcquire</span><span class="token punctuation">(</span>p<span class="token punctuation">,</span> node<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span>
+                   <span class="token function">parkAndCheckInterrupt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                   interrupted <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+           <span class="token punctuation">}</span>
+       <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
+           <span class="token keyword">if</span> <span class="token punctuation">(</span>failed<span class="token punctuation">)</span>
+               <span class="token function">cancelAcquire</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+   <span class="token punctuation">}</span></code></pre>
+</li>
+<li><p>这个方法的核心是shouldParkAfterFailedAcquire，主要目的就是把前一个节点的状态置为 SIGNAL，只要前一个节点的状态是 SIGNAL， 当前节点就可以阻塞了。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>获取共享锁–acquireShared</p>
+<ul>
+<li><p>他的整体流程和acquire相同，代码也是相似的，只有一点小的区别，获取锁的时候，共享锁使用的是tryAcquireShared方法</p>
+</li>
+<li><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">acquireShared</span><span class="token punctuation">(</span><span class="token keyword">int</span> arg<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">tryAcquireShared</span><span class="token punctuation">(</span>arg<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token function">doAcquireShared</span><span class="token punctuation">(</span>arg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span></code></pre>
+</li>
+<li><p>其次，节点获得排他锁时，是把它自己设置成同步队列头节点，但如果是共享锁的话，还会去唤醒自己后续的节点，一起来获得这把锁</p>
+</li>
+<li><p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200219234812137.png" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="释放锁"><a href="#释放锁" class="headerlink" title="释放锁"></a>释放锁</h2><p>释放锁就是用<code>Lock.unLock ()</code> 方法，释放锁也是分为两类，一类是排他锁的释放，另一类是共享锁的释放。</p>
+<ul>
+<li><p>排他锁的释放–release</p>
+<ul>
+<li><p>从队头开始，找它的下一个节点，如果下一个节点是空的，就会从 尾开始，一直找到状态不是取消的节点，然后释放该节点。</p>
+</li>
+<li><p>release是unlock的基础方法，同样的，也是先tryRelease，先调用子类的，如果锁已经完全释放，返回true，那么就唤醒下一个节点。</p>
+</li>
+<li><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">boolean</span> <span class="token function">release</span><span class="token punctuation">(</span><span class="token keyword">int</span> arg<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">tryRelease</span><span class="token punctuation">(</span>arg<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           Node h <span class="token operator">=</span> head<span class="token punctuation">;</span>
+             <span class="token comment" spellcheck="true">// 头节点不为空，并且非初始化状态</span>
+           <span class="token keyword">if</span> <span class="token punctuation">(</span>h <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span> h<span class="token punctuation">.</span>waitStatus <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+                 <span class="token comment" spellcheck="true">// 从头开始唤醒等待锁的节点</span>
+               <span class="token function">unparkSuccessor</span><span class="token punctuation">(</span>h<span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+       <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//当线程释放锁成功后，从 node 开始唤醒同步队列中的节点</span>
+<span class="token comment" spellcheck="true">//通过唤醒机制,保证线程不会一直在同步队列中阻塞等待</span>
+<span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">unparkSuccessor</span><span class="token punctuation">(</span>Node node<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+              <span class="token comment" spellcheck="true">//node节点是当前释放的节点，得到他的ws</span>
+              <span class="token comment" spellcheck="true">//ws小于0，说明节点还没被取消，那就cas，重置它的状态</span>
+        <span class="token keyword">int</span> ws <span class="token operator">=</span> node<span class="token punctuation">.</span>waitStatus<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>ws <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token function">compareAndSetWaitStatus</span><span class="token punctuation">(</span>node<span class="token punctuation">,</span> ws<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment" spellcheck="true">//取出这个节点的下一个节点，如果是空的，或者ws>0也就是被取消了</span>
+              <span class="token comment" spellcheck="true">//遇到这种情况就从队尾开始向前遍历，找到第一个ws&lt;=0的，也就是没被取消的，为啥不是从头呢。。。我也找不到。。。</span>
+        Node s <span class="token operator">=</span> node<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>s <span class="token operator">==</span> null <span class="token operator">||</span> s<span class="token punctuation">.</span>waitStatus <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            s <span class="token operator">=</span> null<span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span>Node t <span class="token operator">=</span> tail<span class="token punctuation">;</span> t <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span> t <span class="token operator">!=</span> node<span class="token punctuation">;</span> t <span class="token operator">=</span> t<span class="token punctuation">.</span>prev<span class="token punctuation">)</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>t<span class="token punctuation">.</span>waitStatus <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+                    s <span class="token operator">=</span> t<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>s <span class="token operator">!=</span> null<span class="token punctuation">)</span>
+            LockSupport<span class="token punctuation">.</span><span class="token function">unpark</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span>thread<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span></code></pre>
+</li>
+</ul>
+</li>
+<li><p>共享锁的释放–releaseShared</p>
+<ul>
+<li><p>他和排他锁的释放也是很相似的，首先tryReleaseShared尝试释放当前锁，然后唤醒当前节点的后续阻塞节点</p>
+</li>
+<li><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">boolean</span> <span class="token function">releaseShared</span><span class="token punctuation">(</span><span class="token keyword">int</span> arg<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">tryReleaseShared</span><span class="token punctuation">(</span>arg<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">doReleaseShared</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="条件队列"><a href="#条件队列" class="headerlink" title="条件队列"></a>条件队列</h2><p>为啥有了同步队列要条件队列，因为不是所有场景都是可以用一个同步队列搞定的呀，如果遇到<strong>锁+队列</strong>的场景，就需要<strong>lock+condition</strong>的配合。先用lock来决定哪些线程能够获得锁，哪些线程要去同步队列中阻塞，但是有可能出现这种情况，同步队列容量&lt;获得锁的线程的个数，那么就有一部分线程获得了锁，但是进不了同步队列，那么可以用Condition来管理这些线程，让这些线程阻塞等待，在合适的时候唤醒他们。</p>
+<p><strong>同步队列 + 条件队列联手使用的场景，最多被使用到锁 + 队列的场景中。</strong></p>
+<ul>
+<li>入队列等待–await<ul>
+<li>获得锁的线程，如果在碰到队列满或空的时候，就会阻塞住，这个阻塞就是用条件队列实现的， 这个动作我们叫做入条件队列，方法名称为 await</li>
+</ul>
+</li>
+</ul>
+<p>先欠着，下次补</p>
+
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Java%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81/">
+                                    <span class="chip bg-color">Java集合源码</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'dc4953b9709420569433',
+        clientSecret: 'be3e7d3530ec49aabfcc887ee30bc356e23de849',
+        repo: 'gitalk',
+        owner: '2885688585',
+        admin: 2885688585,
+        id: '2019-09-24T23-15-48',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/11/21/%E6%B5%B7%E9%87%8F%E5%A4%84%E7%90%86%E4%B9%8BMapReduce/">
+                    <div class="card-image">
+                        
+                        <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gccezvhbozj31es0u0aei.jpg" class="responsive-img" alt="海量数据处理">
+                        
+                        <span class="card-title">海量数据处理</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            海量数据处理（1）：MapReduce海量数据处理，就是基于海量数据的存储、删除、搜索等操作。由于数据量太大，导致要么无法在短时间内迅速处理，要么无法一次性装入内存。针对面试过程中的问题，主要有以下解决步骤
+
+针对时间，可以采用更加迅速的数
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-11-21
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" class="post-category">
+                                    海量数据处理
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">
+                        <span class="chip bg-color">海量数据处理</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/09/21/J.U.C%20Executor%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/">
+                    <div class="card-image">
+                        
+                        <img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/Xnip2020-03-06_00-19-24.jpg" class="responsive-img" alt="Java源码">
+                        
+                        <span class="card-title">Java源码</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            JUC.Executor这个包里主要是Future接口、callable接口、executor接口、四个拒绝策略，TimeUnit，这里着重看一下这个Future接口，它有两个子类，RunnableFuture接口和ScheduleFutu
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-09-21
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81/" class="post-category">
+                                    Java集合源码
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81/">
+                        <span class="chip bg-color">Java集合源码</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="https://0xac001d09.github.io" target="_blank">Jerry</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">100.1k</span>&nbsp;字
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/0xac001d09" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:876774731@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=876774731" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 876774731" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

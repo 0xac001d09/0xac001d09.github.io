@@ -1,0 +1,1143 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Java源码, 0xac001d09">
+    <meta name="description" content="Keep on keeping on">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Java源码 | 0xac001d09</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <span class="logo-span">0xac001d09</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <div class="logo-name">0xac001d09</div>
+        <div class="logo-desc">
+            
+            Keep on keeping on
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://gitee.com/Jerry1997/img-bed/raw/master/uPic/Xnip2020-03-06_00-19-36.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Java源码</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Java%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81/">
+                                <span class="chip bg-color">Java集合源码</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Java%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81/" class="post-category">
+                                Java集合源码
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-09-12
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.5k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    17 分
+                </div>
+                
+
+                
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="HashMap源码解读"><a href="#HashMap源码解读" class="headerlink" title="HashMap源码解读"></a>HashMap源码解读</h1><p>JDK 1.7中使用的是数组+链表，就是大学里数据结构课本上的那种实现</p>
+<p>JDK 1.8中，HashMap底层的数据结构是：数组+链表+红黑树。其中当链表的长度大于等于 8 时，链表会转化成红黑树，当红黑树的大小小于等于 6 时，红黑树会转化成链表，整体的数据结构如下:</p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200305234952852.png" alt=""></p>
+<p>图中左边竖着的是 HashMap 的数组结构，数组的元素可能是单个 Node，也可能是个链表， 也可能是个红黑树</p>
+<p>换一张图，HashMap内部的结构，它可以看作是数组(Node[] table)和链表结合组成的复合结构，数组被分为一个个桶(bucket)，通过哈希值决定了键值对在这个数组的寻址；哈希值相同的键值对，则以链表形式存储你可以参考下面的示意图。这里需要注意的是，如果链表大小超过阈值(TREEIFY_THRESHOLD, 8)，图中的链表就会被改造为红黑树。</p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20191211210845932.png" alt=""></p>
+<h2 id="一、类注释"><a href="#一、类注释" class="headerlink" title="一、类注释"></a>一、类注释</h2><ul>
+<li>允许 null 值，不同于 HashTable，是线程不安全的</li>
+<li>load factor(影响因子) 默认值是 0.75，是均衡了时间和空间损耗算出来的值，较高的值会减少空间开销(扩容减少，数组大小增长速度变慢)，但增加了查找成本(hash 冲突增加，链表长度变长)，不扩容的条件：数组容量 &gt; 需要的数组大小 /load factor;</li>
+<li>如果有很多数据需要储存到 HashMap 中，建议 HashMap 的容量一开始就设置成足够的大小，这样可以防止在其过程中不断的扩容，影响性能;</li>
+<li>在迭代过程中，如果 HashMap 的结构被修改，会快速失败。</li>
+</ul>
+<h2 id="二、常见属性"><a href="#二、常见属性" class="headerlink" title="二、常见属性"></a>二、常见属性</h2><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//初始容量为16</span>
+<span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> DEFAULT_INITIAL_CAPACITY <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">4</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// aka 16</span>
+
+<span class="token comment" spellcheck="true">//最大容量</span>
+<span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> MAXIMUM_CAPACITY <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">30</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//负载因子默认值</span>
+<span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">float</span> DEFAULT_LOAD_FACTOR <span class="token operator">=</span> <span class="token number">0.75f</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//桶上的链表长度大于等于8时，链表转化成红黑树</span>
+<span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> TREEIFY_THRESHOLD <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//桶上的红黑树大小小于等于6时，红黑树转化成链表</span>
+<span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> UNTREEIFY_THRESHOLD <span class="token operator">=</span> <span class="token number">6</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//当数组容量大于 64 时，链表才会转化成红黑树</span>
+<span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> MIN_TREEIFY_CAPACITY <span class="token operator">=</span> <span class="token number">64</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//记录迭代过程中 HashMap 结构是否发生变化，如果有变化，迭代时会 fail-fast</span>
+<span class="token keyword">transient</span> <span class="token keyword">int</span> modCount<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//HashMap 的实际大小，可能不准(因为当你拿到这个值的时候，可能又发生了变化)</span>
+<span class="token keyword">transient</span> <span class="token keyword">int</span> size<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//存放数据的数组</span>
+<span class="token keyword">transient</span> Node<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span><span class="token punctuation">[</span><span class="token punctuation">]</span> table<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// 扩容的门槛，有两种情况</span>
+<span class="token comment" spellcheck="true">// 如果初始化时，给定数组大小的话，通过 tableSizeFor 方法计算，数组大小永远接近于 2 的幂次方（有一个公式的）</span>
+<span class="token comment" spellcheck="true">// 如果是通过 resize 方法进行扩容，实际使用长度 = 数组容量 * 0.75</span>
+<span class="token keyword">int</span> threshold<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//链表的节点</span>
+<span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">Node</span><span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> <span class="token keyword">implements</span> <span class="token class-name">Map<span class="token punctuation">.</span>Entry</span><span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> <span class="token punctuation">{</span>
+
+<span class="token comment" spellcheck="true">//红黑树的节点</span>
+<span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">TreeNode</span><span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> <span class="token keyword">extends</span> <span class="token class-name">LinkedHashMap<span class="token punctuation">.</span>Entry</span><span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> <span class="token punctuation">{</span></code></pre>
+<h2 id="三、新增节点"><a href="#三、新增节点" class="headerlink" title="三、新增节点"></a>三、新增节点</h2><p>新增的步骤如下：</p>
+<ol>
+<li>空数组有没有初始化，没有的话需要初始化</li>
+<li>如果通过 key 的 hash 能够直接找到值，跳转到第6步，否则跳到第3步</li>
+<li>如果 hash 冲突，两种解决方案：链表 or 红黑树</li>
+<li>如果是链表，递归循环，把新元素追加到尾巴</li>
+<li>如果是红黑树，调用红黑树新增的方法</li>
+<li>通过 2、4、5 将新元素追加成功，再根据 onlyIfAbsent 判断是否需要覆盖</li>
+<li>判断是否需要扩容，需要扩容进行扩容，结束</li>
+</ol>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200305235017556.png" alt=""></p>
+<p>总结：要把键值对&lt;key,value&gt;放进去，首先会根据key计算出它的hash值，应该放到哪个位置，如果一开始数组是空的，那就会先<code>resize</code>初始化数组，初始化完后，就要去放键值对了，找到计算出的位置，如果那个索引位置是空的，就会直接新建Node，那就直接放在索引位置上，如果有值了，发生hash冲突了，那就要进行处理，判断是以红黑树还是链表的方式新增，递增完要更新版本号，并且如果HashMap的大小大于阈值了，就要resize，源码如下：</p>
+<pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">// 入参 hash:通过 hash 算法计算出来的值。</span>
+        <span class="token comment" spellcheck="true">// 入参 onlyIfAbsent:false 表示即使 key 已经存在了，仍然会用新值覆盖原来的值，默认为 false</span>
+    <span class="token keyword">final</span> V <span class="token function">putVal</span><span class="token punctuation">(</span><span class="token keyword">int</span> hash<span class="token punctuation">,</span> K key<span class="token punctuation">,</span> V value<span class="token punctuation">,</span> <span class="token keyword">boolean</span> onlyIfAbsent<span class="token punctuation">,</span> <span class="token keyword">boolean</span> evict<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token comment" spellcheck="true">// n 表示数组的长度，i 为数组索引下标，p 为 i 下标位置的 Node 值</span>
+        Node<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span><span class="token punctuation">[</span><span class="token punctuation">]</span> tab<span class="token punctuation">;</span> Node<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> p<span class="token punctuation">;</span> <span class="token keyword">int</span> n<span class="token punctuation">,</span> i<span class="token punctuation">;</span>
+
+          <span class="token comment" spellcheck="true">//如果数组为空，使用 resize 方法初始化</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>tab <span class="token operator">=</span> table<span class="token punctuation">)</span> <span class="token operator">==</span> null <span class="token operator">||</span> <span class="token punctuation">(</span>n <span class="token operator">=</span> tab<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            n <span class="token operator">=</span> <span class="token punctuation">(</span>tab <span class="token operator">=</span> <span class="token function">resize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+
+          <span class="token comment" spellcheck="true">// 如果当前索引位置是空的，直接生成新的节点在当前索引位置上</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>p <span class="token operator">=</span> tab<span class="token punctuation">[</span>i <span class="token operator">=</span> <span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> hash<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">==</span> null<span class="token punctuation">)</span>
+            tab<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">newNode</span><span class="token punctuation">(</span>hash<span class="token punctuation">,</span> key<span class="token punctuation">,</span> value<span class="token punctuation">,</span> null<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 如果当前索引位置有值(hash 冲突了),如何解决 hash 冲突</span>
+        <span class="token keyword">else</span> <span class="token punctuation">{</span>
+              <span class="token comment" spellcheck="true">// e为当前节点的临时变量</span>
+            Node<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> e<span class="token punctuation">;</span> K k<span class="token punctuation">;</span>
+
+              <span class="token comment" spellcheck="true">// 如果 key 的 hash 和值都相等，直接把当前下标位置的 Node 值赋值给临时变量</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>p<span class="token punctuation">.</span>hash <span class="token operator">==</span> hash <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>k <span class="token operator">=</span> p<span class="token punctuation">.</span>key<span class="token punctuation">)</span> <span class="token operator">==</span> key <span class="token operator">||</span> <span class="token punctuation">(</span>key <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span> key<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                e <span class="token operator">=</span> p<span class="token punctuation">;</span>
+
+              <span class="token comment" spellcheck="true">// 如果是红黑树，使用红黑树的方式新增</span>
+            <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>p <span class="token keyword">instanceof</span> <span class="token class-name">TreeNode</span><span class="token punctuation">)</span>
+                e <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>TreeNode<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span><span class="token punctuation">)</span>p<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">putTreeVal</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> tab<span class="token punctuation">,</span> hash<span class="token punctuation">,</span> key<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+              <span class="token comment" spellcheck="true">// 否则是个链表，把新节点放到链表的尾端</span>
+            <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                  <span class="token comment" spellcheck="true">//自旋操作</span>
+                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> binCount <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token punctuation">;</span> <span class="token operator">++</span>binCount<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                      <span class="token comment" spellcheck="true">// e = p.next 表示从头开始，遍历链表</span>
+                                        <span class="token comment" spellcheck="true">// p.next == null 表明 p 是链表的尾节点</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>e <span class="token operator">=</span> p<span class="token punctuation">.</span>next<span class="token punctuation">)</span> <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                          <span class="token comment" spellcheck="true">// 把新节点放到链表的尾部</span>
+                        p<span class="token punctuation">.</span>next <span class="token operator">=</span> <span class="token function">newNode</span><span class="token punctuation">(</span>hash<span class="token punctuation">,</span> key<span class="token punctuation">,</span> value<span class="token punctuation">,</span> null<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                          <span class="token comment" spellcheck="true">// 当链表的长度大于等于 8 时，链表转红黑树</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span>binCount <span class="token operator">>=</span> TREEIFY_THRESHOLD <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// -1 for 1st</span>
+                            <span class="token function">treeifyBin</span><span class="token punctuation">(</span>tab<span class="token punctuation">,</span> hash<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token keyword">break</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                      <span class="token comment" spellcheck="true">// 链表遍历过程中，发现有元素和新增的元素相等，结束循环</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>e<span class="token punctuation">.</span>hash <span class="token operator">==</span> hash <span class="token operator">&amp;&amp;</span>
+                        <span class="token punctuation">(</span><span class="token punctuation">(</span>k <span class="token operator">=</span> e<span class="token punctuation">.</span>key<span class="token punctuation">)</span> <span class="token operator">==</span> key <span class="token operator">||</span> <span class="token punctuation">(</span>key <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span> key<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                        <span class="token keyword">break</span><span class="token punctuation">;</span>
+                      <span class="token comment" spellcheck="true">//更改循环的当前元素，使 p 在遍历过程中，一直往后移动。</span>
+                    p <span class="token operator">=</span> e<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+              <span class="token comment" spellcheck="true">// 说明新节点的新增位置已经找到了</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>e <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// existing mapping for key</span>
+                V oldValue <span class="token operator">=</span> e<span class="token punctuation">.</span>value<span class="token punctuation">;</span>
+                  <span class="token comment" spellcheck="true">// 当 onlyIfAbsent 为 false 时，才会覆盖值</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>onlyIfAbsent <span class="token operator">||</span> oldValue <span class="token operator">==</span> null<span class="token punctuation">)</span>
+                    e<span class="token punctuation">.</span>value <span class="token operator">=</span> value<span class="token punctuation">;</span>
+                <span class="token function">afterNodeAccess</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                  <span class="token comment" spellcheck="true">// 返回老值</span>
+                <span class="token keyword">return</span> oldValue<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+          <span class="token comment" spellcheck="true">// 记录 HashMap 的数据结构发生了变化</span>
+        <span class="token operator">++</span>modCount<span class="token punctuation">;</span>
+          <span class="token comment" spellcheck="true">//如果 HashMap 的实际大小大于扩容的门槛，开始扩容</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">++</span>size <span class="token operator">></span> threshold<span class="token punctuation">)</span>
+            <span class="token function">resize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">afterNodeInsertion</span><span class="token punctuation">(</span>evict<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> null<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span></code></pre>
+<h3 id="1、链表新增节点"><a href="#1、链表新增节点" class="headerlink" title="1、链表新增节点"></a>1、链表新增节点</h3><p>链表的新增比较简单，就是把当前节点追加到链表的尾部，和 LinkedList 的追加实现一样的。当链表长度大于等于 8 时，此时的链表就会转化成红黑树，转化的方法是<code>treeifyBin</code>（treeify是树化的意思），<strong>此方法有一个判断，当链表长度大于等于 8，并且整个数组大小大于 64 时，才会转成红黑树，当数组大小小于 64 时，只会触发扩容，不会转化成红黑树</strong>，转化成红黑树的过程也比较简单，具体转 化的过程源码可以去 github:<a href="https://github.com/luanqiu/java8" target="_blank" rel="noopener">https://github.com/luanqiu/java8</a> 上面去查看。</p>
+<p>可能面试的时候，<strong>有人问你为什么是 8</strong>，这个答案在源码中注释有说，中文翻译过来大概的意思是：</p>
+<blockquote>
+<p>链表查询的时间复杂度是 O (n)，红黑树的查询复杂度是 O (log (n))。在链表数据不多的时候， 使用链表进行遍历也比较快，只有当链表数据比较多的时候，才会转化成红黑树，但红黑树需要的占用空间是链表的 2 倍（源码注释中写的），考虑到转化时间和空间损耗，所以要定义出这个转化的边界值：</p>
+<p>在设计 8 这个值的时候，参考了泊松分布概率函数，由泊松分布中得出结论，链表各个长度的命中概率为:</p>
+<pre class=" language-java"><code class="language-java">     <span class="token operator">*</span> <span class="token number">0</span><span class="token operator">:</span>    <span class="token number">0.60653066</span>
+     <span class="token operator">*</span> <span class="token number">1</span><span class="token operator">:</span>    <span class="token number">0.30326533</span>
+     <span class="token operator">*</span> <span class="token number">2</span><span class="token operator">:</span>    <span class="token number">0.07581633</span>
+     <span class="token operator">*</span> <span class="token number">3</span><span class="token operator">:</span>    <span class="token number">0.01263606</span>
+     <span class="token operator">*</span> <span class="token number">4</span><span class="token operator">:</span>    <span class="token number">0.00157952</span>
+     <span class="token operator">*</span> <span class="token number">5</span><span class="token operator">:</span>    <span class="token number">0.00015795</span>
+     <span class="token operator">*</span> <span class="token number">6</span><span class="token operator">:</span>    <span class="token number">0.00001316</span>
+     <span class="token operator">*</span> <span class="token number">7</span><span class="token operator">:</span>    <span class="token number">0.00000094</span>
+     <span class="token operator">*</span> <span class="token number">8</span><span class="token operator">:</span>    <span class="token number">0.00000006</span></code></pre>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20191211204357542.png" alt=""></p>
+<p>当链表的长度是 8 的时候，出现的概率是 0.00000006，不到千万分之一，所以说正常情况下，链表的长度不可能到达 8 ，而一旦到达 8 时，肯定是 hash 算法出了问题，所以在这种情况下，为了让 HashMap 仍然有较高的查询性能，所以让链表转化成红黑树，我们正常写代码，使用 HashMap 时，几乎不会碰到链表转化成红黑树的情况，毕竟概念只有千万分之 一。</p>
+</blockquote>
+<h3 id="2、红黑树新增节点"><a href="#2、红黑树新增节点" class="headerlink" title="2、红黑树新增节点"></a>2、红黑树新增节点</h3><ul>
+<li><p>首先判断新增的节点在红黑树上是不是已经存在，判断手段有如下两种：</p>
+<ul>
+<li>如果节点没有实现 Comparable 接口，使用 equals 进行判断;</li>
+<li>如果节点自己实现了 Comparable 接口，使用 compareTo 进行判断。</li>
+</ul>
+</li>
+<li><p>新增的节点如果已经在红黑树上，直接返回;不在的话，判断新增节点是在当前节点的左边还是右边，左边值小，右边值大;</p>
+</li>
+<li><p>自旋递归 1 和 2 步，直到当前节点的左边或者右边的节点为空时，停止自旋，当前节点即为我们新增节点的父节点;</p>
+</li>
+<li><p>把新增节点放到当前节点的左边或右边为空的地方，并于当前节点建立父子节点关系;</p>
+</li>
+<li><p>进行着色和旋转，结束。</p>
+</li>
+</ul>
+<p>源码如下：</p>
+<pre class=" language-java"><code class="language-java">      <span class="token comment" spellcheck="true">//入参h为hash值</span>
+            <span class="token keyword">final</span> TreeNode<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> <span class="token function">putTreeVal</span><span class="token punctuation">(</span>HashMap<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> map<span class="token punctuation">,</span> Node<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span><span class="token punctuation">[</span><span class="token punctuation">]</span> tab<span class="token punctuation">,</span><span class="token keyword">int</span> h<span class="token punctuation">,</span> K k<span class="token punctuation">,</span> V v<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            Class<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span> kc <span class="token operator">=</span> null<span class="token punctuation">;</span>
+            <span class="token keyword">boolean</span> searched <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                <span class="token comment" spellcheck="true">//找到根节点</span>
+            TreeNode<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> root <span class="token operator">=</span> <span class="token punctuation">(</span>parent <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token function">root</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+                <span class="token comment" spellcheck="true">//自旋</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span>TreeNode<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> p <span class="token operator">=</span> root<span class="token punctuation">;</span><span class="token punctuation">;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">int</span> dir<span class="token punctuation">,</span> ph<span class="token punctuation">;</span> K pk<span class="token punctuation">;</span>
+                  <span class="token comment" spellcheck="true">// p hash 值大于 h，说明 p 在 h 的右边（左小右大）</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>ph <span class="token operator">=</span> p<span class="token punctuation">.</span>hash<span class="token punctuation">)</span> <span class="token operator">></span> h<span class="token punctuation">)</span>
+                    dir <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+                  <span class="token comment" spellcheck="true">// p hash 值小于 h，说明 p 在 h 的左边</span>
+                <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>ph <span class="token operator">&lt;</span> h<span class="token punctuation">)</span>
+                    dir <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                  <span class="token comment" spellcheck="true">// 要放进去key在当前树中已经存在了(equals来判断)</span>
+                <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>pk <span class="token operator">=</span> p<span class="token punctuation">.</span>key<span class="token punctuation">)</span> <span class="token operator">==</span> k <span class="token operator">||</span> <span class="token punctuation">(</span>k <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span> k<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>pk<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token keyword">return</span> p<span class="token punctuation">;</span>
+                  <span class="token comment" spellcheck="true">// 自己实现的Comparable的话，不能用hashcode比较了，需要用compareTo</span>
+                <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>kc <span class="token operator">==</span> null <span class="token operator">&amp;&amp;</span>
+                          <span class="token comment" spellcheck="true">// 得到key的Class类型，如果key没有实现Comparable就是null</span>
+                          <span class="token punctuation">(</span>kc <span class="token operator">=</span> <span class="token function">comparableClassFor</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token operator">||</span>
+                             <span class="token comment" spellcheck="true">//当前节点pk和入参k不等</span>
+                          <span class="token punctuation">(</span>dir <span class="token operator">=</span> <span class="token function">compareComparables</span><span class="token punctuation">(</span>kc<span class="token punctuation">,</span> k<span class="token punctuation">,</span> pk<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>searched<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        TreeNode<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> q<span class="token punctuation">,</span> ch<span class="token punctuation">;</span>
+                        searched <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span>ch <span class="token operator">=</span> p<span class="token punctuation">.</span>left<span class="token punctuation">)</span> <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span>
+                             <span class="token punctuation">(</span>q <span class="token operator">=</span> ch<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>h<span class="token punctuation">,</span> k<span class="token punctuation">,</span> kc<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token operator">||</span>
+                            <span class="token punctuation">(</span><span class="token punctuation">(</span>ch <span class="token operator">=</span> p<span class="token punctuation">.</span>right<span class="token punctuation">)</span> <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span>
+                             <span class="token punctuation">(</span>q <span class="token operator">=</span> ch<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>h<span class="token punctuation">,</span> k<span class="token punctuation">,</span> kc<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> null<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                            <span class="token keyword">return</span> q<span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                    dir <span class="token operator">=</span> <span class="token function">tieBreakOrder</span><span class="token punctuation">(</span>k<span class="token punctuation">,</span> pk<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+                TreeNode<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> xp <span class="token operator">=</span> p<span class="token punctuation">;</span>
+                  <span class="token comment" spellcheck="true">//找到和当前hashcode值相近的节点(当前节点的左右子节点其中一个为空即可)</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>p <span class="token operator">=</span> <span class="token punctuation">(</span>dir <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">?</span> p<span class="token punctuation">.</span>left <span class="token operator">:</span> p<span class="token punctuation">.</span>right<span class="token punctuation">)</span> <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    Node<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> xpn <span class="token operator">=</span> xp<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+                      <span class="token comment" spellcheck="true">//生成新的节点</span>
+                    TreeNode<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> x <span class="token operator">=</span> map<span class="token punctuation">.</span><span class="token function">newTreeNode</span><span class="token punctuation">(</span>h<span class="token punctuation">,</span> k<span class="token punctuation">,</span> v<span class="token punctuation">,</span> xpn<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                      <span class="token comment" spellcheck="true">//把新节点放在当前子节点为空的位置上</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>dir <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+                        xp<span class="token punctuation">.</span>left <span class="token operator">=</span> x<span class="token punctuation">;</span>
+                    <span class="token keyword">else</span>
+                        xp<span class="token punctuation">.</span>right <span class="token operator">=</span> x<span class="token punctuation">;</span>
+                      <span class="token comment" spellcheck="true">//当前节点和新节点建立父子，前后关系</span>
+                    xp<span class="token punctuation">.</span>next <span class="token operator">=</span> x<span class="token punctuation">;</span>
+                    x<span class="token punctuation">.</span>parent <span class="token operator">=</span> x<span class="token punctuation">.</span>prev <span class="token operator">=</span> xp<span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>xpn <span class="token operator">!=</span> null<span class="token punctuation">)</span>
+                        <span class="token punctuation">(</span><span class="token punctuation">(</span>TreeNode<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span><span class="token punctuation">)</span>xpn<span class="token punctuation">)</span><span class="token punctuation">.</span>prev <span class="token operator">=</span> x<span class="token punctuation">;</span>
+                      <span class="token comment" spellcheck="true">//balanceInsertion 对红黑树进行着色或旋转，以达到更多的查找效率</span>
+                      <span class="token comment" spellcheck="true">//着色:新节点总是为红色;如果新节点的父亲是黑色，则不需要重新着色</span>
+                      <span class="token comment" spellcheck="true">//如果父亲是红色，则只能是黑色</span>
+                      <span class="token comment" spellcheck="true">//旋转: 父亲是红色，叔叔是黑色时，进行旋转</span>
+                      <span class="token comment" spellcheck="true">//如果当前节点是父亲的右节点，则进行左旋 </span>
+                      <span class="token comment" spellcheck="true">//如果当前节点是父亲的左节点，则进行右旋</span>
+                    <span class="token comment" spellcheck="true">//moveRootToFront 方法是把算出来的root放到根节点上</span>
+                    <span class="token function">moveRootToFront</span><span class="token punctuation">(</span>tab<span class="token punctuation">,</span> <span class="token function">balanceInsertion</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">return</span> null<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span></code></pre>
+<p>一般只会问到新增节点到红黑树上大概是什么样的一个过程，着色和旋转的细节不会问，因为很难说清楚，但我们要清楚<strong>着色指的是给红黑树的节点着上红色或黑色</strong>，<strong>旋转是为了让红黑树更加平衡，提高查询的效率</strong>，总的来说都是为了满足红黑树的 5 个原则：</p>
+<ul>
+<li>根是与叶子都是黑色</li>
+<li>节点是红色或黑色</li>
+<li>从任一节点到它每个叶子的所有简单路径都包含相同数目的黑色节点</li>
+<li>从每个叶子到根的所有路径上不能有两个连续的红色节点</li>
+</ul>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200209232100235.png" alt=""></p>
+<h2 id="四、查找"><a href="#四、查找" class="headerlink" title="四、查找"></a>四、查找</h2><p>HashMap 的查找主要分为以下三步：</p>
+<ul>
+<li>根据 hash 算法定位数组的索引位置，equals 判断当前节点是否是我们需要寻找的 key，是的话直接返回，不是的话往下。</li>
+<li>判断当前节点有无 next 节点，有的话判断是链表类型，还是红黑树类型。</li>
+<li>分别走链表和红黑树不同类型的查找方法。</li>
+</ul>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200209224029797.png" alt=""></p>
+<p>链表查找关键源码如下</p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 采用自旋方式从链表中查找 key，e 初始为为链表的头节点</span>
+<span class="token keyword">do</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// 如果当前节点 hash 等于 key 的 hash，并且 equals 相等，当前节点就是我们要找的节点</span>
+  <span class="token comment" spellcheck="true">// 当 hash 冲突时，同一个 hash 值上是一个链表的时候，我们是通过 equals 方法来比较 key是否就是我们要找的那个</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>e<span class="token punctuation">.</span>hash <span class="token operator">==</span> hash <span class="token operator">&amp;&amp;</span>
+      <span class="token punctuation">(</span><span class="token punctuation">(</span>k <span class="token operator">=</span> e<span class="token punctuation">.</span>key<span class="token punctuation">)</span> <span class="token operator">==</span> key <span class="token operator">||</span> <span class="token punctuation">(</span>key <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span> key<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> e<span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 否则，把当前节点的下一个节点拿出来继续寻找</span>
+<span class="token punctuation">}</span> <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>e <span class="token operator">=</span> e<span class="token punctuation">.</span>next<span class="token punctuation">)</span> <span class="token operator">!=</span> null<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>红黑树查找代码思路：</p>
+<ol>
+<li><p>从根节点递归查找;</p>
+</li>
+<li><p>根据 hashcode，比较查找节点，左边节点，右边节点之间的大小，根本红黑树左小右大的</p>
+<p>特性进行判断;</p>
+</li>
+<li><p>判断查找节点在第 2 步有无定位节点位置，有的话返回，没有的话重复 2，3 两步;</p>
+</li>
+<li><p>一直自旋到定位到节点位置为止。</p>
+</li>
+</ol>
+<p>如果红黑树比较平衡的话，每次查找的次数就是树的深度。</p>
+<h2 id="五、其他问题"><a href="#五、其他问题" class="headerlink" title="五、其他问题"></a>五、其他问题</h2><p>抛两个知乎专栏：<a href="https://zhuanlan.zhihu.com/p/76735726" target="_blank" rel="noopener">专栏1</a>、<a href="https://zhuanlan.zhihu.com/p/87929020" target="_blank" rel="noopener">专栏2</a></p>
+<p>（1）初始容量为什么必须是2的幂次方？能不能传别的数进去？</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> DEFAULT_INITIAL_CAPACITY <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">4</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// aka 16</span></code></pre>
+<p>哈希桶的个数为2的幂次方， 在JDK1.7中，如果还没初始化它就会进行初始化，如果输入其他数字，它初始化的时候会调用一个<code>roundUpToPowerOf2</code>方法，就是把它调整为2的幂。hashCode一共是42亿个数，比如初始一共16个桶，你要把42亿个数放进16个桶里面，如果用取余操作，它缺点很多，比如要对负数额外进行处理，并且处理速度很慢，所以写JDK的有一个很鬼畜的操作，它们用了&amp;，他们将hash值与（length-1）与运算了一下。length是桶的个数（数组长度），它是2的幂次方，比如10000（16的2进制），2^4^-1 = 1111，这个时候把hash值跟它与操作，得到一个二进制数字，就得到了数组下标了，前面都是0根本不用管它。（位运算基本知识：和1做与操作取得这个位上的值）</p>
+<p>（2）JDK7中HashMap的问题</p>
+<blockquote>
+<ul>
+<li>引发HashMap死锁，见<a href="https://coolshell.cn/articles/9606.html" target="_blank" rel="noopener">网页</a></li>
+</ul>
+<p>在多线程环境下，JDK 7中数组+链表的HashMap实现，有可能出现成环，然后就死循环，并且很难重现。<a href="https://www.bilibili.com/video/av71408100?from=search&seid=9615660035464292427" target="_blank" rel="noopener">视频讲解</a>（30分钟左右）</p>
+<p>JAVA 7它是头插法，啥意思呢，比如我们本来有个hash表 某个节点上它是下面这样的</p>
+<pre><code>Node1 -&gt; key:1,value:1 -&gt; key:2,value:2 -&gt; key:3,value:3
+
+经过扩容rehash后，变成了
+Node1 -&gt; key:3,value:3
+Node2 -&gt; key:2,value:2 -&gt; key:1,value:1</code></pre><p>因为它是头插法，我先把key=1的摘下来，插进一个新的节点，然后再把2摘下来，头插刀新的节点，2就变到了1的前面了！那这样一来顺序就反了。在多线程的情况下，线程调度本来就随机的嘛。原先是1-&gt;2，扩容后变为2-&gt;1，这样就可能出现死锁，出现环形链表。正常情况查找元素是找到头，往下挨个找，变成环，就有死循环了，线上系统cpu 100%。</p>
+<ul>
+<li><p>还有一个安全隐患，可以通过精心构造的恶意请求引发Dos</p>
+<p>Tomcat使用了一个hash表来存储http的请求参数，那么就可以构造hashCode值一样的字符串，不断发送请求，这样直接导致hash表退化成链表，链表查找时间复杂度是O(n)，这样大大使得性能损耗， 1.7时通过hashSeeds这么一个补丁，就是对它再hash，来避免，接下来就到了1.8。</p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20191211224529407.png" alt=""></p>
+</li>
+</ul>
+</blockquote>
+<p>（3）JDK 8中对HashMap的改进</p>
+<blockquote>
+<ul>
+<li><p>数组+链表+红黑树</p>
+</li>
+<li><p>扩容时插入顺序的改进</p>
+<p>JDK 1.7是头插法，1.8改成了尾插把，特别加了个注释preserve order，保持顺序</p>
+</li>
+<li><p>扩容</p>
+<p>之前讲了数组长度为什么是2的幂次方，这里扩容的时候，比如把2^4^扩容成2^5^，就是由1111变为11111，那么hashCode和它与运算，最高位要么多个1，要么多个0，后面四位不变的，那么它针对hash桶上某个index上对应的链表，这个链表会拆分成两部分，一部分留在原地，另一部分被移走了，这边就把这条链表拆分成了高位和低位，判断哪一部分是要移动的，并且移动的时候顺序是保持的，不会再像JDK 7中出现环，完事后，把高位链表和低位链表赋到新的hash桶中的index下去</p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20191211230350526.png" alt=""></p>
+</li>
+</ul>
+</blockquote>
+<p>（4）hash方法怎么实现的？为什么要用异或^运算符</p>
+<blockquote>
+<p>JDK 1.8 中，是通过 hashCode() 的高 16 位异或低 16 位实现的：(h = k.hashCode()) ^ (h &gt;&gt;&gt; 16)，主要是从速度，功效和质量来考虑的，减少系统的开销，使用异或保证了对象的 hashCode 的 32 位值只要有一位发生改变，整个 hash() 返回值就会改变。尽可能的减少碰撞。</p>
+</blockquote>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Java%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81/">
+                                    <span class="chip bg-color">Java集合源码</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'dc4953b9709420569433',
+        clientSecret: 'be3e7d3530ec49aabfcc887ee30bc356e23de849',
+        repo: 'gitalk',
+        owner: '2885688585',
+        admin: 2885688585,
+        id: '2019-09-12T23-15-48',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/09/13/TreeMap%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/">
+                    <div class="card-image">
+                        
+                        <img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/Xnip2020-03-06_00-19-42.jpg" class="responsive-img" alt="Java源码">
+                        
+                        <span class="card-title">Java源码</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            TreeMapTreeMap 底层的数据结构就是红黑树。TreeMap 利用了红黑树左节点小，右节点大的性质，根据 key 进行排序，使每个元素能够插入到红黑树大小适当的位置，维护了 key 的大小关系，适用于 key 需要排序的场景。因为
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-09-13
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81/" class="post-category">
+                                    Java集合源码
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81/">
+                        <span class="chip bg-color">Java集合源码</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/09/11/LinkedList%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/">
+                    <div class="card-image">
+                        
+                        <img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/Xnip2020-03-06_00-19-10.jpg" class="responsive-img" alt="Java源码">
+                        
+                        <span class="card-title">Java源码</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            LinkedList&emsp;&emsp;底层数据结构是双向链表，如图。链表中没数据时，first和last是同一个结点，前后指向null。因为是个双向链表，只要机器内存足够大，没有大小限制。
+
+内部有一个Node类
+private st
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-09-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81/" class="post-category">
+                                    Java集合源码
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81/">
+                        <span class="chip bg-color">Java集合源码</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="https://0xac001d09.github.io" target="_blank">Jerry</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">100.1k</span>&nbsp;字
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/0xac001d09" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:876774731@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=876774731" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 876774731" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

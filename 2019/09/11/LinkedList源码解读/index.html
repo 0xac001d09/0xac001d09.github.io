@@ -214,7 +214,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://tva1.sinaimg.cn/large/00831rSTgy1gccezx42a0j31ek0u078g.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://gitee.com/Jerry1997/img-bed/raw/master/uPic/Xnip2020-03-06_00-19-10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -661,6 +661,32 @@
     </div>
 
     
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'dc4953b9709420569433',
+        clientSecret: 'be3e7d3530ec49aabfcc887ee30bc356e23de849',
+        repo: 'gitalk',
+        owner: '2885688585',
+        admin: 2885688585,
+        id: '2019-09-11T22-16-28',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
 
     
 
@@ -679,32 +705,31 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/11/21/%E6%B5%B7%E9%87%8F%E5%A4%84%E7%90%86%E4%B9%8BMapReduce/">
+                <a href="/2019/09/12/HashMap%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/">
                     <div class="card-image">
                         
-                        <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gccezvhbozj31es0u0aei.jpg" class="responsive-img" alt="海量数据处理">
+                        <img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/Xnip2020-03-06_00-19-36.jpg" class="responsive-img" alt="Java源码">
                         
-                        <span class="card-title">海量数据处理</span>
+                        <span class="card-title">Java源码</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            海量数据处理（1）：MapReduce海量数据处理，就是基于海量数据的存储、删除、搜索等操作。由于数据量太大，导致要么无法在短时间内迅速处理，要么无法一次性装入内存。针对面试过程中的问题，主要有以下解决步骤
-
-针对时间，可以采用更加迅速的数
+                            HashMap源码解读JDK 1.7中使用的是数组+链表，就是大学里数据结构课本上的那种实现
+JDK 1.8中，HashMap底层的数据结构是：数组+链表+红黑树。其中当链表的长度大于等于 8 时，链表会转化成红黑树，当红黑树的大小小于等于
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-11-21
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-09-12
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" class="post-category">
-                                    海量数据处理
+                            <a href="/categories/Java%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81/" class="post-category">
+                                    Java集合源码
                                 </a>
                             
                             
@@ -714,8 +739,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">
-                        <span class="chip bg-color">海量数据处理</span>
+                    <a href="/tags/Java%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81/">
+                        <span class="chip bg-color">Java集合源码</span>
                     </a>
                     
                 </div>
@@ -732,7 +757,7 @@
                 <a href="/2019/09/10/ArrayList%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/">
                     <div class="card-image">
                         
-                        <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gccezugse7j31ee0u0tck.jpg" class="responsive-img" alt="Java源码">
+                        <img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/Xnip2020-03-06_00-19-03.jpg" class="responsive-img" alt="Java源码">
                         
                         <span class="card-title">Java源码</span>
                     </div>
@@ -920,7 +945,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">79.2k</span>&nbsp;字
+                class="white-color">100.1k</span>&nbsp;字
             
             
             
