@@ -1,0 +1,843 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="JVM, 0xac001d09">
+    <meta name="description" content="Keep on keeping on">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>JVM | 0xac001d09</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <span class="logo-span">0xac001d09</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <div class="logo-name">0xac001d09</div>
+        <div class="logo-desc">
+            
+            Keep on keeping on
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://gitee.com/Jerry1997/img-bed/raw/master/uPic/Xnip2020-03-05_22-53-09.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">JVM</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/JVM/">
+                                <span class="chip bg-color">JVM</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/JVM/" class="post-category">
+                                JVM
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-09-02
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.9k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    10 分
+                </div>
+                
+
+                
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="CMS再优化与频繁Full-GC问题分析"><a href="#CMS再优化与频繁Full-GC问题分析" class="headerlink" title="CMS再优化与频繁Full GC问题分析"></a>CMS再优化与频繁Full GC问题分析</h1><h2 id="一、CMS深度优化技巧"><a href="#一、CMS深度优化技巧" class="headerlink" title="一、CMS深度优化技巧"></a>一、CMS深度优化技巧</h2><h3 id="1、CMS内存碎片问题"><a href="#1、CMS内存碎片问题" class="headerlink" title="1、CMS内存碎片问题"></a>1、CMS内存碎片问题</h3><p>最常见的优化是用工具判断出来每次Young GC后存活对象有多少，Eden区域过小，自然会导致频繁的触发Young GC，Survivor区域过小，自然会导致经常在Young GC之后存活对象其实也没多少，但就是Survivor区域放不下，通过调整区域比例，避免对象快速进入老年代。这是优化的第一步，也是最容易想到的。</p>
+<p>此外，比如老年代有2G的内存，其中1.5G是连续可用内存，0.5G是很多内存碎片。本来老年代如果都是连续空内存的话，那么可能可以对象占用到将近2G才会触发Full GC。结果现在就是对象占用到了1.5G就需要触发Full GC了，剩下0.5G是没法放任何对象的。所以，在第一步降低了Full GC频率之后，由于老年代使用CMS，它的默认碎片整理次数是每5次Full GC后整理一下内存碎片，务必设置如下参数-XX:+UseCMSCompactAtFullCollection -XX:CMSFullGCsBeforeCompaction=0”，每次Full GC后都整理一下内存碎片，否则如果每次Full GC过后，都造成老年代里很多内存碎片，那么必然导致下一次Full GC更快到来。</p>
+<h3 id="2、CMS深度优化"><a href="#2、CMS深度优化" class="headerlink" title="2、CMS深度优化"></a>2、CMS深度优化</h3><p>引入两外两个参数。</p>
+<p>第一个参数是<code>-XX:+CMSParallelInitialMarkEnabled</code>。在使用CMS时的初始标记阶段，是会进行<code>Stop the World</code>的，会导致系统停顿，可以打开参数，这个参数会在CMS垃圾回收器的“初始标记”阶段开启多线程并发执行，可以尽可能优化这个阶段的性能，减少<code>Stop the World</code>的时间，</p>
+<p>另外一个参数是<code>-XX:+CMSScavengeBeforeRemark</code>，这个参数会在CMS的重新标记阶段之前，先尽量执行一次Young GC。CMS的重新标记也是会Stop the World的，所以所以如果在重新标记之前，先执行一次Young GC，就会回收掉一些年轻代里没有人引用的对象。所以如果先提前回收掉一些对象，那么在CMS的重新标记阶段就可以少扫描一些对象，此时就可以提升CMS的重新标记阶段的性能，减少他的耗时。</p>
+<p>小型业务JVM模版</p>
+<pre><code>-Xms4096M -Xmx4096M -Xmn3072M -Xss1M  -XX:PermSize=256M -XX:MaxPermSize=256M -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFaction=92 -XX:+UseCMSCompactAtFullCollection -XX:CMSFullGCsBeforeCompaction=0 -XX:+CMSParallelInitialMarkEnabled -XX:+CMSScavengeBeforeRemark</code></pre><h2 id="二、四大频繁Full-GC原因分析"><a href="#二、四大频繁Full-GC原因分析" class="headerlink" title="二、四大频繁Full GC原因分析"></a>二、四大频繁Full GC原因分析</h2><h3 id="1、大量反射代码使永久代类太多导致频繁Full-GC"><a href="#1、大量反射代码使永久代类太多导致频繁Full-GC" class="headerlink" title="1、大量反射代码使永久代类太多导致频繁Full GC"></a>1、大量反射代码使永久代类太多导致频繁Full GC</h3><p>频繁Full GC不光是老年代触发的，有时候也会因为Metaspace区域的类太多而触发，也是就是Metaspace区域被占满，Full GC 的时候回收其中部分类，我们想了解Metaspace为什么被频繁占满，是哪个类不停的被加载进入，就可以使用下面的两个参数，很有用！</p>
+<p>第一个参数是<code>-XX:TraceClassLoading</code>,第二个参数是<code>-XX:TraceClassUnloading</code>，分别追踪类加载和类卸载的情况，他会通过日志打印出来JVM中加载了哪些类，卸载了哪些类。对于这些类，通过查资料就会明白了，有一个案例说是java中反射时加载的类，执行反射代码时，JVM会在你反射调用一定次数之后就动态生成一些类。<strong>只要记住一个结论：如果你在代码里大量用了类似上面的反射的东西，那么JVM就是会动态的去生成一些类放入Metaspace区域里的。</strong></p>
+<h4 id="（1）为什么会这些类会被放进Metaspace呢？"><a href="#（1）为什么会这些类会被放进Metaspace呢？" class="headerlink" title="（1）为什么会这些类会被放进Metaspace呢？"></a>（1）为什么会这些类会被放进Metaspace呢？</h4><p>反射过程中生成的类的Class对象，都是软引用的，正常情况下不会被回收！（什么是Class对象？类自己本身就是一个对象，就是一个Class的对象，一个Class对象代表了一个类，这个Class对象能够派生出很多的实例）</p>
+<h4 id="（2）什么时候软引用会被回收呢？"><a href="#（2）什么时候软引用会被回收呢？" class="headerlink" title="（2）什么时候软引用会被回收呢？"></a>（2）什么时候软引用会被回收呢？</h4><p>通过这个公式来判断<code>clock - timestamp &lt;= freespace * SoftRefLRUPolicyMSPerMB</code>,“clock - timestamp”代表了一个软引用对象他有多久没被访问过了，freespace代表JVM中的空闲内存空间，SoftRefLRUPolicyMSPerMB代表每一MB空闲内存空间可以允许SoftReference对象存活多久,默认是1000毫秒。假如JVM空闲空间为3000MB，那么一个软引用的对象最多可以活50分钟（3000*1000ms）。</p>
+<p>####（3）解决方案</p>
+<p>按理说JVM应该会随着反射代码的执行，动态的创建一些奇怪的类，他们的Class对象都是软引用的，正常情况下不会被回收，但是也不应该快速增长才对，问题出在<code>SoftRefLRUPolicyMSPerMB</code>这个参数，别误把它设置为0，一旦这个参数设置为0，任何软引用对象就可以尽快释放掉，但这样并不会提高内存利用率，JVM好不容易给你弄出来100个奇怪的类，结果因为瞎设置软引用的参数，导致突然一次GC就给你回收掉几十个类，接着JVM在反射代码执行的过程中，就会继续创建这种奇怪的类，在JVM的机制之下，会导致这种奇怪类越来越多。</p>
+<p>解决方案：在有大量反射代码的场景下，只要把<code>-XX:SoftRefLRUPolicyMSPerMB=0</code>，这个参数设置大一些即可，千万别让一些新手同学设置为0，可以设置个1000，2000，3000，或者5000毫秒，都可以。提高这个数值，就是让反射过程中JVM自动创建的软引用的一些类的Class对象不要被随便回收，优化这个参数之后，就可以看到系统稳定运行了。</p>
+<h3 id="2、大对象导致频繁Full-GC"><a href="#2、大对象导致频繁Full-GC" class="headerlink" title="2、大对象导致频繁Full GC"></a>2、大对象导致频繁Full GC</h3><p>场景是这样的，有一个线上系统一天频繁Full GC数十次，开始以为是每次Young GC后的存活对象较多，Survivor区域太小，放不下了，但通过jstat工具观察，发现每次Young GC后的对象很少，每次存活也就几十MB，且通过jstat追踪观察，并不是每次Young GC后都有几十MB对象进入老年代的，而是偶尔一次Young GC才会有几十MB对象进入老年代，记住，是偶尔一次！但是不知道为什么突然有几百MB对象进入老年代中，所以才导致Young GC偶尔一次让几十MB对象升入老年代，平均30分钟左右就会触发一次Full GC！这个几百MB的对象就是<strong>大对象</strong>，我们想要知道大对象是谁，可以利用堆内存快照工具jmap，通过使用这个工具我们发现是几个Map之类的数据结构，是从数据库中出来的，通过排查SQL语句，发现有一句<code>select * from tbl</code>，根本没使用where语句，导致它把表中几十万条数据查出来，搞出来一个大对象。</p>
+<p><strong>解决方案</strong>，一是对SQL语句的处理，不要一次性查表里全部数据，二是给新生代分配更多的空间，毕竟每次到老年代的对象较少而且频率很低，同时给老年代调整了参数“-XX:CMSInitiatingOccupancyFraction=92”，避免老年代仅仅占用68%就触发GC。</p>
+<h3 id="3、致命代码：System-gc-导致频繁Full-GC"><a href="#3、致命代码：System-gc-导致频繁Full-GC" class="headerlink" title="3、致命代码：System.gc()导致频繁Full GC"></a>3、致命代码：<strong>System.gc()</strong>导致频繁Full GC</h3><p><strong><code>System.gc()</code></strong>不能随便瞎写，它每次执行都会指挥JVM去尝试执行一次Full GC，连带年轻代、老年代、永久代都会去回收，一秒一次Full GC太可怕了！如果写了这个代码，平时系统运行时，访问量很低，基本还不会出大乱子！但是在大促活动的时候，访问量一高，立马由<code>System.gc()</code>代码频繁触发了Full GC，导致了这个系统直接被卡死了！</p>
+<p><strong>解决方案</strong>：一是平时写代码不要用<code>System.gc()</code>去随便触发GC，二是在JVM参数中加入<code>-XX:+DisableExplicitGC</code>,这个参数的意思就是禁止显式执行GC，不允许你来通过代码触发GC。</p>
+<h3 id="4、内存泄漏引起CPU高负载导致频繁Full-GC"><a href="#4、内存泄漏引起CPU高负载导致频繁Full-GC" class="headerlink" title="4、内存泄漏引起CPU高负载导致频繁Full GC"></a>4、内存泄漏引起CPU高负载导致频繁Full GC</h3><p>线上系统的机器CPU负载过高的两个常见的场景。</p>
+<p><strong>第一个场景</strong>，是你自己在系统里创建了大量的线程，这些线程同时并发运行，而且工作负载都很重，过多的线程同时并发运行就会导致你的机器CPU负载过高。</p>
+<p><strong>第二个场景</strong>，就是你的机器上运行的JVM在执行频繁的Full GC，Full GC是非常耗费CPU资源的，他是一个非常重负载的过程。所以一旦你的JVM有频繁的Full GC，带来的一个明显的感觉，一个是系统可能时不时会卡死。这可能与内存泄漏有关。</p>
+<p><strong>内存泄漏问题</strong>，就是内存里驻留了大量的对象塞满了老年代，导致稍微有一些对象进入老年代就会引发Full GC，而且Full GC之后还不会回收掉老年代里大量的对象，只是回收一小部分而已！（可以使用mat分析内存泄漏）</p>
+<p>这个内存泄漏问题可能是没有限制JVM本次缓存大小，没有使用LRU之类的算法定期淘汰一些缓存里的数据，导致缓存在内存里的对象越来越多，进而造成了内存泄漏。</p>
+<p>解决问题很简单，只要使用类似EHCache之类的缓存框架就可以了，他会固定最多缓存多少个对象，定期淘汰删除掉一些不怎么访问的缓存，以便于新的数据可以进入缓存中。</p>
+<h2 id="三、JVM优化阶段性总结"><a href="#三、JVM优化阶段性总结" class="headerlink" title="三、JVM优化阶段性总结"></a>三、JVM优化阶段性总结</h2><h3 id="问：如何设置JVM参数？"><a href="#问：如何设置JVM参数？" class="headerlink" title="问：如何设置JVM参数？"></a>问：如何设置JVM参数？</h3><h4 id="1、初步估计"><a href="#1、初步估计" class="headerlink" title="1、初步估计"></a>1、初步估计</h4><p>首先根据拥有的设备、每秒请求量、每秒创建多少个对象以及对象的大小等来估算1秒钟会占用多少内存空间，估算多久发生一次Young GC、每次存活下来多少对象，需要多少Survivor区，接着要去看老年代中对象的增长速度，多久发生一次Full GC，这样初步估算后去分配堆内存中新生代和老年代的空间，以及新生代中区域的比例。进入压测阶段。</p>
+<h4 id="2、压测后调整"><a href="#2、压测后调整" class="headerlink" title="2、压测后调整"></a>2、压测后调整</h4><p>在这里要分析Eden区对象的增长速度有多快，Young GC后有多少对象存活，Young GC频率和耗时，老年代对象增长速率，Full GC后有多少对象存活，Full GC的频率和耗时。压测完全可以通过jstat来看，然后我们调整参数，找到一些问题，主要还是避免对象频繁进入老年代引起频繁的Full GC。</p>
+<h4 id="3、系统上线后监控"><a href="#3、系统上线后监控" class="headerlink" title="3、系统上线后监控"></a>3、系统上线后监控</h4><p>系统上线后要使用监控工具如Zabbix、Open-Falcon等工具来监控运行情况。如果出现了CPU负载过高、频繁Full GC或者系统无法处理请求这种现象，都要去考虑是不是Full GC太频繁了。</p>
+<p>频繁Full GC 的原因就是上面四个大标题</p>
+<ul>
+<li>大量使用反射导致Metaspace拥挤发生频繁的Full GC。</li>
+<li>大对象可能引起频繁Full GC，需要去修改代码和JVM参数。</li>
+<li>可能是内存泄漏引起的，使用MAT工具分析堆内存快照。</li>
+<li>最后一种是使用了System.gc()方法，并且在JVM参数中也没有添加禁止显式执行gc的参数。</li>
+</ul>
+
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/JVM/">
+                                    <span class="chip bg-color">JVM</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/09/04/OOM%E9%97%AE%E9%A2%98%E7%9A%84%E5%88%86%E6%9E%90%E4%B8%8E%E8%A7%A3%E5%86%B3/">
+                    <div class="card-image">
+                        
+                        <img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/Xnip2020-03-05_22-53-16.jpg" class="responsive-img" alt="JVM">
+                        
+                        <span class="card-title">JVM</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            OOM问题的分析与解决一、OOM原因与场景模拟###1、Metaspace内存溢出
+####（1）原因
+首先来讲Metaspace的回收，当Metaspace快满了就要进行回收，但是这个回收条件比较苛刻，比如这个类的类加载器要先被回收、这个
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-09-04
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/JVM/" class="post-category">
+                                    JVM
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/JVM/">
+                        <span class="chip bg-color">JVM</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/08/31/JVM%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/">
+                    <div class="card-image">
+                        
+                        <img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/Xnip2020-03-05_22-53-01.jpg" class="responsive-img" alt="JVM">
+                        
+                        <span class="card-title">JVM</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            JVM工具的使用一、jstat1、简介jstat可以让你看到当前运行中的系统，他的JVM内的Eden、Survivor、老年代的内存使用情况，还有Young GC和Full gC的执行次数以及耗时。通过这些指标，我们可以轻松的分析出当前系统
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-08-31
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/JVM/" class="post-category">
+                                    JVM
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/JVM/">
+                        <span class="chip bg-color">JVM</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="https://0xac001d09.github.io" target="_blank">Jerry</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">79.2k</span>&nbsp;字
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/0xac001d09" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:876774731@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=876774731" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 876774731" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
