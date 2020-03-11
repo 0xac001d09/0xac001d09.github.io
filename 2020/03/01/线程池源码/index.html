@@ -541,7 +541,7 @@ Future<span class="token operator">&lt;</span><span class="token operator">?</sp
 <p>注意addWorker方法传进来的参数是firstTask， 在初始化的过程中，会把 worker自己作为任务传给 thread 去初始化，上文说了 Worker 在初始化时的关键代码，<code>this.thread = getThreadFactory ().newThread (this)</code>，<code>Worker(this)</code> 是作为新建线程的构造器入参的，所以 t.start () 会执行到 Worker 的 run 方法上</p>
 <p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200311164323092.png" alt=""></p>
 <p>这个worker的run调用了一个runWorker</p>
-<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200311164444333.png" alt="image-20200311164444333"></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200311164444333.png" alt=""></p>
 <p>这个runWorker才是真正去执行run方法的，也是比较重要的方法</p>
 <p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200311221727104.png" alt=""></p>
 <p>通过<code>w.firstTask</code>拿到的task，此时的task是FutureTask类（Future接口的子接口又个RunnableFuture，这个RunnableFuture的父接口是Future和Runnable，然后FutureTask实现了RunnableFuture这个接口，所以FutureTask里面也有run方法），直接看FutureTask的run的源码，它是没有返回值的</p>
