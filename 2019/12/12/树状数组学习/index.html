@@ -535,54 +535,47 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/12/12/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E5%AD%A6%E4%B9%A0/">
+                <a href="/2020/03/01/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%BA%90%E7%A0%81/">
                     <div class="card-image">
                         
-                        <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gccew16irmj31en0u0aau.jpg" class="responsive-img" alt="算法-树状数组">
+                        <img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/Xnip2020-03-11_22-55-49.jpg" class="responsive-img" alt="Java源码">
                         
-                        <span class="card-title">算法-树状数组</span>
+                        <span class="card-title">Java源码</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            树状数组一、树状数组概念Binary Indexed Tree，用于维护前缀信息的结构，对前缀信息处理也十分高校，用于解决前缀信息问题和区间类问题。
-比如：给定一个数组，实现两个函数
+                            线程池源码整体架构
 
-update(int index,int val)，将
+首先来了一个任务，先判断下核心线程池里的线程数有没有达到设定的值，如果没有，就可以新建个Worker出来处理任务，处理任务的时候如果这个任务为空，那这个worker就阻塞住，因为这个任务不需要处理，如果这个任务不为空，
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-12
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-01
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
-                                    算法
+                            <a href="/categories/Java%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81/" class="post-category">
+                                    Java集合源码
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E7%AE%97%E6%B3%95/">
-                        <span class="chip bg-color">算法</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/">
-                        <span class="chip bg-color">树状数组</span>
+                    <a href="/tags/Java%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81/">
+                        <span class="chip bg-color">Java集合源码</span>
                     </a>
                     
                 </div>
@@ -650,6 +643,43 @@ publi
 
 </div>
 
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('100')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 0xac001d09<br />'
+            + '文章作者: Jerry<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
 
 
 <!-- 代码块功能依赖 -->
@@ -789,7 +819,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">100.1k</span>&nbsp;字
+                class="white-color">102.8k</span>&nbsp;字
             
             
             

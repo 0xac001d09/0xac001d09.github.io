@@ -1,0 +1,1018 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Java源码, 0xac001d09">
+    <meta name="description" content="Keep on keeping on">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Java源码 | 0xac001d09</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <span class="logo-span">0xac001d09</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <div class="logo-name">0xac001d09</div>
+        <div class="logo-desc">
+            
+            Keep on keeping on
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://gitee.com/Jerry1997/img-bed/raw/master/uPic/Xnip2020-03-11_22-55-49.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Java源码</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Java%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81/">
+                                <span class="chip bg-color">Java集合源码</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Java%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81/" class="post-category">
+                                Java集合源码
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-03-01
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.5k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    9 分
+                </div>
+                
+
+                
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="线程池源码"><a href="#线程池源码" class="headerlink" title="线程池源码"></a>线程池源码</h1><h2 id="整体架构"><a href="#整体架构" class="headerlink" title="整体架构"></a>整体架构</h2><p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200311165430764.png" alt="image-20200311165430764"></p>
+<blockquote>
+<p>首先来了一个任务，先判断下核心线程池里的线程数有没有达到设定的值，如果没有，就可以新建个Worker出来处理任务，处理任务的时候如果这个任务为空，那这个worker就阻塞住，因为这个任务不需要处理，如果这个任务不为空，就会准备执行任务，这个Worker实现了Runnable接口，并且继承了AQS，那么它就会重写run方法，它重写的run方法里面调用了runWorker()，这个是真正执行任务的，执行任务时，那么首先就会所在执行任务前看看你有没有重写beforeExecute，如果重写了，那就会执行下，然后再执行任务，执行完也会看下有没有重写afterExecute。</p>
+<p>如果来了一个任务，队列没满，就尝试放进阻塞队列，在尝试放入阻塞队列的时候，如果线程池状态异常，那就会拒绝任务，如果队列满了，那就要看此时你设置的maxinumPoolSize，看线程池里的线程有没有达到这个最大值，如果没有，那就可以创建线程出来执行任务，如果达到了，没有线程了，那就只能采取拒绝策略，常用的拒绝策略是 abortpolicy（抛异常），还有discardPolicy（直接丢弃任务），还有discardOldestPolicy（直接丢弃队列中最老的任务），还有个忘了</p>
+</blockquote>
+<h3 id="1、Executor"><a href="#1、Executor" class="headerlink" title="1、Executor"></a>1、Executor</h3><p>这个是多线程的顶级接口，只有一个execute方法</p>
+<h3 id="2、ExecutorService"><a href="#2、ExecutorService" class="headerlink" title="2、ExecutorService"></a>2、ExecutorService</h3><p>Executor 的功能太弱，只有一个execute，ExecutorService接口 丰富了对任务的执行和管理的功能，它继承了Executor接口</p>
+<blockquote>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 线程池关闭，不会接受新的任务，也不会等待未完成的任务</span>
+<span class="token keyword">void</span> <span class="token function">shutdown</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// executor 是否已经关闭了，返回值 true 表示已关闭</span>
+<span class="token keyword">boolean</span> <span class="token function">isShutdown</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// 所有的任务是否都已经终止，是的话，返回 true</span>
+<span class="token keyword">boolean</span> <span class="token function">isTerminated</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// 在超时时间内，等待剩余的任务终止</span>
+<span class="token keyword">boolean</span> <span class="token function">awaitTermination</span><span class="token punctuation">(</span><span class="token keyword">long</span> timeout<span class="token punctuation">,</span> TimeUnit unit<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">// 提交有返回值的任务，使用 get 方法可以阻塞等待任务的执行结果返回</span>
+<span class="token operator">&lt;</span>T<span class="token operator">></span> Future<span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token function">submit</span><span class="token punctuation">(</span>Callable<span class="token operator">&lt;</span>T<span class="token operator">></span> task<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//传入Runnable就没有返回结果了</span>
+Future<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span> <span class="token function">submit</span><span class="token punctuation">(</span>Runnable task<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//还有其他一些方法，这里只是举例</span></code></pre>
+</blockquote>
+<h3 id="3、AbstractExecutorService"><a href="#3、AbstractExecutorService" class="headerlink" title="3、AbstractExecutorService"></a>3、AbstractExecutorService</h3><p>这个是个一个抽象类，封装ExecutorService里的功能</p>
+<h3 id="4、注释得到的信息"><a href="#4、注释得到的信息" class="headerlink" title="4、注释得到的信息"></a>4、注释得到的信息</h3><ul>
+<li>线程池可以使用Executors进行配置<ul>
+<li>Executors.newCachedThreadPool 无界的线程池，并且可以自动回收;</li>
+<li>Executors#newFixedThreadPool 固定大小线程池;</li>
+<li>Executors#newSingleThreadExecutor 单个线程的线程池;</li>
+</ul>
+</li>
+<li>线程池提供可供扩展的参数设置,corsSize和maxSize，一般来说这两个值初始化时候就设定了，当然我们可以自己set，来修改这两个值</li>
+<li>线程池创建时有多种队列可供选择，有四种队列，可见我另一篇博客<ul>
+<li>LinkedBlockingQueue，无界阻塞队列</li>
+<li>ArrayBlockingQueue，有界阻塞队列</li>
+<li>DelayBlockingQueue，延迟队列</li>
+<li>SynchronousQueue，同步阻塞队列</li>
+</ul>
+</li>
+<li>线程池用了模版方法模式，提供了很多hook函数，比如beforeExecute()、afterExecute()，在线程执行前后需要做什么</li>
+<li>还有很多信息就不写了</li>
+</ul>
+<h3 id="5、ThreadPoolExecutor的重要属性"><a href="#5、ThreadPoolExecutor的重要属性" class="headerlink" title="5、ThreadPoolExecutor的重要属性"></a>5、ThreadPoolExecutor的重要属性</h3><ul>
+<li><code>ctl</code>：线程池状态字段，它是由两部分构成的<ul>
+<li><code>workerCount</code>，wc 工作线程数， workerCount 最大到(2^29)-1，大概 5 亿个线程</li>
+<li>runState，rs 线程池的状态</li>
+</ul>
+</li>
+<li><code>RUNNING</code>：值为-536870912，表示线程池正在接受新任务或者处理队列里的任务</li>
+<li><code>SHUTDOWN</code>：值为0，表示不接受新任务，但仍在处理已经在队列里面的任务</li>
+<li><code>STOP</code>：值为-536870912，不接受新任务，也不处理队列中的任务，有正在执行的任务就中断</li>
+<li><code>TIDYING</code>：值为1073741824，它是整理状态，所有任务都被中断，此时wc是0</li>
+<li><code>TERMINATED</code>：terminated() 已经完成的时候</li>
+<li><code>ThreadFactory threadFactory</code>：使用 threadFactory 创建 thread</li>
+<li><code>RejectedExecutionHandler handler</code>：拒绝任务的 handler 处理类</li>
+<li><code>corePoolSize</code>：线程池线程核心数</li>
+<li><code>maximumPoolSize</code>：线程池最大线程数</li>
+</ul>
+<p>Worker是线程池中运行任务的最小单元，Worker实现了Runnable接口，继承了AQS类。Worker本身就是一个Runnable，在它的构造方法中，<code>getThreadFactory().newThread(this)</code>这是话是说它是把自己作为任务传递给了thread</p>
+<pre class=" language-java"><code class="language-java"><span class="token function">Worker</span><span class="token punctuation">(</span>Runnable firstTask<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">setState</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// inhibit interrupts until runWorker</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>firstTask <span class="token operator">=</span> firstTask<span class="token punctuation">;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>thread <span class="token operator">=</span> <span class="token function">getThreadFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">newThread</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Worker就像是任务的一个代理，Worker实现了Runnable，所以要重写run方法，这个run方法调用了<code>runWorker()</code>，</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">runWorker</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Worker继承了AQS，那么它本身就是一个锁，在执行任务的时候，它会锁住它自己，执行完任务然后再释放自己，Worker里面也是重写了<code>tryAcquire()</code>和<code>tryRelease（）</code></p>
+<h2 id="创建线程池及一些线上问题"><a href="#创建线程池及一些线上问题" class="headerlink" title="创建线程池及一些线上问题"></a>创建线程池及一些线上问题</h2><p>第一种线程池的创建方式是利用线程池的工具类Executors来new一个这个线程池</p>
+<pre class=" language-java"><code class="language-java">ExecutorService threadPool <span class="token operator">=</span> Executors<span class="token punctuation">.</span><span class="token function">newFixedThreadPool</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//3就是corePoolSize，核心线程数量</span></code></pre>
+<p>第二线程池的创建方式是直接new一个ThreadPollExecutor()，下面这种方式更推荐</p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200311152100833.png" alt="image-20200311152100833"></p>
+<p>这边有几个参数</p>
+<ul>
+<li><code>corePollSize</code>：指定核心线程数量，这个就是线程池里</li>
+<li><code>maximumPoolSize</code>：这个是假设我线程池里已经有<code>corePollSize</code>个线程了，但是它们处理任务很慢，然后阻塞队列也满了，如果此时<code>maximumPoolSize</code>它是大于这个核心线程数的，那就会再创建这个线程出来执行任务，那么这个<code>maximumPoolSize</code>创建出来的线程什么时候被回收呢，就用到了下面这个参数</li>
+<li><code>keepAliveTime</code>：这个也就是说，我<code>maximumPoolSize</code>里面的线程空闲时间达到<code>keepAliveTime</code>，那就可以回收了</li>
+<li>还有一种情况是这个<code>corePollSize</code>满了，队列满了，<code>maximumPoolSize</code>也满了，那就不能再创建额外的线程出来了，所以这边就有拒绝策略，常见的拒绝策略是 <code>AbortPolicy</code>，就直接丢弃任务，还有<code>DiscardPolicy</code>、<code>DiscardOldestPolicy</code>等等</li>
+<li>一般用的是fixed线程池，它的<code>corePollSize</code>和<code>maximumPoolSize</code>是一样大的，然后默认的阻塞队列是无界阻塞队列，可以无限制放任务，如果用无界阻塞队列不设置上限，然后处理任务也很慢，队列积压很多，那么内存飙升，回收也没法回收，就可能导致<code>OOM</code></li>
+<li>针对上面的解决策略是，我可以自定义一个拒绝策略，队列满了，来任务了，我就持久化到磁盘上去，等我任务处理的差不多了，再从磁盘上读进来再处理任务。</li>
+<li>当然线程机器可能宕机，那么这个任务不就没了吗，所以一种处理措施是，我在提交任务的时候，往数据库里写上这个任务的信息，然后给他设置个状态，是未提交、提交了、已完成，提交成功后更改状态，如果此时系统宕机也没关系，系统重启再去扫描数据库里面未提交和已提交的任务，再执行</li>
+</ul>
+<h2 id="submit-和execute"><a href="#submit-和execute" class="headerlink" title="submit()和execute()"></a>submit()和execute()</h2><p>首先看一下结构</p>
+<p><code>Executor</code>是线程池最顶级的接口，它的一个子接口是<code>ExecutorService</code>，然后是有一个抽象类<code>AbstractExecutorService</code>实现了<code>ExecutorService</code>这个接口，最后才是这个<code>ThreadPoolExecutor</code>来继承这个抽象类。</p>
+<blockquote>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">ExecutorService</span>（二级接口） <span class="token keyword">extends</span> <span class="token class-name">Executor</span>（线程顶级接口）
+<span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">AbstractExecutorService</span>（第三级） <span class="token keyword">implements</span> <span class="token class-name">ExecutorService</span>
+<span class="token keyword">class</span> <span class="token class-name">ThreadPoolExecutor</span>（第四级） <span class="token keyword">extends</span> <span class="token class-name">AbstractExecutorService</span></code></pre>
+</blockquote>
+<p>但是我们new一个<code>ThreadPoolExecutor</code>出来后，既可以执行<code>submit()</code>，也可以执行<code>execute()</code>，实际上这两个是有区别的</p>
+<ul>
+<li><p>顶级接口<code>Executor</code>这个接口它只有一个<code>execute()</code>方法</p>
+<ul>
+<li><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Executor</span> <span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">execute</span><span class="token punctuation">(</span>Runnable command<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+</li>
+</ul>
+</li>
+<li><p>二级接口<code>ExecutorService</code>，在这一层，添加了<code>submit()</code>方法</p>
+<ul>
+<li><p>command+F12</p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200311160725648.png" alt="image-20200311160725648"></p>
+</li>
+</ul>
+</li>
+<li><p>到了第三层<code>AbstractExecutorService</code>，它实现了<code>ExecutorService</code>这个接口，自然有<code>submit</code>和<code>execute</code>这两个方法</p>
+</li>
+<li><p>到了第四层<code>ThreadPoolExecutor</code>这个实现类，它没有<code>submit</code>这个方法，但是有<code>execute</code>方法</p>
+<ul>
+<li><p>那么实际上<code>ThreadPoolExecutor</code>的实例调用的是<code>AbstractExecutorService</code>的<code>submit</code>方法</p>
+</li>
+<li><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//AbstractExecutorService的submit方法，举例两个</span>
+<span class="token keyword">public</span> <span class="token operator">&lt;</span>T<span class="token operator">></span> Future<span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token function">submit</span><span class="token punctuation">(</span>Callable<span class="token operator">&lt;</span>T<span class="token operator">></span> task<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>task <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NullPointerException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    RunnableFuture<span class="token operator">&lt;</span>T<span class="token operator">></span> ftask <span class="token operator">=</span> <span class="token function">newTaskFor</span><span class="token punctuation">(</span>task<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">execute</span><span class="token punctuation">(</span>ftask<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> ftask<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">public</span> <span class="token operator">&lt;</span>T<span class="token operator">></span> Future<span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token function">submit</span><span class="token punctuation">(</span>Runnable task<span class="token punctuation">,</span> T result<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>task <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NullPointerException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    RunnableFuture<span class="token operator">&lt;</span>T<span class="token operator">></span> ftask <span class="token operator">=</span> <span class="token function">newTaskFor</span><span class="token punctuation">(</span>task<span class="token punctuation">,</span> result<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">execute</span><span class="token punctuation">(</span>ftask<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> ftask<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+</li>
+<li><p>可以看到这个<code>AbstractExecutorService</code>的submit方法本质上还是调用了Executor的execute方法</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>注意submit的返回值是 Future 类的，而execute的返回值是void</p>
+<p><strong>submit做了两件事情</strong></p>
+<ul>
+<li>submit的参数可以是实现了runnable接口的，也可以是实现了callable接口的，第一件事情就是把Runnable接口和Callable都转化成FutureTask</li>
+<li>第二件事情就是让execute方法执行FutureTask</li>
+</ul>
+<h3 id="execute"><a href="#execute" class="headerlink" title="execute()"></a>execute()</h3><p><strong>那么<code>ThreadPoolExecutor</code>的execute()这个方法的实现是怎样的呢？</strong></p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200311220043075.png" alt="image-20200311220043075"></p>
+<p>这一道这边有个，这个意思是说，并发的时候，可能线程还没启动，任务已经跑起来了，所以会预先搞个非核心线程出来</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">workerCountOf</span><span class="token punctuation">(</span>recheck<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+      <span class="token function">addWorker</span><span class="token punctuation">(</span>null<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<h3 id="addWorker-与runWorker"><a href="#addWorker-与runWorker" class="headerlink" title="addWorker()与runWorker()"></a>addWorker()与runWorker()</h3><p>接着看一下<code>addWorker()</code>方法，它就是结合线程池的情况看要不要添加Worker</p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200311220801057.png" alt="image-20200311220801057"></p>
+<p>注意addWorker方法传进来的参数是firstTask， 在初始化的过程中，会把 worker自己作为任务传给 thread 去初始化，上文说了 Worker 在初始化时的关键代码，<code>this.thread = getThreadFactory ().newThread (this)</code>，<code>Worker(this)</code> 是作为新建线程的构造器入参的，所以 t.start () 会执行到 Worker 的 run 方法上</p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200311164323092.png" alt="image-20200311164323092"></p>
+<p>这个worker的run调用了一个runWorker</p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200311164444333.png" alt="image-20200311164444333"></p>
+<p>这个runWorker才是真正去执行run方法的，也是比较重要的方法</p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200311221727104.png" alt="image-20200311221727104"></p>
+<p>通过<code>w.firstTask</code>拿到的task，此时的task是FutureTask类（Future接口的子接口又个RunnableFuture，这个RunnableFuture的父接口是Future和Runnable，然后FutureTask实现了RunnableFuture这个接口，所以FutureTask里面也有run方法），直接看FutureTask的run的源码，它是没有返回值的</p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200311223336589.png" alt="image-20200311223336589"></p>
+<h3 id="执行完任务之后呢"><a href="#执行完任务之后呢" class="headerlink" title="执行完任务之后呢"></a>执行完任务之后呢</h3><p>上面代码也看到了，在runWorker()方法中是一个while循环，如果队列中有任务就继续执行</p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200311223729888.png" alt="image-20200311223729888"></p>
+<p>那么关键就是这个getTask方法</p>
+<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200311225053893.png" alt="image-20200311225053893"></p>
+
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Java%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81/">
+                                    <span class="chip bg-color">Java集合源码</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2020/03/01/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%BA%90%E7%A0%81/">
+                    <div class="card-image">
+                        
+                        <img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/Xnip2020-03-11_22-55-49.jpg" class="responsive-img" alt="Java源码">
+                        
+                        <span class="card-title">Java源码</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            线程池源码整体架构
+
+首先来了一个任务，先判断下核心线程池里的线程数有没有达到设定的值，如果没有，就可以新建个Worker出来处理任务，处理任务的时候如果这个任务为空，那这个worker就阻塞住，因为这个任务不需要处理，如果这个任务不为空，
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-01
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81/" class="post-category">
+                                    Java集合源码
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81/">
+                        <span class="chip bg-color">Java集合源码</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/12/12/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E5%AD%A6%E4%B9%A0/">
+                    <div class="card-image">
+                        
+                        <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gccew16irmj31en0u0aau.jpg" class="responsive-img" alt="算法-树状数组">
+                        
+                        <span class="card-title">算法-树状数组</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            树状数组一、树状数组概念Binary Indexed Tree，用于维护前缀信息的结构，对前缀信息处理也十分高校，用于解决前缀信息问题和区间类问题。
+比如：给定一个数组，实现两个函数
+
+update(int index,int val)，将
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
+                                    算法
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%AE%97%E6%B3%95/">
+                        <span class="chip bg-color">算法</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/">
+                        <span class="chip bg-color">树状数组</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('100')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 0xac001d09<br />'
+            + '文章作者: Jerry<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="https://0xac001d09.github.io" target="_blank">Jerry</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">102.8k</span>&nbsp;字
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/0xac001d09" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:876774731@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=876774731" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 876774731" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

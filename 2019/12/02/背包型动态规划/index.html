@@ -374,14 +374,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.3k
+                    2.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    10 分
+                    11 分
                 </div>
                 
 
@@ -393,7 +393,8 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="动态规划：背包型"><a href="#动态规划：背包型" class="headerlink" title="动态规划：背包型"></a>动态规划：背包型</h2><p>数组开n+1，背包关键就是看最后一步。</p>
-<h3 id="1、LintCode-92-Backpack"><a href="#1、LintCode-92-Backpack" class="headerlink" title="1、LintCode 92: Backpack"></a>1、<a href="https://www.lintcode.com/problem/backpack/description" target="_blank" rel="noopener"><strong>LintCode 92: Backpack</strong></a></h3><p>【问题】在n个物品中挑选若干物品装入背包，最多能装多满？假设背包的大小为m，每个物品的大小为A[i]</p>
+<h3 id="1、01背包–求max"><a href="#1、01背包–求max" class="headerlink" title="1、01背包–求max"></a>1、01背包–求max</h3><p><a href="https://www.lintcode.com/problem/backpack/description" target="_blank" rel="noopener"><strong>LintCode 92: Backpack</strong></a></p>
+<p>【问题】在n个物品中挑选若干物品装入背包，最多能装多满？假设背包的大小为m，每个物品的大小为A[i]</p>
 <p>【分析】从最后一步出发，最后一个物品放还是不放。有两种情况</p>
 <ul>
 <li>前n-1个物品能拼出重量 <code>w</code>，那么n个物品也能拼出重量<code>w</code></li>
@@ -455,16 +456,20 @@
 <p>优化成一维</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">backPack</span><span class="token punctuation">(</span><span class="token keyword">int</span> m<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> A<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">int</span> f<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span>m <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-
         <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> A<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+             <span class="token comment" spellcheck="true">//从后往前更新</span>
+          <span class="token comment" spellcheck="true">//下面的f[j - A[i]]，j - A[i]严格小于j，j是从小到大枚举的</span>
+          <span class="token comment" spellcheck="true">//也就是在第i层已经算过了，等价于f[i][j-A[i]]</span>
+          <span class="token comment" spellcheck="true">//那么我们从大到小更新，算f[j],f[j - A[i]]其实是还没有被更新过，它存的是第i-1层的，这就对了</span>
             <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> m<span class="token punctuation">;</span> j <span class="token operator">>=</span> A<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span> j<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                  <span class="token comment" spellcheck="true">//不放和放，不放就是它自身，</span>
+                  <span class="token comment" spellcheck="true">//不放和放，不放就是它自身</span>
                 f<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>f<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span>j <span class="token operator">-</span> A<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">+</span> A<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token punctuation">}</span> 
         <span class="token punctuation">}</span>
         <span class="token keyword">return</span> f<span class="token punctuation">[</span>m<span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span></code></pre>
-<h3 id="2、LintCode-563-Backpack-V"><a href="#2、LintCode-563-Backpack-V" class="headerlink" title="2、LintCode 563: Backpack V"></a>2、<a href="http://www.lintcode.com/problem/backpack-v/" target="_blank" rel="noopener">LintCode 563: Backpack V</a></h3><p>【问题】给出 n 个物品, 以及一个数组, <code>nums[i]</code> 代表第i个物品的大小, 保证大小均为正数, 正整数 <code>target</code> 表示背包的大小, 找到能填满背包的方案数。<strong>注意：每一个物品只能使用一次。</strong></p>
+<h3 id="2、01背包–求数量"><a href="#2、01背包–求数量" class="headerlink" title="2、01背包–求数量"></a>2、01背包–求数量</h3><p><a href="http://www.lintcode.com/problem/backpack-v/" target="_blank" rel="noopener">LintCode 563: Backpack V</a></p>
+<p>【问题】给出 n 个物品, 以及一个数组, <code>nums[i]</code> 代表第i个物品的大小, 保证大小均为正数, 正整数 <code>target</code> 表示背包的大小, 找到能填满背包的方案数。<strong>注意：每一个物品只能使用一次。</strong></p>
 <p>【分析】需要求出有多少种组合能组合成target，对于最后一个物品，有放和不放两种选择。</p>
 <ul>
 <li>第一种：使用前n-1个物品拼出target</li>
@@ -600,7 +605,8 @@
         <span class="token punctuation">}</span>
         <span class="token keyword">return</span> res<span class="token punctuation">;</span>
     <span class="token punctuation">}</span></code></pre>
-<h3 id="5、LintCode-440-Backpack-III"><a href="#5、LintCode-440-Backpack-III" class="headerlink" title="5、LintCode 440: Backpack III"></a>5、<strong>LintCode 440: Backpack III</strong></h3><p>【问题】将Backpack II的物品改为无穷多个，背包最大承重m，求能带走的最大价值。</p>
+<h3 id="5、完全背包"><a href="#5、完全背包" class="headerlink" title="5、完全背包"></a>5、完全背包</h3><p><strong>LintCode 440: Backpack III</strong></p>
+<p>【问题】将Backpack II的物品改为无穷多个，背包最大承重m，求能带走的最大价值。</p>
 <ul>
 <li>输入:4个物品，重量为2, 3, 5, 7，价值为1, 5, 2, 4. 背包最大承重是10</li>
 <li>输出:15</li>
@@ -653,9 +659,11 @@
         <span class="token keyword">int</span> res <span class="token operator">=</span> Integer<span class="token punctuation">.</span>MIN_VALUE<span class="token punctuation">;</span>
         <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> m<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>j <span class="token operator">>=</span> A<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                    <span class="token comment" spellcheck="true">//old = dp[j],new = dp[j - A[i - 1] + V[i - 1]],加起来覆盖本来的old</span>
-                    <span class="token comment" spellcheck="true">//old相当于原来的dp[i-1][j],dp[j - A[i - 1]相当于dp[i][j - A[i - 1]</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>j <span class="token operator">>=</span> A<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>    <span class="token comment" spellcheck="true">//上面改成j直接从A[i-1]出发更好</span>
+                  <span class="token comment" spellcheck="true">//old = dp[j],new = dp[j - A[i - 1] + V[i - 1]],加起来覆盖本来的old</span>
+                  <span class="token comment" spellcheck="true">//old相当于原来的dp[i-1][j],dp[j - A[i - 1]相当于dp[i][j - A[i - 1]</span>
+                  <span class="token comment" spellcheck="true">//这边就不需要倒着更新，因为和二维的状态转移方程是一致的，我们需要的就是第i层的</span>
+                  <span class="token comment" spellcheck="true">//这里不动看下01背包那边的注释就懂了</span>
                     dp<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>dp<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> dp<span class="token punctuation">[</span>j <span class="token operator">-</span> A<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> V<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
                 <span class="token punctuation">}</span>
                 res <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>res<span class="token punctuation">,</span> dp<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -663,6 +671,7 @@
         <span class="token punctuation">}</span>
         <span class="token keyword">return</span> res<span class="token punctuation">;</span>
     <span class="token punctuation">}</span></code></pre>
+<p>TBD：多重背包（这个优化思想比较巧妙）、分组背包 </p>
 
             </div>
             <hr/>
@@ -832,6 +841,43 @@
 </div>
 
 
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('100')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 0xac001d09<br />'
+            + '文章作者: Jerry<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
 
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
@@ -970,7 +1016,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">100.1k</span>&nbsp;字
+                class="white-color">102.8k</span>&nbsp;字
             
             
             
