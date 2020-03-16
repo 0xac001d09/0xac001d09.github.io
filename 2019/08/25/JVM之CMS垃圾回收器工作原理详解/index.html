@@ -370,7 +370,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.7k
+                    1.8k
                 </div>
                 
 
@@ -401,6 +401,10 @@
 <p>初识标记如图所示</p>
 <h4 id="（2）并发标记——对老年代所有对象进行GC-Roots追踪（最耗时）"><a href="#（2）并发标记——对老年代所有对象进行GC-Roots追踪（最耗时）" class="headerlink" title="（2）并发标记——对老年代所有对象进行GC Roots追踪（最耗时）"></a>（2）并发标记——对老年代所有对象进行GC Roots追踪（最耗时）</h4><p>&emsp;&emsp;这个阶段会让系统线程可以随意创建各种新对象，继续运行。在运行期间可能会创建新的存活对象，也可能会让部分存活对象失去引用，变成垃圾对象。在这个过程中，垃圾回收线程，会尽可能的对已有的对象进行GC Roots追踪。GC Roots追踪，意思就是对类似<code>ReplicaFetcher</code>之类的全部老年代里的对象，他会去看他被谁引用了，<strong>认定为是被GC Roots间接引用后，就不需要回收它。因为老年代里存活对象是比较多的，这个过程会追踪大量的对象，所以耗时较高。</strong></p>
 <p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200305191740459.png" alt=""></p>
+<p>这里我看的时候有一个问题，为什么要经过初始标记而不直接进入并发标记呢？</p>
+<blockquote>
+<p>因为初始标记是用来标记GC Roots直接关联的对象，如果不在初始标记时找到哪些是GC Roots直接关联的对象的话，并发标记的GC Root Tracing没办法进行啊</p>
+</blockquote>
 <h4 id="（3）重新标记"><a href="#（3）重新标记" class="headerlink" title="（3）重新标记"></a>（3）重新标记</h4><p>&emsp;&emsp;第二阶段里，你一边标记存活对象和垃圾对象，一边系统在不停运行创建新对象，让老对象变成垃圾，所以第二阶段结束之后，绝对会有很多存活对象和垃圾对象，是之前第二阶段没标记出来的。在这个阶段，要再次进入<code>Stop the World</code>阶段，重新标记下在第二阶段里新创建的一些对象，还有一些已有对象可能失去引用变成垃圾的情况。重新标记的阶段只是对变动过的<strong>少数对象</strong>进行标记，是速度很快的</p>
 <h4 id="（4）并发清理"><a href="#（4）并发清理" class="headerlink" title="（4）并发清理"></a>（4）并发清理</h4><p>&emsp;&emsp;这个阶段就是让系统程序随意运行，然后清理掉之前标记为垃圾的对象即可，也是很耗时的。</p>
 <p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20200305191757623.png" alt=""></p>
@@ -742,7 +746,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">105.3k</span>&nbsp;字
+                class="white-color">105.4k</span>&nbsp;字
             
             
             
