@@ -400,7 +400,7 @@
 <li>子序列长度为1，只有一个字母</li>
 <li>子序列长度大于1，必有<code>S[0] = S[len-1]</code></li>
 </ul>
-<p>S是在区间<code>[i,j]</code>中的最长回文子串，对于最长子序列S去头去尾后<code>S[1..len-2]</code>仍然是一个回文串，并且是在区间<code>[i+1,j-1]</code>中的最长回文子串（应该说是在在长度为j-i+1 - 2时的最长回文子串），并且可以得出<code>S[i,j] = S[i+1,j-1] + 2</code></p>
+<p>S是在区间<code>[i,j]</code>中的最长回文子串，对于最长子序列S去头去尾后<code>S[1..len-2]</code>仍然是一个回文串，并且是在区间<code>[i+1,j-1]</code>中的最长回文子序列（应该说是在在长度为j-i+1 - 2时的最长回文子序列），并且可以得出<code>S[i,j] = S[i+1,j-1] + 2</code></p>
 <p>【转移方程】头尾不想等，去头、去尾各一种情况；头尾相等，同时去头去尾</p>
 <ul>
 <li><code>dp[i][j] = max{dp[i+1][j],dp[i][j-1],dp[i+1][j-1]+2 &amp;&amp; chs[i] == chs[j]}</code></li>
@@ -479,7 +479,7 @@
         <span class="token comment" spellcheck="true">//最长的长度为dp[0][n - 1]</span>
         <span class="token keyword">char</span><span class="token punctuation">[</span><span class="token punctuation">]</span> res <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">char</span><span class="token punctuation">[</span>dp<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
         <span class="token comment" spellcheck="true">//开始与结束两个指针</span>
-        <span class="token keyword">int</span> p <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> q <span class="token operator">=</span> dp<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> p <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> q <span class="token operator">=</span> dp<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
         <span class="token comment" spellcheck="true">//chs数组的两个指针</span>
         <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> j <span class="token operator">=</span> n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
         <span class="token comment" spellcheck="true">//从两头分别往中间去走</span>
@@ -1096,7 +1096,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">105.4k</span>&nbsp;字
+                class="white-color">106.4k</span>&nbsp;字
             
             
             

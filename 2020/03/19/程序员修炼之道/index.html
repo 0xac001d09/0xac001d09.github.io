@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="JVM, 0xac001d09">
+    <meta name="keywords" content="程序员修炼之道, 0xac001d09">
     <meta name="description" content="Keep on keeping on">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>JVM | 0xac001d09</title>
+    <title>程序员修炼之道 | 0xac001d09</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -214,12 +214,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://gitee.com/Jerry1997/img-bed/raw/master/uPic/Xnip2020-03-05_22-53-16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://gitee.com/Jerry1997/img-bed/raw/master/uPic/Xnip2020-03-21_18-59-13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">JVM</h1>
+                    <h1 class="description center-align post-title">程序员修炼之道</h1>
                 </div>
             </div>
         </div>
@@ -336,8 +336,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/JVM/">
-                                <span class="chip bg-color">JVM</span>
+                            <a href="/tags/%E9%9A%8F%E7%AC%94/">
+                                <span class="chip bg-color">随笔</span>
                             </a>
                         
                     </div>
@@ -348,8 +348,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/JVM/" class="post-category">
-                                JVM
+                            <a href="/categories/%E9%9A%8F%E7%AC%94/" class="post-category">
+                                随笔
                             </a>
                         
                     </div>
@@ -361,7 +361,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-09-04
+                    2020-03-19
                 </div>
                 
 
@@ -370,14 +370,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.4k
+                    978
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    9 分
+                    3 分
                 </div>
                 
 
@@ -388,118 +388,61 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="OOM问题的分析与解决"><a href="#OOM问题的分析与解决" class="headerlink" title="OOM问题的分析与解决"></a>OOM问题的分析与解决</h1><h2 id="一、OOM原因与场景模拟"><a href="#一、OOM原因与场景模拟" class="headerlink" title="一、OOM原因与场景模拟"></a>一、OOM原因与场景模拟</h2><h3 id="1、Metaspace内存溢出"><a href="#1、Metaspace内存溢出" class="headerlink" title="1、Metaspace内存溢出"></a>1、Metaspace内存溢出</h3><h4 id="（1）原因"><a href="#（1）原因" class="headerlink" title="（1）原因"></a>（1）原因</h4><p>首先来讲Metaspace的回收，当Metaspace快满了就要进行回收，但是这个回收条件比较苛刻，比如这个类的类加载器要先被回收、这个类的所有实例对象要被回收等等，所以即使Metaspace满了，未必能回收掉很多类，腾不出太多空间，又要放进入，就会导致OOM，一般来说，Metaspace的OOM有两个原因</p>
-<p><strong>第一个原因</strong>是我们忘记去设置永久区的大小了，默认永久区大小只有几十MB，太小了，我们一般设置为256MB～512MB。有两个参数是来设置区域大小的：<code>-XX:MetaspaceSize=512m</code>和<code>-XX:MaxMetaspaceSize=512m</code>。一般来说512MB足够！</p>
-<p><strong>第二个原因</strong>是写系统的时候使用了cglib之类的技术，来动态的生成一些类，一旦没控制好生成类的个数就很容易把Metaspace塞满，引发内存溢出。</p>
-<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20191101103540944.png" alt=""></p>
-<p>示意图：内存溢出</p>
-<h4 id="（2）场景模拟"><a href="#（2）场景模拟" class="headerlink" title="（2）场景模拟"></a>（2）场景模拟</h4><p>这里使用cglib来模拟Metaspace的OOM</p>
-<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20191101104842624.png" alt=""></p>
-<p>使用cglib来增强Car类的run方法，实质就是cglib的Enhancer能在系统运行期间动态的生成Car的子类。在JVM参数中动点手脚，把Metaspace的区域限制得小一点：</p>
-<pre><code>-XX:MetaspaceSize=10m 
--XX:MaxMetaspaceSize=10m</code></pre><p>然后价格计数器来看它能生成多少个子类，得到日志</p>
-<pre><code>Exception in thread &quot;main&quot; java.lang.IllegalStateException: Unable to load cache item
-at net.sf.cglib.core.internal.LoadingCache.createEntry(LoadingCache.java:79)
-at net.sf.cglib.core.internal.LoadingCache.get(LoadingCache.java:34)
-at net.sf.cglib.core.AbstractClassGenerator$ClassLoaderData.get(AbstractClassGenerator.java:119)
-at net.sf.cglib.core.AbstractClassGenerator.create(AbstractClassGenerator.java:294)
-at net.sf.cglib.reflect.FastClass$Generator.create(FastClass.java:65)
-at net.sf.cglib.proxy.MethodProxy.helper(MethodProxy.java:121)
-at net.sf.cglib.proxy.MethodProxy.init(MethodProxy.java:75)
-at net.sf.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:226)
-at com.limao.demo.jvm.Demo1$1.intercept(Demo1.java:22)
-at com.limao.demo.jvm.Demo1$Car$$EnhancerByCGLIB$$7e5aa3a5_264.run(&lt;generated&gt;)
-at com.limao.demo.jvm.Demo1.main(Demo1.java:30)
-Caused by: java.lang.OutOfMemoryError: Metaspace
-at java.lang.Class.forName0(Native Method)
-at java.lang.Class.forName(Class.java:348)
-at net.sf.cglib.core.ReflectUtils.defineClass(ReflectUtils.java:467)
-at net.sf.cglib.core.AbstractClassGenerator.generate(AbstractClassGenerator.java:339)
-at net.sf.cglib.core.AbstractClassGenerator$ClassLoaderData$3.apply(AbstractClassGenerator.java:96)
-at net.sf.cglib.core.AbstractClassGenerator$ClassLoaderData$3.apply(AbstractClassGenerator.java:94)
-at net.sf.cglib.core.internal.LoadingCache$2.call(LoadingCache.java:54)
-at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-at net.sf.cglib.core.internal.LoadingCache.createEntry(LoadingCache.java:61)</code></pre><p>发送有一行就是OOM，明确告诉你溢出了。</p>
-<p><strong>一般使用动态代理要记得用缓存！这个子类只要生成一次就可以了，下次能直接用，如果没有缓存这个动态生成的类，每次调用生成一个类，若线上负载很高，可能导致瞬间创建一大堆类，塞满元数据空间，直接OOM，系统崩溃。</strong></p>
-<h3 id="2、栈内存溢出"><a href="#2、栈内存溢出" class="headerlink" title="2、栈内存溢出"></a>2、栈内存溢出</h3><h4 id="（1）原因-1"><a href="#（1）原因-1" class="headerlink" title="（1）原因"></a>（1）原因</h4><p>JVM把类加载进内存后，就通过main线程执行main方法，方法调用的栈帧不断压入虚拟机栈，这都是占栈内存的，每一个虚拟机栈的大小是固定的，比如1MB，虽然说一些变量和其他数据占卜了太多，但是这个<code>栈帧</code>是会占内存的，一个方法调用的栈帧要占个几百字节。如果我们不停的调用方法，不停的往栈里放入栈帧，就会导致OOM。</p>
-<h4 id="（2）场景模拟-1"><a href="#（2）场景模拟-1" class="headerlink" title="（2）场景模拟"></a>（2）场景模拟</h4><p>代码设置</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Demo</span> <span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">long</span> counter <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token function">work</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">work</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"目前是第"</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token operator">++</span>counter<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"次调用方法"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token function">work</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span></code></pre>
-<p>JVM参数设置</p>
-<pre><code>-XX:ThreadStackSize=1m</code></pre><p>直接打印出结果</p>
-<pre><code>目前是第5729次调用方法
-目前是第5730次调用方法
-Exception in thread &quot;main&quot; java.lang.StackOverflowError</code></pre><h4 id="（3）处理思路"><a href="#（3）处理思路" class="headerlink" title="（3）处理思路"></a>（3）处理思路</h4><p>在JVM参数中加入打印日志参数和内存快照参数，但是内存快照参数主要是分析堆内存的Metaspace的，对于栈内存而言不需要用。运行本地代码能够得到异常报错的调用栈，直接告诉你溢出问题来自哪个类的哪个方法，可以直接定位到。</p>
-<pre class=" language-java"><code class="language-java">at com<span class="token punctuation">.</span>demo<span class="token punctuation">.</span>jvm<span class="token punctuation">.</span>Demo2<span class="token punctuation">.</span><span class="token function">work</span><span class="token punctuation">(</span>Demo2<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">13</span><span class="token punctuation">)</span>
-at com<span class="token punctuation">.</span>demo<span class="token punctuation">.</span>jvm<span class="token punctuation">.</span>Demo2<span class="token punctuation">.</span><span class="token function">work</span><span class="token punctuation">(</span>Demo2<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">13</span><span class="token punctuation">)</span></code></pre>
-<h3 id="3、堆内存溢出"><a href="#3、堆内存溢出" class="headerlink" title="3、堆内存溢出"></a>3、堆内存溢出</h3><h4 id="（1）原因-2"><a href="#（1）原因-2" class="headerlink" title="（1）原因"></a>（1）原因</h4><p>对象进来先进入Eden区，Eden区满了则Young GC，多次GC后S区也满了，S区放不下放进了老年代，慢慢的，老年代也满了，那就得等CMS进行回收，如果此时Full GC后，依然存活下来很多对象，而此时又有对象要放进老年代，如果老年代空间不足，就会再出发Full GC，触发后还是没足够空间，如果还坚持要放就会导致OOM。</p>
-<p><strong>总的来说，就是有限的空间放了过多的对象，大多数都是存活的，即使GC后也有很多存活的，再放进新的对象就不行了，此时就引发OOM了。</strong></p>
-<p><strong>内存溢出的两个场景</strong></p>
-<p><strong>第一个场景</strong>：系统承载高并发请求，因为请求量过大，导致大量对象都是存活的，所以要继续放入新的对象实在是不行了，此时就会引发OOM。</p>
-<p><strong>第二个场景</strong>：系统有内存泄漏的问题，莫名其妙弄了很多的对象，结果对象都是存活的，没有及时取消对他们的引用，导致触发GC还是无法回收，此时只能引发内存溢出</p>
-<p><strong>总的来说，一般引发OOM不是系统负载过高就是有内存泄漏问题。</strong></p>
-<h4 id="（2）场景模拟-2"><a href="#（2）场景模拟-2" class="headerlink" title="（2）场景模拟"></a>（2）场景模拟</h4><p>代码</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Demo</span> <span class="token punctuation">{</span>
-
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">long</span> counter <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        ArrayList<span class="token operator">&lt;</span>Object<span class="token operator">></span> list <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            list<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"目前创建了第"</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token operator">++</span>counter<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"个对象"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span></code></pre>
-<p>JVM参数设置堆内存大小总共10MB，尽快触发溢出</p>
-<pre><code>-XX:InitialHeapSize=10485760
--XX:MaxHeapSize=10485760</code></pre><p>结果</p>
-<pre><code>目前创建了第360145个对象
-Exception in thread &quot;main&quot; java.lang.OutOfMemoryError: Java heap space</code></pre><h4 id="（3）处理思路-1"><a href="#（3）处理思路-1" class="headerlink" title="（3）处理思路"></a>（3）处理思路</h4><p>添加打印日志参数和堆内存快照参数，得到日志文件，中有这么几行，告诉我们堆内存溢出了</p>
-<pre><code>java.lang.OutOfMemoryError: Java heap space
-Dumping heap to ./java_pid1023.hprof ...
-Heap dump file created [13409210 bytes in 0.033 secs]
-Exception in thread &quot;main&quot; java.lang.OutOfMemoryError: Java heap space</code></pre><p>接着我们用mat来分析</p>
-<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20191101123713956.png" alt=""></p>
-<p>第一句话，这个main线程的局部变量引用了7203536个字节对象（7MB），我测试时候给堆内存总共是10MB，所以7MB差不多极限。第二句话，表明内存被一个Object的实例对象占满了。点开下方的Details就真相大白了</p>
-<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20191101124003886.png" alt=""></p>
-<p>我们要知道这些对象是怎么创建的，就可以使用<code>See stacktrace</code></p>
-<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20191101124105414.png" alt=""></p>
-<h2 id="二、OOM时自动dump内存快照"><a href="#二、OOM时自动dump内存快照" class="headerlink" title="二、OOM时自动dump内存快照"></a>二、OOM时自动dump内存快照</h2><p>解决OOM首先就要知道是什么对象导致了OOM，获取dump内存快照，使用mat工具来分析，此时需要在JVM中加入两个参数</p>
-<pre><code>-XX:+HeapDumpOnOutOfMemoryError      //在OOM的时候自动dump内存快照出来
--XX:HeapDumpPath=/usr/local/app/oom        //内存快照dump地址</code></pre><p>JVM参数模版</p>
-<pre><code>-Xms4096M 
--Xmx4096M 
--Xmn3072M 
--Xss1M  
--XX:MetaspaceSize=256M 
--XX:MaxMetaspaceSize=256M 
--XX:+UseParNewGC 
--XX:+UseConcMarkSweepGC 
--XX:CMSInitiatingOccupancyFaction=92 
--XX:+UseCMSCompactAtFullCollection 
--XX:CMSFullGCsBeforeCompaction=0 
--XX:+CMSParallelInitialMarkEnabled 
--XX:+CMSScavengeBeforeRemark 
--XX:+DisableExplicitGC 
--XX:+PrintGCDetails 
--Xloggc:gc.log 
--XX:+HeapDumpOnOutOfMemoryError  
--XX:HeapDumpPath=/usr/local/app/oom”</code></pre><h2 id="三、导致OOM的实例"><a href="#三、导致OOM的实例" class="headerlink" title="三、导致OOM的实例"></a>三、导致OOM的实例</h2><h3 id="1、每秒仅上百请求的事故现场"><a href="#1、每秒仅上百请求的事故现场" class="headerlink" title="1、每秒仅上百请求的事故现场"></a>1、每秒仅上百请求的事故现场</h3><p>每秒仅100+请求的系统报警发生异常，第一件事就是登陆到线上机器去看日志文件。看到有这么一行</p>
-<pre><code>Exception in thread &quot;http-nio-8080-exec-1089&quot; java.lang.OutOfMemoryError: Java heap space</code></pre><p>这里<code>http-nio-8080-exec-1089</code>说的其实就是Tomcat的工作线程。我们写的系统都是部署在Tomcat中的。最早我们会在IDE上写一堆的Servlet，然后打包之后放入Tomcat，再启动Tomcat，接着我们访问Tomcat监听的一个端口号（一般是8080），然后系统的功能就可以运行起来了。后来随着技术发展，我们不再写Servlet这么原始的东西了，有一些类似Spring MVC之类的框架把Servlet封装起来了，我们就基于Spring MVC之类的框架去开发。再到后来，越来越先进了，出现了Spring Boot，我们可以把Tomcat之类的Web容器都内嵌在系统里。再到后来甚至是基于Spring Cloud去开发分布式的系统。我们基于Spring Cloud、Spring Boot、Spring Web MVC等技术，写好一套系统，给打包之后，放入线上服务器中部署的Tomcat目录下，然后启动Tomcat就可以了。每当Tomcat间听到了请求，就会把请求交给框架去处理，框架会根据请求路径，找到代码中处理这个请求的Controller组件。如图。</p>
-<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20191101125402691.png" alt=""></p>
-<p>Tomcat自己本身就是个JVM进程，我们写好的系统只不过是一些代码，一个个类被Tomcat加载到内存中，由Tomcat来执行。Tomcat有很多的线程，少则100来个，多则三四百个，从8080端口上收到的请求就交给这些线程去做，这些线程收到请求后就回去调用框架的代码，框架再调用我们写好的代码，这基本就是Tomcat的底层原理了。如图</p>
-<p><img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/image-20191101125659399.png" alt=""></p>
-<p>碰到事故，首先先看是三个区域中哪里溢出了，其次看是哪个线程溢出的（MAT可以看有哪些线程存在），可能是Tomcat的线程，也可能是我们自己的线程。每个系统上线务必设置<code>-XX:+HeapDumpOnOutOfMemoryError</code>以及导出内存快照，排查问题基本依靠内存快照。</p>
+                <h1 id="程序员修炼之道读书笔记"><a href="#程序员修炼之道读书笔记" class="headerlink" title="程序员修炼之道读书笔记"></a>程序员修炼之道读书笔记</h1><p><strong>补上前言</strong></p>
+<p>一直有个读书的计划，每一年都是懒过去了，白稚卿说的很对，能战胜懒的只有ddl和绝对的自律，在学校里也只有老师要求写读书笔记才会去翻阅一下了，在学校各种压力都很大，大家选择解压的方式各不相同，我也开始尝试读一些经典的书，希望能做一些思考和产出，这是今年第一本断断续续读完的，只有一点零碎的记录</p>
+<blockquote>
+<ul>
+<li>开会就是编程，并能够改善编程</li>
+<li>注重实效的程序员应当不断学习，我们也应当不断学习下去</li>
+<li>provide options,dont make lame excess<ul>
+<li>提供选择，不要找借口</li>
+</ul>
+</li>
+<li>dont live with broken wondows!<ul>
+<li>把问题放入注释、或是其他能够让你想到的地方，日后修复</li>
+<li>对每一个设计不合理的地方，至少注释声明，不要让熵越变越大</li>
+<li>我之前刷力扣碰到调不好的bug总是放弃，过一阵子也是忘掉了，虽然有意识要去修复，但总视而不见，工作中和同事之间，其实也会有一种总是期望同事去修窗户，可能因为自己缺乏实战经验，害怕自己能力不足吧，当我能力足够强的时候也希望自己是能够冒着窗户被修错的风险，能够出来修窗户、工作效率高的人</li>
+</ul>
+</li>
+<li>不要过度修饰和追求精而损坏完好的程序，go on<ul>
+<li>代码是不完美的，也不可能完美</li>
+</ul>
+</li>
+<li><strong>每年至少学习一种新语言，每季度阅读一本技术书籍，但也要阅读非技术书籍</strong></li>
+<li>交流<ul>
+<li>没有太大的概念，虽然在人月神话中意识到了交流的重要性，但并没有切身感受，日后再补</li>
+</ul>
+</li>
+<li>dont repeat yourself<ul>
+<li>这里就想到了软工书上背过的那些东西了，这里的重复不再指代码的重复，包含了开发者之间的重复、加强的重复、无意的重复等等</li>
+<li>做到正交，大白话就是解耦合，两个或多个事物中的一个发生变化，不会影响到另一个。正交得到的结果是 M+N 而不是 M*N</li>
+</ul>
+</li>
+<li>分析你读到和听到的都东西<ul>
+<li>从一些情况来看，我的反应能力很慢，无论是技术上还是非技术上，很慢</li>
+</ul>
+</li>
+<li>消除无关事物之间的影响<ul>
+<li>这章太长了，书中提到了一些aop日志的使用，我还没做过相关的事，日后再读</li>
+</ul>
+</li>
+<li>如果某个想法是你唯一的想法，在没有比这个更危险了，言外之意，思维和想法多元，如何多元？</li>
+<li>凡事没有最终决策！</li>
+<li>Tracer Bullet<ul>
+<li>曳光弹的重要性，之前在人月神话还是哪里看到过？</li>
+</ul>
+</li>
+<li>不要用你不熟悉的框架与工具<ul>
+<li>如果对各种框架的底层不熟悉，也不去了解它的实现，项目将会是不可控制的，很多时候我们没办法维护，调试也会带来极大的困难</li>
+<li>面试最喜欢问的就是Spring源码这块了，但自己确实只会使用，对于源码的了解也很少，要加把劲</li>
+</ul>
+</li>
+<li>关于文档和测试<ul>
+<li>这是大多数人最讨厌的两件事，目前正巧是服务端计算课 的助教，在陶老师的课上，他也是反复和学弟学妹们强调了测试的重要性，并且每次作业也是需要加测试图的，为什么大多数程序员讨厌写文档和测试，是觉得麻烦还是会影响自己的进度？在我工作之后应该有一点体会了，日后补</li>
+</ul>
+</li>
+</ul>
+</blockquote>
 
             </div>
             <hr/>
@@ -513,8 +456,8 @@ Exception in thread &quot;main&quot; java.lang.OutOfMemoryError: Java heap space
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/JVM/">
-                                    <span class="chip bg-color">JVM</span>
+                                <a href="/tags/%E9%9A%8F%E7%AC%94/">
+                                    <span class="chip bg-color">随笔</span>
                                 </a>
                             
                         </div>
@@ -555,46 +498,48 @@ Exception in thread &quot;main&quot; java.lang.OutOfMemoryError: Java heap space
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/09/05/JVM%E4%B9%8BGC%E5%9C%BA%E6%99%AF%E6%A8%A1%E6%8B%9F%E4%B8%8E%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/">
+                <a href="/2020/03/19/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93/">
                     <div class="card-image">
                         
-                        <img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/Xnip2020-03-05_22-53-52.jpg" class="responsive-img" alt="JVM">
+                        <img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/Xnip2020-03-21_18-59-13.jpg" class="responsive-img" alt="程序员修炼之道">
                         
-                        <span class="card-title">JVM</span>
+                        <span class="card-title">程序员修炼之道</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            JVM之GC场景模拟与日志分析一、Young GC场景模拟与日志分析1、JVM参数设置-XX:NewSize=5242880                        //新生代大小为5MB
--XX:MaxNewSize=5242880
+                            程序员修炼之道读书笔记补上前言
+一直有个读书的计划，每一年都是懒过去了，白稚卿说的很对，能战胜懒的只有ddl和绝对的自律，在学校里也只有老师要求写读书笔记才会去翻阅一下了，在学校各种压力都很大，大家选择解压的方式各不相同，我也开始尝试读一些
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-09-05
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-19
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/JVM/" class="post-category">
-                                    JVM
+                            <a href="/categories/%E9%9A%8F%E7%AC%94/" class="post-category">
+                                    随笔
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/JVM/">
-                        <span class="chip bg-color">JVM</span>
+                    <a href="/tags/%E9%9A%8F%E7%AC%94/">
+                        <span class="chip bg-color">随笔</span>
                     </a>
                     
                 </div>
@@ -608,30 +553,38 @@ Exception in thread &quot;main&quot; java.lang.OutOfMemoryError: Java heap space
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/09/02/CMS%E5%86%8D%E4%BC%98%E5%8C%96%E4%B8%8E%E9%A2%91%E7%B9%81FullGC%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90/">
+                <a href="/2020/03/10/%E6%9C%80%E7%9F%AD%E8%B7%AF%E7%AE%97%E6%B3%95/">
                     <div class="card-image">
                         
-                        <img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/Xnip2020-03-05_22-53-09.jpg" class="responsive-img" alt="JVM">
+                        <img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/Xnip2020-03-13_11-33-15.jpg" class="responsive-img" alt="算法-最短路">
                         
-                        <span class="card-title">JVM</span>
+                        <span class="card-title">算法-最短路</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            CMS再优化与频繁Full GC问题分析一、CMS深度优化技巧1、CMS内存碎片问题最常见的优化是用工具判断出来每次Young GC后存活对象有多少，Eden区域过小，自然会导致频繁的触发Young GC，Survivor区域过小，自然会导
+                            最短路算法这篇博客主要是记一下最短路板子，板子三天不练就忘（x
+回到正题，图的最短路算法有很多，在此记录一下非常常用的三个算法
+
+单源最短路
+不带负权边：$Dijkstra$
+带负权边：$Bellman-Ford$、$SPFA$
+
+
+多源最
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-09-02
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-10
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/JVM/" class="post-category">
-                                    JVM
+                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
+                                    算法
                                 </a>
                             
                             
@@ -641,8 +594,12 @@ Exception in thread &quot;main&quot; java.lang.OutOfMemoryError: Java heap space
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/JVM/">
-                        <span class="chip bg-color">JVM</span>
+                    <a href="/tags/%E7%AE%97%E6%B3%95/">
+                        <span class="chip bg-color">算法</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%9B%BE/">
+                        <span class="chip bg-color">图</span>
                     </a>
                     
                 </div>
