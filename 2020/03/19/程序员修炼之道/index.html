@@ -484,6 +484,32 @@
     </div>
 
     
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'dc4953b9709420569433',
+        clientSecret: 'be3e7d3530ec49aabfcc887ee30bc356e23de849',
+        repo: 'gitalk',
+        owner: '2885688585',
+        admin: 2885688585,
+        id: '2020-03-19T19-10-37',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
 
     
 
@@ -498,48 +524,49 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/03/19/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93/">
+                <a href="/2020/03/26/%E5%89%8D%E7%BC%80%E5%92%8C/">
                     <div class="card-image">
                         
-                        <img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/Xnip2020-03-21_18-59-13.jpg" class="responsive-img" alt="程序员修炼之道">
+                        <img src="https://gitee.com/Jerry1997/img-bed/raw/master/uPic/Xnip2020-03-26_23-33-39.jpg" class="responsive-img" alt="前缀和">
                         
-                        <span class="card-title">程序员修炼之道</span>
+                        <span class="card-title">前缀和</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            程序员修炼之道读书笔记补上前言
-一直有个读书的计划，每一年都是懒过去了，白稚卿说的很对，能战胜懒的只有ddl和绝对的自律，在学校里也只有老师要求写读书笔记才会去翻阅一下了，在学校各种压力都很大，大家选择解压的方式各不相同，我也开始尝试读一些
+                            前缀和最近刷了几个前缀和的题，也都是板子题，记录一下
+LeetCode 560. 和为K的子数组
+给定一个整数数组和一个整数 k，你需要找到该数组中和为 k 的连续的子数组的个数。
+示例 1 :
+输入:nums = [1,1,1], k =
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-19
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-26
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E9%9A%8F%E7%AC%94/" class="post-category">
-                                    随笔
+                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
+                                    算法
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E9%9A%8F%E7%AC%94/">
-                        <span class="chip bg-color">随笔</span>
+                    <a href="/tags/%E7%AE%97%E6%B3%95/">
+                        <span class="chip bg-color">算法</span>
                     </a>
                     
                 </div>
@@ -788,7 +815,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">106.4k</span>&nbsp;字
+                class="white-color">109.4k</span>&nbsp;字
             
             
             

@@ -962,6 +962,32 @@ isMatch("aab", "c*a*b") → true</code></pre>
     </div>
 
     
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'dc4953b9709420569433',
+        clientSecret: 'be3e7d3530ec49aabfcc887ee30bc356e23de849',
+        repo: 'gitalk',
+        owner: '2885688585',
+        admin: 2885688585,
+        id: '2019-12-02T19-10-37',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
 
     
 
@@ -980,10 +1006,10 @@ isMatch("aab", "c*a*b") → true</code></pre>
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/12/02/%E8%83%8C%E5%8C%85%E5%9E%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+                <a href="/2019/12/02/%E5%88%92%E5%88%86%E5%9E%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
                     <div class="card-image">
                         
-                        <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gccf01exv6j31e90u0gnw.jpg" class="responsive-img" alt="算法-动态规划">
+                        <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gccf00jokkj31eq0u076v.jpg" class="responsive-img" alt="算法-动态规划">
                         
                         <span class="card-title">算法-动态规划</span>
                     </div>
@@ -991,10 +1017,8 @@ isMatch("aab", "c*a*b") → true</code></pre>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            动态规划：背包型数组开n+1，背包关键就是看最后一步。
-1、01背包–求maxLintCode 92: Backpack
-【问题】在n个物品中挑选若干物品装入背包，最多能装多满？假设背包的大小为m，每个物品的大小为A[i]
-【分析】从最后一
+                            动态规划：划分型划分型动态规划就是给定长度为N的字符串，需要划分成若干段，段数不限，每一段满足一定的性质。在学校oj中做过的书本分发、漆狗屋这种就属于划分型。开数组也是开n+1
+1、Lintcode 512 解码方法【问题】有一个消息包含A
                         
                     </div>
                     <div class="publish-info">
@@ -1035,10 +1059,10 @@ isMatch("aab", "c*a*b") → true</code></pre>
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/12/02/%E5%8D%9A%E5%BC%88%E5%9E%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+                <a href="/2019/12/02/%E5%9D%90%E6%A0%87%E5%9E%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
                     <div class="card-image">
                         
-                        <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gccezthz1aj31eh0u0mzt.jpg" class="responsive-img" alt="算法-动态规划">
+                        <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gccf0006itj31em0u0wh1.jpg" class="responsive-img" alt="算法-动态规划">
                         
                         <span class="card-title">算法-动态规划</span>
                     </div>
@@ -1046,8 +1070,10 @@ isMatch("aab", "c*a*b") → true</code></pre>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            动态规划：博弈型博弈型dp一般从第一步分析，而不是最后一步，需要开n+1
-1、LintCode 394 Coins in a Line【问题】有 n 个硬币排成一条线。两个参赛者轮流从右边依次拿走 1 或 2 个硬币，直到没有硬币为止。拿到
+                            动态规划解题模版：：坐标型坐标型dp一般都是给定网格、序列，来求满足某种性质的最大值、最小值。开数组时，f[i]代表以ai 结尾的满足条件的子序列，f[i][j]代表以i、j结尾的满足条件的某种情况。
+做题思路：
+
+从最后一步出发思考，确定
                         
                     </div>
                     <div class="publish-info">
@@ -1263,7 +1289,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">106.4k</span>&nbsp;字
+                class="white-color">109.4k</span>&nbsp;字
             
             
             
